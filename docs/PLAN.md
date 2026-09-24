@@ -3,6 +3,19 @@
 Times in TRT. Kick-off: **Fri 25 Sep 18:00**. Published submission deadline: **Sun 27 Sep 18:00**.
 Reconfirm the schedule at kick-off.
 
+## Confirmed by lablab email (24 Sep 2026)
+
+- Bob IDE as a core component; Bob Shell optional. 40 Bobcoins, no top-ups.
+- `bob_sessions/`: **PNG** screenshots of each task's session consumption summary
+  (Tasks → task → header), named e.g. `senakose_task01_audit_zfi_summary.png`.
+  Every task related to the submission. Do it right after each task.
+- Data: own data only, no client or company-confidential data, no personal info,
+  no social media. Our samples are synthetic, written for this repo. Keep a
+  list of any public sources used (docs/sources.md).
+- The brief lists "Legacy modernization accelerator" as an example idea. Strong
+  submissions use agent mode, parallel tasks, subagents and show measurable impact.
+- Participant reward: $100 × 20 for a qualified submission + feedback form.
+
 ## Working constraints from the May 2026 IBM guide
 
 These constraints were reported from the earlier guide; their applicability
@@ -36,6 +49,10 @@ line, stop and do the rest by hand.
 ## Timeline
 
 **Before kick-off (Wed–Thu)**
+- [ ] Sena: create IBMid with the registration email (kosesena@hotmail.com), tonight
+- [ ] Sena: install Bob IDE ≥ v2.0.2 (v1.0.3 / v2.0.0 stop working on 30 Sep)
+- [ ] Kick-off day: accept the `ibm-hackathon-xxxx` invite (check spam); in Bob
+      Settings switch to the hackathon account (ibm-coding-challenge-uat, us-east)
 - [x] Register on lablab (Sena) — Enrolled verified on 24 Sep 2026
 - [ ] Make GlovesOn public on 26 Sep (Sena times it; takes ~10 min, Sat morning)
 - [x] Project skeleton, legacy samples, rule catalogue, mode draft
