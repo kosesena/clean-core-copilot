@@ -1,0 +1,9 @@
+samples/legacy/zcc_legacy_materials.abap
+samples/legacy/zfi_vendor_aging.abap
+samples/legacy/zmm_mass_price_update.abap
+samples/legacy/zsd_open_orders.abap
+docs/clean-core-rules.md
+docs/verification-rules.md
+docs/findings.schema.json
+bob-config-draft/clean-core-architect.mode.md
+bob-config-draft/first-task.md

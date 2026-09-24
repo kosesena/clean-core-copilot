@@ -35,8 +35,6 @@ remaining catalogue before treating any row as ground truth.
   old-looking construct forbidden.
 - Separate syntax restrictions, API release classifications and performance
   advice; avoid assigning SAP A–D levels solely from keyword matches.
-- Reconcile vendor aging business semantics, especially key-date open items,
-  clearing dates and currency handling, before selecting an accounting view.
 - A static hosted report is an evidence/demo page, not proof of a running
   analyzer or a successfully activated ABAP implementation.
 
@@ -57,13 +55,6 @@ Freeze a manually reviewed expected-findings list before Bob's audit. Count
 correct, incorrect and missed findings against that list; de-duplicate findings
 by rule and source location. Record unresolved cases separately. A fixed rule
 catalogue improves traceability but cannot guarantee absence of hallucinations.
-
-## Claims to verify before the demo
-
-- VBUK/VBUP (sales document status tables) are removed in S/4HANA as a
-  simplification item; status fields moved to VBAK/VBAP. `zsd_open_orders`
-  reads VBUP on purpose, so this is a strong demo point *if* confirmed from
-  the Simplification List — cite the item, don't state it from memory.
 
 ## Other items
 

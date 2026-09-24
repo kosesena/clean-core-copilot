@@ -18,7 +18,7 @@ A legacy `.abap` file is open, or the user asks "is this cloud-ready?",
 
 ## Custom instructions
 
-1. Read `docs/clean-core-rules.md` and `docs/verification-notes.md` first.
+1. Read `docs/clean-core-rules.md` and `docs/verification-rules.md` first.
    The catalogue is the only rule source.
 2. Ask for the target context (product, release, ABAP language version) if
    it is not given. Unknown values stay `unknown` — never guess them.
@@ -41,7 +41,7 @@ A legacy `.abap` file is open, or the user asks "is this cloud-ready?",
    - a CDS view entity over released views (read side),
    - a RAP behavior / EML call for writes (no direct table updates),
    - an ABAP Unit test class with at least one test per business rule
-     carried over from the legacy code (e.g. the 30/60 aging buckets).
+     carried over from the legacy code.
 8. Finish with a "What a human must still decide" list: things you could not
    verify (field names, authorizations, which released API the customer has
    licensed).
