@@ -62,8 +62,10 @@ line, stop and do the rest by hand.
 
 **Sat → Sun before 16:00**
 - [ ] Modernize one program end-to-end → `modernized/`
-- [ ] If BTP_TRIAL MCP works: activate + run ATC on the generated code (proof
-      it compiles). If not: say so honestly in the README.
+- [ ] BTP: destination `BTP_TRIAL2` connected via ADT MCP (24 Sep, read calls OK;
+      trial ends ~24 Oct). Activate + ATC + unit tests on the generated code in a
+      Z package (Sena creates the package in Eclipse/ADT). Any object creation there
+      is Sena's call, not automatic
 - [ ] Demo URL: static page rendering `reports/*.json` (GitHub Pages). It is
       labelled as *recorded Bob output + human review*, not a live analyzer
 - [ ] Deck + cover + 3-min video
