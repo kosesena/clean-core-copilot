@@ -42,7 +42,7 @@ line, stop and do the rest by hand.
 - [ ] Verify released object names in the rules file
 - [x] Baseline drafted — `~/Desktop/clean-core-copilot-private/baseline.md`, outside Bob's workspace; inputs + baseline hashed by `scripts/freeze.sh` into `docs/freeze.sha256` (author's answer key: 29 core +
       11 bonus findings; see its provenance note)
-- [ ] Sena: review baseline, then run `scripts/freeze.sh` and commit before the first Bob session
+- [x] Baseline frozen 24 Sep (46a1d20): Sena delegated review; author + Codex checked. 29 core + 12 bonus
 
 **Fri 18:00 → Sat**
 - [ ] Watch kick-off; note tracks and the exact deadline
@@ -51,7 +51,9 @@ line, stop and do the rest by hand.
       files as pre-existing research in the README and submission text.
 - [ ] Confirm Bob 2.0 coin cap, export format and consumption UI path
 - [ ] Open only `~/Desktop/ccc-bob-audit` in Bob; confirm it can't read outside that folder
-- [ ] Get Bob access, move mode draft into Bob's real config format
+- [ ] Get Bob access, move mode draft into Bob's real config format. The wrapper file is a
+      new input not covered by the freeze: log it (path, hash, what changed) in the
+      private `baseline-errata.md` and add it to `scripts/audit-files.txt` in a separate commit
 - [ ] Audit run on the 4 samples → `reports/*.json` + `.md`, export sessions
 - [ ] Review Bob's findings by hand: count correct / wrong / missed
 
