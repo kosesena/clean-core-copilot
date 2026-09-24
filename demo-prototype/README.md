@@ -35,4 +35,9 @@ Bob mascot artwork: IBM, from https://bob.ibm.com/tr
 Original asset: https://bob.ibm.com/assets/bob-standing-BECrMjXJ.webp
 Stored unchanged in assets/ibm-bob.webp for the requested private prototype.
 Artwork belongs to IBM; this project does not claim authorship or IBM endorsement.
-No generated animation or HeyGen video is included yet.
+The original-reference HeyGen greeting is stored in assets/bob-greeting.mp4.
+HeyGen video ID: 468e1649e81ec323f61393e47997fb53 (3.239 seconds).
+Generated mascot greeting, not an audit recording. English captions included.
+Click Bob to play once with sound; native video controls allow pausing, seeking
+and muting. End or Back to Bob restores the original still. No autoplay or loop.
+The clip and captions are local assets; playing sends no data to HeyGen.
