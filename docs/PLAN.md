@@ -49,8 +49,8 @@ line, stop and do the rest by hand.
 ## Timeline
 
 **Before kick-off (Wed–Thu)**
-- [ ] Sena: create IBMid with the registration email (kosesena@hotmail.com), tonight
-- [ ] Sena: install Bob IDE ≥ v2.0.2 (v1.0.3 / v2.0.0 stop working on 30 Sep)
+- [x] IBMid created with kosesena@hotmail.com (24 Sep)
+- [x] Bob IDE 2.1.0 installed (pkg signed by IBM, Apple-notarized; 24 Sep)
 - [ ] Kick-off day: accept the `ibm-hackathon-xxxx` invite (check spam); in Bob
       Settings switch to the hackathon account (ibm-coding-challenge-uat, us-east)
 - [x] Register on lablab (Sena) — Enrolled verified on 24 Sep 2026
