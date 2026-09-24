@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Clean Core Copilot audit report",
+  "description": "What Bob writes to reports/<program>.json and what the demo page renders.",
+  "type": "object",
+  "required": ["program", "source_file", "target", "provenance", "findings", "summary"],
+  "properties": {
+    "program": { "type": "string" },
+    "source_file": { "type": "string" },
+    "target": {
+      "type": "object",
+      "required": ["product", "release", "language_version"],
+      "properties": {
+        "product": { "type": "string", "description": "e.g. SAP S/4HANA Cloud Public Edition, or 'unknown'" },
+        "release": { "type": "string" },
+        "language_version": { "type": "string", "description": "e.g. ABAP for Cloud Development, or 'unknown'" }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Lets the demo page say exactly where this report came from.",
+      "required": ["produced_by", "bob_session", "catalogue_version", "reviewed_by_human"],
+      "properties": {
+        "produced_by": { "enum": ["bob", "manual_baseline"] },
+        "bob_session": { "type": ["string", "null"], "description": "Path under bob_sessions/ of the exported task" },
+        "catalogue_version": { "type": "string" },
+        "reviewed_by_human": { "type": "boolean" }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "rule", "line_start", "line_end", "evidence", "reason", "suggested_action", "effort", "verification_status", "unknowns"],
+        "properties": {
+          "id": { "type": "string" },
+          "rule": { "type": "string", "pattern": "^(CC-[0-9]{2}|Unclassified)$" },
+          "level_hint": { "enum": ["A", "B", "C", "D", "perf", "syntax", null] },
+          "line_start": { "type": "integer" },
+          "line_end": { "type": "integer" },
+          "evidence": { "type": "string", "description": "The exact source statement" },
+          "reason": { "type": "string" },
+          "suggested_action": { "type": "string" },
+          "effort": { "enum": ["S", "M", "L"] },
+          "verification_status": { "enum": ["observed", "needs_verification", "verified_on_target"] },
+          "source_url": { "type": ["string", "null"] },
+          "unknowns": { "type": "array", "items": { "type": "string" } },
+          "human_review": {
+            "enum": ["correct", "incorrect", "partially_correct", "not_reviewed"],
+            "description": "Filled by Sena after the audit, never by Bob"
+          }
+        }
+      }
+    },
+    "missed_by_bob": {
+      "type": "array",
+      "description": "Items from the frozen manual baseline Bob did not report. Filled by Sena.",
+      "items": { "type": "string" }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["status", "draft_verdict_hint"],
+      "properties": {
+        "status": { "enum": ["Needs target verification", "Verified on target"] },
+        "draft_verdict_hint": { "enum": ["Ready", "Refactor", "Rebuild"] },
+        "human_must_decide": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}
