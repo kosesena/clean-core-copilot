@@ -51,9 +51,12 @@ line, stop and do the rest by hand.
       files as pre-existing research in the README and submission text.
 - [ ] Confirm Bob 2.0 coin cap, export format and consumption UI path
 - [ ] Open only `~/Desktop/ccc-bob-audit` in Bob; confirm it can't read outside that folder
-- [ ] Get Bob access, move mode draft into Bob's real config format. The wrapper file is a
-      new input not covered by the freeze: log it (path, hash, what changed) in the
-      private `baseline-errata.md` and add it to `scripts/audit-files.txt` in a separate commit
+- [ ] Get Bob access, move mode draft into Bob's real config format. The file Bob
+      actually reads is a new input: freeze it with `scripts/freeze-addendum.sh <path>`
+      (the main freeze stays untouched) and commit before the first audit. Log path,
+      hash and reason in the private `baseline-errata.md`. If the instructions'
+      *meaning* changes (not just the format), record it as a new experiment
+      version rather than a conversion
 - [ ] Audit run on the 4 samples → `reports/*.json` + `.md`, export sessions
 - [ ] Review Bob's findings by hand: count correct / wrong / missed
 
