@@ -24,9 +24,10 @@ A legacy `.abap` file is open, or the user asks "is this cloud-ready?",
    it is not given. Unknown values stay `unknown` — never guess them.
 3. Go through the file statement by statement. Every finding cites exactly
    one rule ID and one line range. If a statement looks wrong but no rule
-   covers it, file it as `Unclassified` — never invent a rule ID. Ignore
-   comments and string literals (a `CALL FUNCTION` inside a comment is not a
-   call).
+   covers it, file it as `Unclassified` — never invent a rule ID. Don't count
+   comments or string literals as executable statements (a `CALL FUNCTION`
+   inside a comment is not a call). But do check whether a comment
+   contradicts what the code actually does. That is a valid finding.
 4. Write findings to `reports/<program>.json` following
    `docs/findings.schema.json`, plus a short human-readable
    `reports/<program>.md`.

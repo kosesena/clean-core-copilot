@@ -32,7 +32,17 @@ Code akışı, coin tüketimi. Kullanılmayan özelliği kullanılmış gibi gö
 ## 5. Ölçüm ve sınırlar
 
 Tablo: dondurulmuş elle hazırlanmış baseline'a karşı doğru / yanlış / kısmen /
-kaçan / sınıflandırılamayan. Sınırlar: sentetik örnekler, sorunlar bilerek
+kaçan / sınıflandırılamayan.
+
+İki ölçüm, iki farklı iddia:
+- **Core:** verilen kataloğu koda doğru uygulama başarısı.
+- **Bonus:** önceden tanımlanmış, katalog dışındaki sorunları belirleme başarısı.
+İkisi de aynı sentetik örnek setinde ölçülüyor; bonus bağımsız bir genelleme
+testi değil. Yorumdan destek alan bulgular (ör. F10) ayrıca belirtilir.
+Precision "karara bağlanan bulgular üzerinden" diye etiketlenir, kararsız
+sayısı yanında gösterilir.
+
+Sınırlar: sentetik örnekler, sorunlar bilerek
 yerleştirildi, hedef sistemde çalıştırılmadıysa açıkça söylenir. SAP
 sertifikası değildir.
 

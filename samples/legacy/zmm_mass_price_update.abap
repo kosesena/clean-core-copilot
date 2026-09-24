@@ -36,7 +36,7 @@ START-OF-SELECTION.
     ENDLOOP.
     COMMIT WORK.
   ELSE.
-*   "Safe" path: replay the MM02 screens
+*   Alternative path using transaction processing
     LOOP AT lt_mbew INTO ls_mbew.
       CLEAR lt_bdc.
       PERFORM bdc_dynpro USING 'SAPLMGMM' '0060'.
