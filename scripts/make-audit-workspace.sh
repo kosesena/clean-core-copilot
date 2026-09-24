@@ -12,6 +12,8 @@ git -C "$REPO" diff --quiet HEAD -- docs/freeze.sha256 && git -C "$REPO" ls-file
   || { echo "docs/freeze.sha256 is not committed" >&2; exit 1; }
 [ -e "$DEST" ] && { echo "$DEST already exists; remove it or pass another path" >&2; exit 1; }
 mkdir -p "$DEST/reports" "$DEST/modernized"
+# From here on, any failure removes the half-built folder.
+trap 'rm -rf "$DEST"' EXIT
 while IFS= read -r f; do
   [ -n "$f" ] || continue
   mkdir -p "$DEST/$(dirname "$f")"
@@ -21,6 +23,7 @@ done < "$REPO/scripts/audit-files.txt"
 # Every copied file must appear, with the same hash, in the committed freeze.
 grep -v '^#' "$FREEZE" | grep -v '  private/' | sort > "$DEST/.expected"
 sort "$DEST/MANIFEST.sha256" | diff "$DEST/.expected" - \
-  || { echo "Audit inputs differ from the committed freeze; aborting" >&2; rm -rf "$DEST"; exit 1; }
+  || { echo "Audit inputs differ from the committed freeze; aborting" >&2; exit 1; }
 rm "$DEST/.expected"
+trap - EXIT
 echo "Audit workspace: $DEST (matches docs/freeze.sha256)"
