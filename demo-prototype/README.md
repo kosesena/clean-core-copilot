@@ -30,3 +30,9 @@ analyzer.
 No precision, recall, ATC result or coin-use result is invented.
 
 Frozen inputs and private baseline are not loaded, changed or copied here.
+
+Bob mascot artwork: IBM, from https://bob.ibm.com/tr
+Original asset: https://bob.ibm.com/assets/bob-standing-BECrMjXJ.webp
+Stored unchanged in assets/ibm-bob.webp for the requested private prototype.
+Artwork belongs to IBM; this project does not claim authorship or IBM endorsement.
+No generated animation or HeyGen video is included yet.
