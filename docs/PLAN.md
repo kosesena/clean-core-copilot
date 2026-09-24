@@ -50,6 +50,7 @@ line, stop and do the rest by hand.
       everything be created during the event? If the latter, declare the prep
       files as pre-existing research in the README and submission text.
 - [ ] Confirm Bob 2.0 coin cap, export format and consumption UI path
+- [ ] Confirm Bob's workspace cannot read `~/Desktop/clean-core-copilot-private/` (answer key)
 - [ ] Get Bob access, move mode draft into Bob's real config format
 - [ ] Audit run on the 4 samples → `reports/*.json` + `.md`, export sessions
 - [ ] Review Bob's findings by hand: count correct / wrong / missed
