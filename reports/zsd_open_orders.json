@@ -1,0 +1,319 @@
+{
+  "program": "ZSD_OPEN_ORDERS",
+  "source_file": "samples/legacy/zsd_open_orders.abap",
+  "target": {
+    "product": "unknown",
+    "release": "unknown",
+    "language_version": "ABAP for Cloud Development"
+  },
+  "provenance": {
+    "produced_by": "bob",
+    "bob_session": null,
+    "catalogue_version": "docs/clean-core-rules.md (draft)",
+    "reviewed_by_human": false
+  },
+  "findings": [
+    {
+      "id": "F-01",
+      "rule": "CC-10",
+      "level_hint": "syntax",
+      "line_start": 10,
+      "line_end": 10,
+      "evidence": "TABLES: vbak, vbap, kna1.",
+      "reason": "TABLES statement is obsolete in ABAP for Cloud Development. It declares implicit work areas tied to SAP GUI dynpro processing, which does not exist in the cloud language version.",
+      "suggested_action": "Remove the TABLES statement. Declare explicit work-area variables with DATA or inline DATA( ) at the point of use.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": [
+        "Confirm TABLES is syntactically rejected by the target compiler version (ABAP for Cloud Development)."
+      ]
+    },
+    {
+      "id": "F-02",
+      "rule": "CC-10",
+      "level_hint": "syntax",
+      "line_start": 12,
+      "line_end": 21,
+      "evidence": "DATA: BEGIN OF it_orders OCCURS 0,\n        vbeln LIKE vbak-vbeln,\n        ...\n      END OF it_orders.",
+      "reason": "OCCURS 0 on a DATA declaration creates a table with header line, which is obsolete in ABAP for Cloud Development. WITH HEADER LINE / OCCURS are not permitted in the cloud language version.",
+      "suggested_action": "Replace with a local structure type + a standard table TYPE declaration: TYPES: BEGIN OF ty_orders … END OF ty_orders. DATA it_orders TYPE STANDARD TABLE OF ty_orders WITH EMPTY KEY.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": [
+        "Confirm OCCURS and header-line tables are rejected by the target compiler version."
+      ]
+    },
+    {
+      "id": "F-03",
+      "rule": "CC-10",
+      "level_hint": "syntax",
+      "line_start": 12,
+      "line_end": 21,
+      "evidence": "vbeln LIKE vbak-vbeln, erdat LIKE vbak-erdat, … (LIKE references to database table fields)",
+      "reason": "LIKE referencing DB table fields (not ABAP Dictionary types) is an obsolete form in ABAP for Cloud Development. The table fields themselves may also not be accessible in the cloud language version.",
+      "suggested_action": "Use TYPE references to released CDS view elements or local type declarations. E.g. TYPE I_SalesDocument-SalesDocument (if released and verified).",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": [
+        "Confirm which released CDS field types correspond to each VBAK/VBAP/KNA1 field in the target release.",
+        "Confirm whether LIKE <dbtable>-<field> is rejected or merely discouraged in the target compiler version."
+      ]
+    },
+    {
+      "id": "F-04",
+      "rule": "CC-10",
+      "level_hint": "syntax",
+      "line_start": 23,
+      "line_end": 23,
+      "evidence": "DATA: w_total LIKE vbap-netwr.",
+      "reason": "Same LIKE referencing a DB table field — obsolete in ABAP for Cloud Development.",
+      "suggested_action": "Replace with a TYPE reference to a released CDS element or a built-in numeric type (e.g. TYPE decfloat34 or the corresponding released type).",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": [
+        "Confirm the correct released substitute type for VBAP-NETWR in the target release."
+      ]
+    },
+    {
+      "id": "F-05",
+      "rule": "CC-10",
+      "level_hint": "syntax",
+      "line_start": 25,
+      "line_end": 27,
+      "evidence": "SELECT-OPTIONS: s_kunnr FOR vbak-kunnr,\n                s_erdat FOR vbak-erdat.\nPARAMETERS:     p_vkorg LIKE vbak-vkorg OBLIGATORY.",
+      "reason": "SELECT-OPTIONS and PARAMETERS are part of the REPORT/selection-screen framework, which is not available in ABAP Cloud (no SAP GUI). The LIKE vbak-vkorg reference is also an obsolete LIKE form.",
+      "suggested_action": "Move selection criteria into method parameters or an OData/RAP filter API. No selection screen exists in the cloud.",
+      "effort": "M",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": [
+        "Confirm whether SELECT-OPTIONS and PARAMETERS are syntax-rejected in the ABAP for Cloud Development language version or only blocked by the REPORT statement context."
+      ]
+    },
+    {
+      "id": "F-06",
+      "rule": "CC-01",
+      "level_hint": "C",
+      "line_start": 35,
+      "line_end": 37,
+      "evidence": "SELECT * FROM vbak WHERE kunnr IN s_kunnr\n                     AND erdat IN s_erdat\n                     AND vkorg = p_vkorg.",
+      "reason": "Direct SELECT on SAP table VBAK. Release status of VBAK for ABAP Cloud must be verified; in S/4HANA Cloud it is typically not a released object. The released alternative is CDS view I_SalesDocument (candidate — must be verified).",
+      "suggested_action": "Replace with a SELECT or CDS-based query on I_SalesDocument (verify release contract and available fields before use).",
+      "effort": "M",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Confirm VBAK is not released in the target product/release.",
+        "Confirm I_SalesDocument is released, licensed, and covers SalesOrganization, CreationDate and SoldToParty filters in the target release.",
+        "Confirm whether SELECT * on a released CDS view is the correct pattern or whether a typed projection is required."
+      ]
+    },
+    {
+      "id": "F-07",
+      "rule": "CC-12",
+      "level_hint": "perf",
+      "line_start": 35,
+      "line_end": 49,
+      "evidence": "SELECT * FROM vbak … ENDSELECT.\n  SELECT * FROM vbap WHERE vbeln = vbak-vbeln.\n    SELECT SINGLE * FROM vbup … (inside inner loop)",
+      "reason": "Three-level nested SELECT…ENDSELECT loop. The innermost SELECT fires once per item row. For large order volumes this produces N² + N database round-trips. This is a performance finding, not a cloud-blocker by itself, but migration is the appropriate time to address it.",
+      "suggested_action": "Consolidate into a single CDS-based SELECT joining I_SalesDocument, I_SalesDocumentItem and I_SalesDocumentItemDeliverySchedule (or equivalent released view for item status), filtered server-side, to avoid loop-driven round-trips.",
+      "effort": "M",
+      "verification_status": "needs_verification",
+      "source_url": null,
+      "unknowns": [
+        "Confirm which released CDS view exposes the VBUP-LFSTA (delivery status) field in the target release.",
+        "Confirm whether a single-query join across the three objects is achievable with released views alone."
+      ]
+    },
+    {
+      "id": "F-08",
+      "rule": "CC-01",
+      "level_hint": "C",
+      "line_start": 38,
+      "line_end": 38,
+      "evidence": "SELECT * FROM vbap WHERE vbeln = vbak-vbeln.",
+      "reason": "Direct SELECT on SAP table VBAP. Release status must be verified for the target. The candidate released alternative is I_SalesDocumentItem.",
+      "suggested_action": "Replace with I_SalesDocumentItem (verify release contract and field coverage).",
+      "effort": "M",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Confirm VBAP is not released in the target product/release.",
+        "Confirm I_SalesDocumentItem covers POSNR, MATNR, KWMENG, NETWR in the target release."
+      ]
+    },
+    {
+      "id": "F-09",
+      "rule": "CC-01",
+      "level_hint": "C",
+      "line_start": 40,
+      "line_end": 41,
+      "evidence": "SELECT SINGLE * FROM vbup INTO @DATA(ls_vbup)\n  WHERE vbeln = @vbap-vbeln AND posnr = @vbap-posnr.",
+      "reason": "Direct SELECT on SAP table VBUP (sales document item status). VBUP release status must be verified. A released CDS alternative covering item delivery status must be identified and confirmed.",
+      "suggested_action": "Identify and use the released CDS view that exposes the item delivery status field (LFSTA). Candidate name unknown — requires verification in the Released Objects list for the target release.",
+      "effort": "M",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Confirm VBUP is not released in the target product/release.",
+        "Identify the released CDS view (or association in I_SalesDocumentItem) that exposes VBUP-LFSTA (delivery completion status) in the target release."
+      ]
+    },
+    {
+      "id": "F-10",
+      "rule": "CC-01",
+      "level_hint": "C",
+      "line_start": 43,
+      "line_end": 44,
+      "evidence": "SELECT SINGLE name1 FROM kna1 INTO it_orders-name1\n  WHERE kunnr = vbak-kunnr.",
+      "reason": "Direct SELECT on SAP table KNA1 (customer master). The candidate released alternative is CDS view I_Customer (verify release contract).",
+      "suggested_action": "Replace with I_Customer (verify release contract, field availability and authorisation check behaviour in the target release).",
+      "effort": "S",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Confirm KNA1 is not released in the target product/release.",
+        "Confirm I_Customer exposes a NAME1-equivalent field in the target release and that reading it does not require an additional licence."
+      ]
+    },
+    {
+      "id": "F-11",
+      "rule": "CC-10",
+      "level_hint": "syntax",
+      "line_start": 45,
+      "line_end": 46,
+      "evidence": "MOVE-CORRESPONDING vbak TO it_orders.\nMOVE-CORRESPONDING vbap TO it_orders.",
+      "reason": "MOVE-CORRESPONDING is listed as an obsolete syntax in ABAP for Cloud Development (CC-10 covers MOVE). Verify whether this specific form is prohibited in the target language version.",
+      "suggested_action": "Replace with inline VALUE #( ) or CORRESPONDING #( ) operator, which is the modern equivalent.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": [
+        "Confirm whether MOVE-CORRESPONDING (as distinct from the scalar MOVE statement) is explicitly prohibited in ABAP for Cloud Development, or only the scalar MOVE form."
+      ]
+    },
+    {
+      "id": "F-12",
+      "rule": "CC-11",
+      "level_hint": "C",
+      "line_start": 34,
+      "line_end": 50,
+      "evidence": "FORM get_data.\n  …\nENDFORM.",
+      "reason": "Subroutine (FORM/PERFORM) is obsolete in ABAP for Cloud Development. Subroutines are not permitted in the cloud language version.",
+      "suggested_action": "Move logic into a private or static method of a local or global class.",
+      "effort": "M",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": []
+    },
+    {
+      "id": "F-13",
+      "rule": "CC-11",
+      "level_hint": "C",
+      "line_start": 53,
+      "line_end": 67,
+      "evidence": "FORM print_list.\n  …\nENDFORM.",
+      "reason": "Subroutine (FORM/PERFORM) is obsolete in ABAP for Cloud Development.",
+      "suggested_action": "Move logic into a private or static method of a local or global class.",
+      "effort": "M",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": []
+    },
+    {
+      "id": "F-14",
+      "rule": "CC-11",
+      "level_hint": "C",
+      "line_start": 30,
+      "line_end": 31,
+      "evidence": "PERFORM get_data.\nPERFORM print_list.",
+      "reason": "PERFORM calls (invoking subroutines) are the direct callers of the two FORM blocks. Both are obsolete in ABAP for Cloud Development.",
+      "suggested_action": "Replace with method calls once FORM blocks are converted to methods.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": []
+    },
+    {
+      "id": "F-15",
+      "rule": "CC-09",
+      "level_hint": "C",
+      "line_start": 53,
+      "line_end": 67,
+      "evidence": "WRITE: / it_orders-kunnr COLOR COL_HEADING, it_orders-name1.\nULINE.\nWRITE: / it_orders-vbeln …\nADD it_orders-netwr TO w_total.\nWRITE: / 'Total open value:', w_total.",
+      "reason": "Classic list output (WRITE, ULINE, AT NEW … ENDAT) is not available in ABAP Cloud. There is no list processing or SAP GUI in the cloud runtime.",
+      "suggested_action": "Replace the entire print_list FORM with a RAP-based query exposed via OData and a Fiori Elements List Report page. The total value can be computed as an aggregation in the CDS projection.",
+      "effort": "L",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": [
+        "Confirm whether the business requirement calls for a UI list, a background report output, or both — affects choice of RAP query vs. Application Job."
+      ]
+    },
+    {
+      "id": "F-16",
+      "rule": "CC-09",
+      "level_hint": "C",
+      "line_start": 56,
+      "line_end": 60,
+      "evidence": "AT NEW kunnr.\n  SKIP.\n  WRITE: / it_orders-kunnr COLOR COL_HEADING, it_orders-name1.\n  ULINE.\nENDAT.",
+      "reason": "AT NEW … ENDAT is a classic list-processing control break construct, not available in ABAP Cloud.",
+      "suggested_action": "Grouping by customer is a presentation concern; implement via a Fiori Elements List Report with group-by on SoldToParty, or sort/aggregate in CDS.",
+      "effort": "M",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": []
+    },
+    {
+      "id": "F-17",
+      "rule": "CC-10",
+      "level_hint": "syntax",
+      "line_start": 63,
+      "line_end": 63,
+      "evidence": "ADD it_orders-netwr TO w_total.",
+      "reason": "ADD … TO is an obsolete arithmetic statement in ABAP for Cloud Development. The modern form is w_total = w_total + it_orders-netwr or computed as a CDS aggregation.",
+      "suggested_action": "Replace with w_total += it_orders-netwr or compute a SUM aggregation in CDS/ABAP SQL.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": []
+    },
+    {
+      "id": "F-18",
+      "rule": "Unclassified",
+      "level_hint": null,
+      "line_start": 42,
+      "line_end": 42,
+      "evidence": "CHECK ls_vbup-lfsta <> 'C'.",
+      "reason": "The delivery status value 'C' (fully delivered) is a hard-coded literal. The comment on line 39 says 'open = no delivery yet' but LFSTA = 'C' means 'fully delivered', not 'partially delivered' or 'not started'. The filter is logically correct (exclude fully delivered), but the comment is misleading. Additionally, if VBUP is replaced by a released CDS view, the field name and domain values for delivery status may differ and must be re-verified.",
+      "suggested_action": "Clarify the comment to match the actual logic. When migrating, confirm the equivalent delivery-status field and its 'fully delivered' constant in the released CDS view.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": null,
+      "unknowns": [
+        "Confirm the field name and constant value for 'fully delivered' delivery status in the released CDS view that replaces VBUP.",
+        "Confirm whether the business rule should also exclude partially delivered items (LFSTA = 'B') or only fully delivered ones."
+      ]
+    }
+  ],
+  "missed_by_bob": [],
+  "summary": {
+    "status": "Needs target verification",
+    "draft_verdict_hint": "Rebuild",
+    "human_must_decide": [
+      "Target product and exact release must be confirmed before any rule classification is treated as final.",
+      "ABAP language version must be confirmed (ABAP for Cloud Development assumed).",
+      "Release status of VBAK, VBAP, VBUP, KNA1 in the target system — check ADT Released Objects tree or api.sap.com.",
+      "Released CDS view that exposes VBUP-LFSTA (item delivery completion status); candidate I_SalesDocumentItem association to be verified.",
+      "Release contract, field coverage and licensing of I_SalesDocument, I_SalesDocumentItem, I_Customer in the target release.",
+      "Whether MOVE-CORRESPONDING is explicitly forbidden in the target language version or only the scalar MOVE statement.",
+      "Whether the output requirement is an interactive Fiori UI, a background/scheduled report, or both — determines RAP query vs. Application Job pattern.",
+      "Correct business rule for 'open': exclude only fully delivered (LFSTA = C) or also partially delivered (LFSTA = B).",
+      "Authorization concept: the legacy program reads KNA1/VBAK directly with no explicit auth check; the replacement must define the correct authorization objects."
+    ]
+  }
+}

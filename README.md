@@ -79,7 +79,7 @@ removed before submission.
 
 | Program | Findings | Correct | Wrong | Missed | Verdict hint |
 |---------|----------|---------|-------|--------|--------------|
-| ZSD_OPEN_ORDERS | | | | | |
+| ZSD_OPEN_ORDERS | 18 (5 duplicates) | 11 core + 1 extra | 1 (proposed) | 1 core + 3 bonus | Rebuild (key says Refactor) — see [`docs/scoring/zsd_open_orders.md`](docs/scoring/zsd_open_orders.md) |
 | ZFI_VENDOR_AGING | 8 | 6 core + 1 bonus | 0 (1 undecided) | 4 bonus | Rebuild — see [`docs/scoring/zfi_vendor_aging.md`](docs/scoring/zfi_vendor_aging.md) |
 | ZMM_MASS_PRICE_UPDATE | | | | | |
 | ZCC_LEGACY_MATERIALS | | | | | |
