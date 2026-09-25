@@ -78,3 +78,15 @@ change this single flag to `true` and reload to enable the existing greeting.
 Missing configuration also keeps it disabled. This display switch does not
 remove media files from the repository, deployment directory or Git history.
 Exclude those assets separately from any distribution that must omit them.
+
+## Multiple reports
+
+Import each program JSON using Import report. The Report selector retains all
+imports in memory, including separate imports for the same program (numbered
+by import order). Switching reports preserves each report's raw JSON, review
+decisions and omission notes separately. Selecting the design example does
+not discard imports. Search and status filters reset on a report switch.
+Export JSON exports only the selected report and its review overlay; export
+each report before closing or reloading. No report is automatically fetched,
+persisted or scored, and this does not turn the viewer's basic import checks
+into full schema validation.
