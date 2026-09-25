@@ -1,0 +1,160 @@
+{
+  "program": "ZMM_MASS_PRICE_UPDATE",
+  "source_file": "samples/legacy/zmm_mass_price_update.abap",
+  "target": {
+    "product": "unknown",
+    "release": "unknown",
+    "language_version": "ABAP for Cloud Development"
+  },
+  "provenance": {
+    "produced_by": "bob",
+    "bob_session": null,
+    "catalogue_version": "docs/clean-core-rules.md (draft)",
+    "reviewed_by_human": false
+  },
+  "findings": [
+    {
+      "id": "F-01",
+      "rule": "CC-08",
+      "level_hint": "C",
+      "line_start": 22,
+      "line_end": 27,
+      "evidence": "CALL FUNCTION 'POPUP_TO_CONFIRM' EXPORTING text_question = 'Really update all prices?' IMPORTING answer = lv_answer.",
+      "reason": "POPUP_TO_CONFIRM is a non-released function module that relies on SAP GUI dynpro processing. It is not available in ABAP Cloud (no released API contract).",
+      "suggested_action": "Replace the user-confirmation pattern with a Fiori elements confirmation action (RAP action with confirmation step) or, for background use, remove the interactive guard entirely and enforce the check via authorisation or application job parameters.",
+      "effort": "M",
+      "verification_status": "observed",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Whether a released successor function module or class for modal confirmation dialogs exists on the specific target release",
+        "Whether the program is intended to run interactively (Fiori) or as a background job — the replacement strategy differs"
+      ]
+    },
+    {
+      "id": "F-02",
+      "rule": "CC-01",
+      "level_hint": "C",
+      "line_start": 29,
+      "line_end": 29,
+      "evidence": "SELECT * FROM mbew INTO TABLE lt_mbew WHERE bwkey = p_werks.",
+      "reason": "MBEW is an SAP-delivered material valuation table. Direct SELECT on SAP tables bypasses the released API layer; the release status of MBEW for ABAP Cloud on the target system must be verified separately.",
+      "suggested_action": "Read material valuation data through a released CDS view (candidate: I_MaterialStock or a valuation-specific released view — verify exact name and availability on target release).",
+      "effort": "M",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Exact released CDS view name covering MBEW fields STPRS, MATNR, BWKEY on the target release",
+        "Whether MBEW has a compatibility view released for ABAP Cloud on this target"
+      ]
+    },
+    {
+      "id": "F-03",
+      "rule": "CC-03",
+      "level_hint": "D",
+      "line_start": 35,
+      "line_end": 35,
+      "evidence": "UPDATE mbew FROM ls_mbew.",
+      "reason": "Direct UPDATE on SAP table MBEW bypasses all business logic, locking, change documents, and price-change history that standard posting processes maintain. This is a Level-D pattern (not recommended / blocked in ABAP Cloud).",
+      "suggested_action": "Replace with a released RAP Business Object or BAPI for standard-price update (e.g. BAPI_MATERIAL_SAVEDATA with costing data, or an EML MODIFY call against a released RAP BO — verify exact API on target). COMMIT WORK at line 37 must also move to the released API commit mechanism.",
+      "effort": "L",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Which released API (BAPI or RAP BO) covers standard-price update for material valuation on the target release",
+        "Whether the price-change requires a CO/Costing document (MR21 equivalent) that only the standard API creates"
+      ]
+    },
+    {
+      "id": "F-04",
+      "rule": "CC-04",
+      "level_hint": "D",
+      "line_start": 45,
+      "line_end": 45,
+      "evidence": "CALL TRANSACTION 'MM02' USING lt_bdc MODE 'N' UPDATE 'S'.",
+      "reason": "CALL TRANSACTION with BDC replay of MM02 requires SAP GUI screen processing which does not exist in ABAP Cloud. This is a Level-D pattern.",
+      "suggested_action": "Replace the BDC path with the same released RAP BO / BAPI used for F-03. The entire BDCDATA infrastructure (lines 12–14, 51–64) becomes redundant once the direct API path is used.",
+      "effort": "L",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Which released API replaces the MM02 BDC path for material master costing data update on the target release"
+      ]
+    },
+    {
+      "id": "F-05",
+      "rule": "CC-09",
+      "level_hint": "C",
+      "line_start": 49,
+      "line_end": 49,
+      "evidence": "WRITE: / 'Updated', lines( lt_mbew ), 'materials.'.",
+      "reason": "Classic list output via WRITE is not supported in ABAP Cloud (no SAP GUI list processing).",
+      "suggested_action": "Surface results through a Fiori elements List Report or return a structured result from an Application Log / Application Jobs callback; for a batch scenario, write to the application job log (CL_APJ_RT_API).",
+      "effort": "M",
+      "verification_status": "observed",
+      "source_url": null,
+      "unknowns": [
+        "Whether the program is intended to run interactively (Fiori action) or as a scheduled background job — the output mechanism differs"
+      ]
+    },
+    {
+      "id": "F-06",
+      "rule": "CC-11",
+      "level_hint": "C",
+      "line_start": 51,
+      "line_end": 64,
+      "evidence": "FORM bdc_dynpro USING program dynpro. ... ENDFORM.\nFORM bdc_field USING fnam fval. ... ENDFORM.",
+      "reason": "FORM/PERFORM subroutines are obsolete in ABAP for Cloud Development language version and not allowed.",
+      "suggested_action": "Inline the BDCDATA population logic into private methods of a class, or — preferably — remove it entirely once the BDC path (F-04) is replaced by a released API.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": null,
+      "unknowns": []
+    },
+    {
+      "id": "F-07",
+      "rule": "CC-10",
+      "level_hint": "syntax",
+      "line_start": 10,
+      "line_end": 14,
+      "evidence": "DATA: lt_mbew TYPE TABLE OF mbew, ls_mbew TYPE mbew, lt_bdc TYPE TABLE OF bdcdata, ls_bdc TYPE bdcdata, lv_answer TYPE c.",
+      "reason": "Chained DATA: declarations are not forbidden by CC-10 per se, but the use of untyped TYPE c (length 1, no length specified explicitly) and ABAP-typed structure declarations tied to physical SAP tables are migration-time code quality issues. The main concern is the TABLE OF mbew / TYPE mbew pattern which directly references an SAP database table as a type — this is coupled to the direct-table-access findings above.",
+      "suggested_action": "Redeclare all data objects against released CDS view-based types or locally defined structures. Use inline DATA( ) where possible.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": null,
+      "unknowns": [
+        "Whether TYPE TABLE OF mbew is explicitly blocked by the ATC Cloud check on the target release (table-type declarations against unreleased tables may trigger a separate ATC check)"
+      ]
+    },
+    {
+      "id": "F-08",
+      "rule": "Unclassified",
+      "level_hint": null,
+      "line_start": 33,
+      "line_end": 36,
+      "evidence": "LOOP AT lt_mbew INTO ls_mbew.\n  ls_mbew-stprs = ls_mbew-stprs * ( 1 + p_pct / 100 ).\n  UPDATE mbew FROM ls_mbew.\nENDLOOP.",
+      "reason": "Business logic concern: the program updates STPRS (standard price) without checking the price control indicator (VPRSV). Materials with price control 'V' (moving average) should not have STPRS updated directly. Updating STPRS for a 'V'-controlled material without a proper posting creates inconsistency between the price and the stock value. No CC rule covers this logic error, but verification-rules.md requires flagging wrong-looking logic.",
+      "suggested_action": "Before any price update, filter or branch on VPRSV = 'S' (standard price control). For 'V' materials, either skip or raise a dedicated error. Verify the exact field and value with the target costing configuration.",
+      "effort": "M",
+      "verification_status": "observed",
+      "source_url": null,
+      "unknowns": [
+        "Whether all materials in the plant are guaranteed to carry price control S — if so the risk is mitigated but the guard should still be explicit",
+        "Whether the released API used as replacement enforces this check itself"
+      ]
+    }
+  ],
+  "summary": {
+    "status": "Needs target verification",
+    "draft_verdict_hint": "Rebuild",
+    "human_must_decide": [
+      "Target product and release must be confirmed before any finding can be marked verified_on_target",
+      "Exact released CDS view that exposes MBEW fields (STPRS, BWKEY, MATNR, VPRSV) in ABAP Cloud",
+      "Exact released API (RAP BO or BAPI) for standard-price update of material valuation — BAPI_MATERIAL_SAVEDATA is a candidate but its release status for ABAP Cloud must be checked",
+      "Whether the interactive confirmation popup (POPUP_TO_CONFIRM) must be replaced by a Fiori confirmation action or simply removed for a background-only redesign",
+      "Whether the p_bdc BDC path needs to be preserved at all, or can be dropped in favour of a single released-API path",
+      "Price-control-indicator guard (VPRSV): confirm all in-scope materials are price-control S, or mandate the API enforces this",
+      "Authorization concept: the current program has no explicit authority-check; the replacement must clarify which authorization objects govern mass price changes"
+    ]
+  }
+}

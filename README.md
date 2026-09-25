@@ -81,7 +81,7 @@ removed before submission.
 |---------|----------|---------|-------|--------|--------------|
 | ZSD_OPEN_ORDERS | 18 (5 duplicates) | 11 core + 1 extra | 1 (proposed) | 1 core + 3 bonus | Rebuild (key says Refactor) — see [`docs/scoring/zsd_open_orders.md`](docs/scoring/zsd_open_orders.md) |
 | ZFI_VENDOR_AGING | 8 | 6 core + 1 bonus | 0 (1 undecided) | 4 bonus | Rebuild — see [`docs/scoring/zfi_vendor_aging.md`](docs/scoring/zfi_vendor_aging.md) |
-| ZMM_MASS_PRICE_UPDATE | | | | | |
+| ZMM_MASS_PRICE_UPDATE | 8 | 6 core + 1 extra | 1 (proposed) | 3 bonus | Rebuild — see [`docs/scoring/zmm_mass_price_update.md`](docs/scoring/zmm_mass_price_update.md) |
 | ZCC_LEGACY_MATERIALS | | | | | |
 
 ## Repo layout
