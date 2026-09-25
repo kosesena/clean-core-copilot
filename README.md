@@ -80,7 +80,7 @@ removed before submission.
 | Program | Findings | Correct | Wrong | Missed | Verdict hint |
 |---------|----------|---------|-------|--------|--------------|
 | ZSD_OPEN_ORDERS | | | | | |
-| ZFI_VENDOR_AGING | | | | | |
+| ZFI_VENDOR_AGING | 8 | 6 core + 1 bonus | 0 (1 undecided) | 4 bonus | Rebuild — see [`docs/scoring/zfi_vendor_aging.md`](docs/scoring/zfi_vendor_aging.md) |
 | ZMM_MASS_PRICE_UPDATE | | | | | |
 | ZCC_LEGACY_MATERIALS | | | | | |
 

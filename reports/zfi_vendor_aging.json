@@ -1,0 +1,168 @@
+{
+  "program": "ZFI_VENDOR_AGING",
+  "source_file": "samples/legacy/zfi_vendor_aging.abap",
+  "target": {
+    "product": "unknown",
+    "release": "unknown",
+    "language_version": "ABAP for Cloud Development"
+  },
+  "provenance": {
+    "produced_by": "bob",
+    "bob_session": null,
+    "catalogue_version": "docs/clean-core-rules.md (draft)",
+    "reviewed_by_human": false
+  },
+  "findings": [
+    {
+      "id": "F-01",
+      "rule": "CC-02",
+      "level_hint": "C",
+      "line_start": 30,
+      "line_end": 36,
+      "evidence": "SELECT b~lifnr, l~name1, b~belnr, b~zfbdt, b~dmbtr\n  FROM bseg AS b\n  INNER JOIN lfa1 AS l ON l~lifnr = b~lifnr\n  WHERE b~bukrs = @p_bukrs\n    AND b~koart = 'K'\n    AND b~augbl = @space\n  INTO CORRESPONDING FIELDS OF TABLE @gt_items.",
+      "reason": "Direct SELECT on BSEG (vendor line items) and LFA1 (vendor master). BSEG is an aggregation-based table in S/4HANA whose row structure and availability in the cloud tier must be verified; LFA1 is a classic vendor-master table. CC-02 covers BSEG/BSIK/BSAK reads; LFA1 also falls under CC-01 (SAP master-data tables). The filter `koart = 'K'` and `augbl = space` implements the open-vendor-items semantic — that business logic must be replicated when switching to released views.",
+      "suggested_action": "Candidate replacement: CDS view I_OperationalAcctgDocItem for open items (clearing fields expose augbl-equivalent). Join with I_Supplier (candidate for LFA1 name data). Verify both objects are released for the target product/release and carry the required fields (zfbdt/net-due-date, dmbtr, koart-equivalent) before committing. The open-item filter (augbl = space) may require a dedicated open-items entity or a filter on clearing status.",
+      "effort": "M",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Whether I_OperationalAcctgDocItem is released on the target product/release",
+        "Whether I_Supplier carries the NAME1 field equivalent",
+        "Whether ZFBDT (net due date) is exposed on the candidate view",
+        "Whether KOART-equivalent filtering is available in the released view",
+        "Whether open-item semantics (AUGBL = space) map directly to a clearing-status field on the released view"
+      ]
+    },
+    {
+      "id": "F-02",
+      "rule": "CC-01",
+      "level_hint": "C",
+      "line_start": 32,
+      "line_end": 32,
+      "evidence": "INNER JOIN lfa1 AS l ON l~lifnr = b~lifnr",
+      "reason": "Direct SELECT on LFA1 (vendor master table). LFA1 is a classic SAP table; its release status in ABAP Cloud must be verified. The candidate released object is I_Supplier.",
+      "suggested_action": "Replace with released CDS view I_Supplier (candidate). Verify that I_Supplier is released for the target product and release, and that the required fields (name1 equivalent) are present.",
+      "effort": "S",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Whether I_Supplier is released on the target product/release",
+        "Exact field name mapping from LFA1-NAME1 to I_Supplier"
+      ]
+    },
+    {
+      "id": "F-03",
+      "rule": "CC-05",
+      "level_hint": "D",
+      "line_start": 39,
+      "line_end": 41,
+      "evidence": "EXEC SQL.\n  UPDATE ZFI_AGING_LOG SET LAST_RUN = :sy-datum WHERE BUKRS = :p_bukrs\nENDEXEC.",
+      "reason": "Native SQL (EXEC SQL … ENDEXEC) is not permitted in ABAP for Cloud Development. This block also performs a direct UPDATE on table ZFI_AGING_LOG, which may be a custom Z-table; however, the approach (native SQL bypass) is the primary blocker regardless of table ownership.",
+      "suggested_action": "Replace with ABAP SQL (UPDATE zfi_aging_log SET last_run = @sy-datum WHERE bukrs = @p_bukrs). If ZFI_AGING_LOG is a custom table owned by the development team, a plain ABAP SQL UPDATE is sufficient. If a RAP BO governs it, use EML instead. Verify table ownership and whether a RAP BO already exists.",
+      "effort": "S",
+      "verification_status": "needs_verification",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": [
+        "Whether ZFI_AGING_LOG is a custom Z-table fully owned by the customer or a SAP-delivered object",
+        "Whether a RAP BO already governs ZFI_AGING_LOG",
+        "Database compatibility of the original native SQL syntax on the target DB"
+      ]
+    },
+    {
+      "id": "F-04",
+      "rule": "CC-10",
+      "level_hint": "syntax",
+      "line_start": 19,
+      "line_end": 19,
+      "evidence": "DATA: gt_items TYPE STANDARD TABLE OF ty_item WITH HEADER LINE,",
+      "reason": "WITH HEADER LINE on an internal table is listed as obsolete syntax under CC-10. It is not allowed in the ABAP for Cloud Development language version. The implicit header line is used for field access in LOOP AT (lines 44–51) and MODIFY gt_items (line 52), and in the second LOOP AT / TRANSFER block (lines 59–63).",
+      "suggested_action": "Remove WITH HEADER LINE. Declare a separate work area (e.g. DATA ls_item TYPE ty_item). Change LOOP AT gt_items / MODIFY gt_items to LOOP AT gt_items INTO ls_item / modify or collect via lt_items[ ] field symbol approach. Use LOOP AT gt_items ASSIGNING FIELD-SYMBOL(<ls_item>) for in-place modification.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": null,
+      "unknowns": []
+    },
+    {
+      "id": "F-05",
+      "rule": "CC-06",
+      "level_hint": "C",
+      "line_start": 55,
+      "line_end": 64,
+      "evidence": "OPEN DATASET gv_file FOR OUTPUT IN TEXT MODE ENCODING DEFAULT.\n...\nTRANSFER gv_line TO gv_file.\nCLOSE DATASET gv_file.",
+      "reason": "OPEN DATASET / TRANSFER / CLOSE DATASET access the application-server file system, which is not available in ABAP Cloud. The program writes CSV output to a hard-coded path (/usr/sap/trans/out/aging.csv) for nightly treasury pickup — this integration pattern must be replaced.",
+      "suggested_action": "Replace with an outbound integration mechanism: e.g. an HTTP outbound call (Communication Arrangement + CL_HTTP_CLIENT or released HTTP client class), a Business Document flow, or an event-driven pattern. The treasury system must be given a pull endpoint or receive a push notification. Exact replacement depends on the target integration architecture for the treasury system.",
+      "effort": "L",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Target integration architecture for the treasury system (push vs pull, protocol)",
+        "Whether a Communication Arrangement / Communication Scenario already exists for this interface",
+        "Whether the treasury system can consume an OData feed or API instead of a flat file"
+      ]
+    },
+    {
+      "id": "F-06",
+      "rule": "CC-07",
+      "level_hint": "C",
+      "line_start": 67,
+      "line_end": 67,
+      "evidence": "SUBMIT zfi_treasury_upload WITH p_file = gv_file AND RETURN.",
+      "reason": "SUBMIT calls a classic ABAP report. Reports cannot be called in ABAP Cloud; the SUBMIT statement is not available in the ABAP for Cloud Development language version.",
+      "suggested_action": "Replace with a class-based call. Extract the logic of ZFI_TREASURY_UPLOAD into a released or custom class/method and call it directly, or schedule it as an Application Job using CL_APJ_RT_API. The dependency on gv_file (the CSV path) also needs to be resolved together with F-05.",
+      "effort": "M",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Whether ZFI_TREASURY_UPLOAD is in scope for this migration or maintained by a different team",
+        "Whether ZFI_TREASURY_UPLOAD itself has additional clean-core issues (not audited here)"
+      ]
+    },
+    {
+      "id": "F-07",
+      "rule": "Unclassified",
+      "level_hint": null,
+      "line_start": 38,
+      "line_end": 41,
+      "evidence": "* Currency conversion done in the database, native, because \"it was faster\"\nEXEC SQL.\n  UPDATE ZFI_AGING_LOG SET LAST_RUN = :sy-datum WHERE BUKRS = :p_bukrs\nENDEXEC.",
+      "reason": "The comment says 'currency conversion done in the database' but the actual EXEC SQL statement is a plain UPDATE to a log table — it performs no currency conversion at all. The comment contradicts the code. This could indicate missing logic (currency conversion was removed or never implemented) or a misplaced comment. No clean-core rule governs comment accuracy, so this is Unclassified, but it warrants human review.",
+      "suggested_action": "Clarify with the original developer: (a) Was currency conversion logic removed? (b) Is it handled elsewhere? (c) Should amounts in dmbtr be converted before bucketing or output? If conversion is needed, consider CURRENCY_CONVERSION in CDS or a released currency API.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": null,
+      "unknowns": [
+        "Whether currency conversion is expected but missing",
+        "Whether dmbtr is always in local (company-code) currency, removing the need for conversion"
+      ]
+    },
+    {
+      "id": "F-08",
+      "rule": "CC-09",
+      "level_hint": "C",
+      "line_start": 8,
+      "line_end": 8,
+      "evidence": "REPORT zfi_vendor_aging.",
+      "reason": "The program is a classic ABAP REPORT (executable program). While there is no explicit WRITE/ULINE/SKIP in this specific program, the REPORT statement itself signals a classic executable program structure that has no place in ABAP Cloud. The START-OF-SELECTION event block (line 27) and the PARAMETERS screen (lines 24–25) are also part of this classic paradigm. CC-09 covers the absence of list processing here; the broader program type must be replaced.",
+      "suggested_action": "Repackage as a RAP application job (CL_APJ_RT_API) with a selection screen equivalent implemented as job parameters, or expose the logic as an OData-based Fiori app. The bucketing and output logic become service methods.",
+      "effort": "L",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Whether the program is always run in background (making Application Jobs the right fit) or also interactively"
+      ]
+    }
+  ],
+  "summary": {
+    "status": "Needs target verification",
+    "draft_verdict_hint": "Rebuild",
+    "human_must_decide": [
+      "Target product and exact release (required to verify release contracts for all candidate CDS views)",
+      "Whether I_OperationalAcctgDocItem and I_Supplier are released and carry the required fields on the target system",
+      "Whether BSEG is available as a compatibility object on the target release, or fully replaced by ACDOCA",
+      "Whether ZFI_AGING_LOG is a customer-owned Z-table (ABAP SQL UPDATE acceptable) or SAP-delivered",
+      "Whether ZFI_TREASURY_UPLOAD is in scope and who owns it",
+      "Target integration architecture for the treasury flat-file handoff (file → API/event/push)",
+      "Whether currency conversion on DMBTR is a business requirement that was removed or is handled elsewhere",
+      "Whether the program runs interactively or purely in background (determines Application Job vs Fiori app target)"
+    ]
+  }
+}
