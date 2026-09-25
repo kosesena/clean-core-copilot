@@ -41,3 +41,25 @@ Generated mascot greeting, not an audit recording. English captions included.
 Click Bob to play once with sound; native video controls allow pausing, seeking
 and muting. End or Back to Bob restores the original still. No autoplay or loop.
 The clip and captions are local assets; playing sends no data to HeyGen.
+
+## End-to-end case viewer
+
+Open `walkthrough.html` using the local HTTP server. This separate case viewer
+was added on 25 September before kickoff eligibility was confirmed; it remains
+pre-event preparation pending confirmation. It is outside the audit allowlist.
+
+Load original and proposed ABAP text, a Bob task record, and activation, ATC
+and ABAP Unit execution logs. Set the target system/release/language version.
+Check outcomes are explicit user declarations, never parsed or inferred from
+logs. They bind to the implementation and execution-record SHA-256 hashes
+and target string; changing any of these makes the declaration stale. This
+detects local content changes, not forged evidence or deployed object identity.
+Each case currently covers ONE implementation file, not a multi-object deployment.
+Required Bob PNG consumption summaries must still be stored in bob_sessions/.
+
+Export/import uses `clean-core-case-v1`, separate from the frozen findings
+schema and existing review bundle. Data stays in memory until exported. Nothing
+runs against Bob or SAP, and no success, completeness or measured savings is
+asserted from attaching files. All imported contents render as text.
+
+Validation: `node --test demo-prototype/tests/walkthrough.test.mjs`.
