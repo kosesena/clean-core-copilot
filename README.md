@@ -85,6 +85,18 @@ removed before submission.
 | ZMM_MASS_PRICE_UPDATE | 8 | 6 core + 1 extra | 1 (proposed) | 3 bonus | Rebuild — see [`docs/scoring/zmm_mass_price_update.md`](docs/scoring/zmm_mass_price_update.md) |
 | ZCC_LEGACY_MATERIALS | 6 (1 duplicate) | 4 core + 1 extra | 0 | 1 core (runtime) + 1 bonus | Rebuild (key says Refactor) — see [`docs/scoring/zcc_legacy_materials.md`](docs/scoring/zcc_legacy_materials.md) |
 
+Totals across the four audits: core recall 27 / 29, bonus 1 / 12, 40 raw
+findings of which 6 are duplicates, 0.66 Bobcoin.
+
+**Modernization (ZFI_VENDOR_AGING, task 5):** CDS view entity, class, ABAP
+Unit tests and per-finding README in
+[`modernized/zfi_vendor_aging/`](modernized/zfi_vendor_aging/), 0.807
+Bobcoin. Reviewed by reading only — see
+[`docs/scoring/zfi_vendor_aging_modernization.md`](docs/scoring/zfi_vendor_aging_modernization.md):
+verification discipline intact, one probable activation error (CDS element
+names vs. class field names), one data-model gap (no item number in the
+key), one legacy bug carried over. Not activated on any system.
+
 ## Repo layout
 
 ```
