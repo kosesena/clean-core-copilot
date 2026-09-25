@@ -69,6 +69,16 @@ asserted from attaching files. All imported contents render as text.
 
 Validation: `node --test demo-prototype/tests/walkthrough.test.mjs`.
 
+The “Load recorded ZFI case” button loads `cases/zfi-modernization.json`, a
+snapshot of the original synthetic ZFI source, Bob's proposed class and Bob's
+generated modernization README (task output, not a transcript). These texts
+are copied verbatim from their repository files. The bundle has an empty
+target and no check declarations or execution logs. Seven authored test
+methods do not imply seven passing tests. CDS and test-class files remain in
+`modernized/zfi_vendor_aging/`; this single-file comparison does not cover
+their deployment. The task 5 consumption PNG remains in `bob_sessions/`.
+Loading this case replaces the current in-memory case; export edits first.
+
 ## Optional mascot display
 
 `demo-config.js` defaults to `SHOW_MASCOT: false` while permission is pending.
