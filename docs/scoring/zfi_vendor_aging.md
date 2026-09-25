@@ -8,6 +8,11 @@ from the committed `docs/freeze.sha256` (no `.git`, no plan, no answer key).
 `bob-config-draft/clean-core-architect.mode.md`; tools: Read + Edit only).
 **Task prompt:** `bob-config-draft/first-task.md`, with the output paths
 spelled out.
+**Not captured:** the mode as Bob stored it was not exported before this
+run, so there is no hash of the live mode text taken before the task. The
+wording was typed from the frozen draft (hash in `docs/freeze.sha256`); an
+export taken later can be compared to the draft, but it is not a
+pre-run freeze.
 **Cost:** 0.165 Bobcoin of 40 (task badge), 22.4k / 270k context.
 **Output:** `reports/zfi_vendor_aging.json` (8 findings) and
 `reports/zfi_vendor_aging.md`. Both copied unchanged from the workspace;
