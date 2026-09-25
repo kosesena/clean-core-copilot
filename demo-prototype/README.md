@@ -2,8 +2,11 @@
 
 Pre-event UI exploration, created with Codex on 24 September 2026. This is
 not an IBM Bob artifact and is not part of the frozen audit input set.
-Confirm preparation-material eligibility at kickoff before using this in
-the submission.
+On 25 September at 19:37 TRT, Hamza (lablab.ai) confirmed in the participant
+chat that pre-prepared synthetic sample code and demo UI templates may be used
+if disclosed in the repository and the core Bob analysis and project logic are
+built during the hackathon. This confirmation does not separately name the
+rule catalogue or baseline. IBM mascot/animation permission remains pending.
 
 Open `index.html` in a browser, or serve this directory with
 `python3 -m http.server 4173 --bind 127.0.0.1`.
@@ -45,8 +48,8 @@ The clip and captions are local assets; playing sends no data to HeyGen.
 ## End-to-end case viewer
 
 Open `walkthrough.html` using the local HTTP server. This separate case viewer
-was added on 25 September before kickoff eligibility was confirmed; it remains
-pre-event preparation pending confirmation. It is outside the audit allowlist.
+was added on 25 September before kickoff; it remains disclosed pre-event
+preparation under the conditions above. It is outside the audit allowlist.
 
 Load original and proposed ABAP text, a Bob task record, and activation, ATC
 and ABAP Unit execution logs. Set the target system/release/language version.
@@ -54,6 +57,8 @@ Check outcomes are explicit user declarations, never parsed or inferred from
 logs. They bind to the implementation and execution-record SHA-256 hashes
 and target string; changing any of these makes the declaration stale. This
 detects local content changes, not forged evidence or deployed object identity.
+Blank implementation, execution record, or target cannot support an accepted
+outcome declaration, including when a case bundle is imported.
 Each case currently covers ONE implementation file, not a multi-object deployment.
 Required Bob PNG consumption summaries must still be stored in bob_sessions/.
 

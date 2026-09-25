@@ -1,4 +1,4 @@
-import {emptyCase,validateCase,digest,checkState} from './walkthrough-model.mjs';
+import {emptyCase,validateCase,digest,checkState,declarationReady} from './walkthrough-model.mjs';
 const $=id=>document.getElementById(id);
 let data=emptyCase(),revision=0;
 const checkNames={activation:'Activation',atc:'ATC',unit:'ABAP Unit'};
@@ -12,7 +12,7 @@ for(const [key,label] of Object.entries(checkNames)){
  const select=document.createElement('select');select.id=key+'-outcome';select.setAttribute('aria-label',label+' declared outcome');
  for(const [value,text] of [['','Choose reported outcome'],['passed','Passed'],['failed','Failed'],['inconclusive','Inconclusive']]){const o=document.createElement('option');o.value=value;o.textContent=text;select.append(o);}panel.append(select);
  const save=document.createElement('button');save.textContent='Record declaration';save.onclick=async()=>{
- try{if(!data.artifacts.after||!data.artifacts[key]||!data.target.trim()||!select.value)throw Error('Load implementation and execution record, set target, and choose an outcome first.');
+ try{if(!declarationReady(data,key)||!select.value)throw Error('Load non-empty implementation and execution records, set target, and choose an outcome first.');
  const snapshot=data,ver=revision,target=data.target,outcome=select.value;
  const source_sha256=await digest(data.artifacts.after.text),record_sha256=await digest(data.artifacts[key].text);
  if(ver!==revision||snapshot!==data)throw Error('Files changed; review the outcome again.');
