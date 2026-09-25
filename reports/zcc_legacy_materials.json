@@ -1,0 +1,139 @@
+{
+  "$schema": "../docs/findings.schema.json",
+  "program": "ZCC_LEGACY_MATERIALS",
+  "source_file": "samples/legacy/zcc_legacy_materials.abap",
+  "target": {
+    "product": "unknown",
+    "release": "unknown",
+    "language_version": "ABAP for Cloud Development"
+  },
+  "provenance": {
+    "produced_by": "bob",
+    "bob_session": null,
+    "catalogue_version": "docs/clean-core-rules.md (draft)",
+    "reviewed_by_human": false
+  },
+  "findings": [
+    {
+      "id": "F-01",
+      "rule": "CC-10",
+      "level_hint": "C",
+      "line_start": 5,
+      "line_end": 5,
+      "evidence": "TABLES mara.",
+      "reason": "The TABLES statement is an obsolete syntax construct that is not permitted in the ABAP for Cloud Development language version. It creates an implicit work area header line tied to the classical dynpro/screen paradigm.",
+      "suggested_action": "Remove the TABLES statement. Declare an explicit structure with DATA ls_mara TYPE mara, or derive the work area inline from the SELECT result. Access MARA data through the released CDS view I_Product instead of the raw table.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": [
+        "Whether the target system's language version check will flag TABLES as a hard syntax error or only as an ATC warning",
+        "Exact release status of MARA in the target system's simplification list"
+      ],
+      "human_review": "not_reviewed"
+    },
+    {
+      "id": "F-02",
+      "rule": "Unclassified",
+      "level_hint": null,
+      "line_start": 6,
+      "line_end": 6,
+      "evidence": "SELECT-OPTIONS s_matnr FOR mara-matnr.",
+      "reason": "SELECT-OPTIONS is a classic selection-screen declaration that depends on SAP GUI / ABAP runtime selection-screen processing. There is no SAP GUI in ABAP Cloud, and selection screens cannot be rendered in a Fiori or API context. No catalogue rule explicitly names SELECT-OPTIONS, so this is filed as Unclassified rather than assigned a rule that does not fit precisely.",
+      "suggested_action": "Replace the selection screen filter with a method parameter or an OData filter option on the RAP query. If a range table is still required, declare it explicitly as TYPE RANGE OF matnr.",
+      "effort": "S",
+      "verification_status": "needs_verification",
+      "source_url": null,
+      "unknowns": [
+        "Whether the target ATC check set treats SELECT-OPTIONS as a hard error under the ABAP for Cloud Development language version",
+        "What the intended call channel is for the migrated artefact (UI5 app, API, background job)"
+      ],
+      "human_review": "not_reviewed"
+    },
+    {
+      "id": "F-03",
+      "rule": "CC-01",
+      "level_hint": "C",
+      "line_start": 15,
+      "line_end": 18,
+      "evidence": "SELECT matnr mtart\n    FROM mara\n    INTO TABLE lt_materials\n    WHERE matnr IN s_matnr.",
+      "reason": "Direct SELECT on the SAP table MARA bypasses the released data model. The release status of MARA in the target system and whether a compatibility view exists must be verified; the table itself is not in the released API catalogue.",
+      "suggested_action": "Replace with a SELECT (or ABAP EML READ) against the released CDS view I_Product (candidate). Verify that I_Product exposes the required fields (matnr, mtart equivalents) and is released for the target product and release. Adjust the WHERE clause to use the CDS view's field names.",
+      "effort": "M",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Whether I_Product is released and licensed on the specific target system",
+        "Exact field mapping from MARA-MATNR / MARA-MTART to the CDS view's element names",
+        "Whether a simplification / compatibility object for MARA exists in the target release"
+      ],
+      "human_review": "not_reviewed"
+    },
+    {
+      "id": "F-04",
+      "rule": "CC-09",
+      "level_hint": "C",
+      "line_start": 21,
+      "line_end": 21,
+      "evidence": "WRITE: / 'No materials found'.",
+      "reason": "WRITE is a classic list-processing statement that is not available in ABAP for Cloud Development. There is no list processor or SAP GUI in the cloud runtime.",
+      "suggested_action": "Remove list output. For the empty-result case, raise an informational message via a RAP action result, a Fiori message, or return an empty result set to the caller.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": [
+        "Target UI layer (Fiori elements list report, API consumer, background job) that determines the correct messaging channel"
+      ],
+      "human_review": "not_reviewed"
+    },
+    {
+      "id": "F-05",
+      "rule": "CC-08",
+      "level_hint": "C",
+      "line_start": 25,
+      "line_end": 32,
+      "evidence": "CALL FUNCTION 'REUSE_ALV_GRID_DISPLAY'\n    EXPORTING\n      i_structure_name = 'MARA'\n    TABLES\n      t_outtab          = lt_materials\n    EXCEPTIONS\n      program_error    = 1\n      OTHERS           = 2.",
+      "reason": "REUSE_ALV_GRID_DISPLAY is a non-released function module (part of the classic ALV framework tied to SAP GUI). It is not in the released API catalogue for ABAP Cloud and depends on SAP GUI screen rendering.",
+      "suggested_action": "Replace with a RAP-based query exposed as a Fiori Elements List Report OData service. The ALV display logic is entirely superseded by the Fiori list report page. No direct code equivalent exists; the output channel must change to a released OData V4 endpoint.",
+      "effort": "L",
+      "verification_status": "needs_verification",
+      "source_url": "https://github.com/SAP/abap-atc-cr-cv-s4hc",
+      "unknowns": [
+        "Whether the customer has licensed the relevant Fiori app or intends to build a custom Fiori Elements app",
+        "Whether any released CL_SALV_* class variant is available and sufficient on the target system as a transitional measure",
+        "Exact release status of REUSE_ALV_GRID_DISPLAY in the target system's released object list"
+      ],
+      "human_review": "not_reviewed"
+    },
+    {
+      "id": "F-06",
+      "rule": "CC-09",
+      "level_hint": "C",
+      "line_start": 34,
+      "line_end": 34,
+      "evidence": "WRITE: / 'Display failed'.",
+      "reason": "Second WRITE statement — same restriction as F-04. Classic list output is not available in ABAP for Cloud Development.",
+      "suggested_action": "Remove list output. Surface the error through a proper exception class or RAP message.",
+      "effort": "S",
+      "verification_status": "observed",
+      "source_url": "https://help.sap.com/docs/abap-cloud/abap-cloud/abap-language",
+      "unknowns": [
+        "Target error-handling pattern (exception class, RAP message, application log)"
+      ],
+      "human_review": "not_reviewed"
+    }
+  ],
+  "summary": {
+    "status": "Needs target verification",
+    "draft_verdict_hint": "Rebuild",
+    "human_must_decide": [
+      "Target product and exact release (currently unknown) — required before any compliance verdict can be issued",
+      "Whether MARA has a simplification/compatibility object in the target release, or must be replaced entirely by I_Product",
+      "Exact release contract and field mapping of the candidate CDS view I_Product on the target system",
+      "Whether REUSE_ALV_GRID_DISPLAY is listed as released or deprecated in the target system's released object catalogue",
+      "Intended call channel for the migrated artefact: Fiori UI, OData API, or background Application Job — this determines which output and input patterns are valid replacements",
+      "Authorization concept: who may read material data and how authorisation checks are passed in the released API layer",
+      "Whether the SELECT-OPTIONS / selection-screen approach must be replaced by OData filter parameters, method parameters, or an Application Job variant"
+    ]
+  }
+}
