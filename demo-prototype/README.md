@@ -68,3 +68,13 @@ runs against Bob or SAP, and no success, completeness or measured savings is
 asserted from attaching files. All imported contents render as text.
 
 Validation: `node --test demo-prototype/tests/walkthrough.test.mjs`.
+
+## Optional mascot display
+
+`demo-config.js` defaults to `SHOW_MASCOT: false` while permission is pending.
+The welcome block and greeting player are hidden, and the image, video and
+caption sources are not assigned when disabled. After permission is confirmed,
+change this single flag to `true` and reload to enable the existing greeting.
+Missing configuration also keeps it disabled. This display switch does not
+remove media files from the repository, deployment directory or Git history.
+Exclude those assets separately from any distribution that must omit them.
