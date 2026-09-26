@@ -76,7 +76,8 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 | 21:47–21:53 | Codex | Sources pasted into both tables and the view (view label shortened to 40 chars), all three activated | Codex session |
 | 21:5x | Claude | **Class activated. `abap_run_unit_tests`: PASSED (7 tests). ATC on class + stub view: 0 errors, 2 warnings, 43 infos.** Activation record, README status, demo Evidence page updated | `docs/activation/README.md` |
 
+| 22:1x–22:22 | Codex + Claude | ABAP Unit run in VS Code: Test classes 1, methods 7, passed 7 (2.1 s). Codex's first capture was the wrong screen; window captured by Claude (`screencapture -l`) | `bob_sessions/2026-09-26_abap_unit_7_tests.png` |
+
 ## Open at the time of writing
 
-- Codex: VS Code Test Results screenshot with the seven test names → `bob_sessions/2026-09-26_abap_unit_7_tests.png`; link it from `docs/activation/README.md`.
-- Video recording; Sunday: credential scan, repo public, lablab form.
+- Video (docs/video-plan.md); Sunday: credential scan, repo public, lablab form.

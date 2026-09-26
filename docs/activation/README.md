@@ -146,8 +146,9 @@ exactly seven `FOR TESTING` methods (`bucket_0_30`, `bucket_31_lower`,
 `bucket_60_upper`, `bucket_over_60`, `bucket_due_today`,
 `key_date_defaults_to_today`, `open_item_is_bucketed`), and the same tool
 answered "No executable tests found" earlier when the include was empty,
-so PASSED means these ran. A VS Code Test Results screenshot with the
-seven names is being captured as `bob_sessions/2026-09-26_abap_unit_7_tests.png`.
+so PASSED means these ran. VS Code's Test Results panel (run 22:1x,
+2.1 s) confirms it — **Test classes 1 · Test methods 7 · Passed 7** — see
+[`bob_sessions/2026-09-26_abap_unit_7_tests.png`](../../bob_sessions/2026-09-26_abap_unit_7_tests.png).
 
 ## What this changes in the project's claims
 
