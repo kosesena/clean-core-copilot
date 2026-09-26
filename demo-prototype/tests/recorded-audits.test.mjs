@@ -23,3 +23,12 @@ test('study labels retain duplicates and unresolved proposals',()=>{
  assert.equal(a.filter(x=>x==='Undecided').length,1);
  assert.equal(Math.round((entries.reduce((n,e)=>n+e.coins,0)+.807)*1000),1468);
 });
+
+test('task 6 case preserves current recorded files without invented target checks',()=>{
+ const c=JSON.parse(read('cases/zfi-modernization.json'));
+ for(const key of ['before','after','bob'])assert.equal(c.artifacts[key].text,read('../'+c.artifacts[key].name));
+ assert.deepEqual(c.checks,{});
+ assert.equal(c.target,'');
+ for(const key of ['activation','atc','unit'])assert.equal(c.artifacts[key],undefined);
+ assert.equal(Math.round((entries.reduce((n,e)=>n+e.coins,0)+.807+1.03)*1000),2498);
+});

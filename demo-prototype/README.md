@@ -115,7 +115,7 @@ Other imported reports retain the original excerpt-based inspection workflow.
 
 Overview totals and the Evidence Atlas describe the recorded study snapshot;
 imports and local check declarations do not update those totals. The coin
-sum for five tasks is 1.468 (rounded to approximately 1.5). Core 27/29 includes
+sum for six tasks is 2.498 (rounded to approximately 2.5). Core 27/29 includes
 a non-catalogue issue and is therefore labelled “Core issues found”.
 
 Review state is also retained in tab-scoped sessionStorage when available so
@@ -130,3 +130,8 @@ unverified and do not alter the Evidence Atlas.
 The Bobcoin metric uses `assets/bob-coins.png`, an AI-generated decorative
 illustration based on the original Bob reference, controlled by SHOW_MASCOT.
 It does not represent an official coin design or alter recorded usage values.
+
+The recorded ZFI case includes the task 6 class and README revision. R3 and
+R1 are addressed by source reading (Claude assessment, awaiting Sena); no
+activation, ATC or unit execution record is supplied. Previously saved cases
+are preserved: use “Load task 6 ZFI case” to replace them explicitly.
