@@ -17,14 +17,17 @@ CLASS zcl_vendor_aging DEFINITION
 
     TYPES:
       "! Single vendor open item, enriched with ageing bucket.
+      "! Component names match CDS element names exactly so that
+      "! SELECT … INTO CORRESPONDING FIELDS resolves without AS aliases.
       BEGIN OF ty_item,
-        company_code       TYPE bukrs,
-        supplier           TYPE lifnr,
-        supplier_name      TYPE name1_gp,  "< candidate field width; verify
-        accounting_doc     TYPE belnr_d,
-        net_due_date       TYPE dzfbdt,    "< maps to ZFBDT; verify field type
-        amount_cc_currency TYPE dmbtr,     "< maps to DMBTR; verify field type
-        bucket             TYPE char10,
+        CompanyCode                    TYPE bukrs,
+        Supplier                       TYPE lifnr,
+        AccountingDocument             TYPE belnr_d,
+        AccountingDocumentItem         TYPE posnr,    "< candidate element/type; verify on target
+        NetDueDate                     TYPE dzfbdt,   "< maps to ZFBDT; verify field type
+        AmountInCompanyCodeCurrency    TYPE dmbtr,    "< maps to DMBTR; verify field type
+        SupplierName                   TYPE name1_gp, "< candidate field width; verify
+        Bucket                         TYPE char10,   "< custom field, not from CDS
       END OF ty_item,
       ty_items TYPE STANDARD TABLE OF ty_item WITH EMPTY KEY.
 
@@ -131,15 +134,18 @@ CLASS zcl_vendor_aging IMPLEMENTATION.
     "-- candidate: I_VendorOpenItem_VAgeing is the CDS entity defined in
     "--            I_VendorOpenItem_VAgeing.cds; its consumed views are
     "--            themselves candidates (see F-01, F-02).
+    "-- CDS element names are listed explicitly; they match ty_item component
+    "-- names exactly, so INTO CORRESPONDING FIELDS maps without AS aliases.
     SELECT
-        company_code,
-        supplier,
-        supplier_name,
-        accounting_doc,
-        net_due_date,
-        amount_cc_currency
-      FROM I_VendorOpenItem_VAgeing  "#EC CI_NOWHERE "< candidate view name
-      WHERE company_code = @iv_company_code
+        CompanyCode,
+        Supplier,
+        AccountingDocument,
+        AccountingDocumentItem,         "< candidate element name; verify on target
+        NetDueDate,
+        AmountInCompanyCodeCurrency,
+        SupplierName
+      FROM I_VendorOpenItem_VAgeing     "#EC CI_NOWHERE "< candidate view name
+      WHERE CompanyCode = @iv_company_code
       INTO CORRESPONDING FIELDS OF TABLE @rt_items.
 
   ENDMETHOD.
@@ -150,16 +156,16 @@ CLASS zcl_vendor_aging IMPLEMENTATION.
     "-- F-04: LOOP with field-symbol replaces LOOP AT <hdr_line> / MODIFY.
     LOOP AT ct_items ASSIGNING FIELD-SYMBOL(<ls_item>).
 
-      DATA(lv_days) = iv_key_date - <ls_item>-net_due_date.
+      DATA(lv_days) = iv_key_date - <ls_item>-NetDueDate.
 
       "-- Business rules (bucket thresholds): carried over from legacy lines 45–51.
       "-- Threshold constants make the values testable in isolation.
       IF lv_days <= c_threshold_30.
-        <ls_item>-bucket = c_bucket_0_30.
+        <ls_item>-Bucket = c_bucket_0_30.
       ELSEIF lv_days <= c_threshold_60.
-        <ls_item>-bucket = c_bucket_31_60.
+        <ls_item>-Bucket = c_bucket_31_60.
       ELSE.
-        <ls_item>-bucket = c_bucket_60p.
+        <ls_item>-Bucket = c_bucket_60p.
       ENDIF.
 
     ENDLOOP.

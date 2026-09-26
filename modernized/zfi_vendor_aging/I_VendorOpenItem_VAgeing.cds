@@ -45,6 +45,11 @@ define view entity I_VendorOpenItem_VAgeing
       /*-- Accounting document number */
   key item.AccountingDocument,
 
+      /*-- Accounting document line-item number – candidate element name;
+          a document can have several vendor lines.
+          Field name 'AccountingDocumentItem' is a candidate; verify on target. */
+  key item.AccountingDocumentItem,  /* candidate */
+
       /*-- Net due date – maps to legacy BSEG-ZFBDT
           Field name 'NetDueDate' is a candidate; verify on target */
       item.NetDueDate,

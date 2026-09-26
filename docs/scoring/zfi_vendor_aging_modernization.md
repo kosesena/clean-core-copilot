@@ -75,6 +75,26 @@ Without a target system it stays a review finding, not a measured result.
 - Cost of the whole pipeline for one program: 0.165 (audit) + 0.807
   (modernization) ≈ **1 Bobcoin**, ~45 minutes of Bob time.
 
+## Follow-up, task 6 (26 Sep, 14:12–14:40 TRT)
+
+One prompt in the same Bob session, naming R3 and R1 as review findings
+and asking for one consistent naming approach. Cost: 1.03 Bobcoin on top
+of task 5 (session total 1.84) — Bob re-read all four files before
+editing. Four diffs, four approvals, nothing outside
+`modernized/zfi_vendor_aging/` touched.
+
+| Finding | What Bob did | Status after task 6 |
+|---------|--------------|---------------------|
+| R3 | Renamed `ty_item` components to the CDS element names (`CompanyCode`, `Supplier`, `AccountingDocument`, `NetDueDate`, `AmountInCompanyCodeCurrency`, `SupplierName`, plus `Bucket`), listed the elements explicitly in `select_open_items`, renamed `bucket` → `Bucket` in `assign_buckets`, `make_items` and all seven asserts | **Addressed** by reading. `INTO CORRESPONDING FIELDS` now has matching names on both sides. Still unactivated |
+| R1 | Added `key item.AccountingDocumentItem` (candidate) to the CDS, carried it into `ty_item` as `posnr`, and into the test helper as `'0001'` | **Addressed** by reading; element name and type remain candidates |
+| README F-01 | One paragraph on both changes | Done |
+| R2, R4–R10 | Not in scope of the prompt | Open, as before |
+
+What this shows for the deck: a review finding phrased precisely (which
+names, which statement, which fix options) turns into a clean four-file
+change in one Bob turn. The cost is that Bob re-reads everything each
+time, so follow-ups are not cheaper than the original task.
+
 ## Not done, by choice
 
 - Not activated on BTP_TRIAL. Doing so would turn R1/R3/R9 from review

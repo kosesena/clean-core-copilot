@@ -70,13 +70,15 @@ CLASS zcl_vendor_aging_test IMPLEMENTATION.
   "  Helper
   "--------------------------------------------------------------------
   METHOD make_items.
-    "-- Build one item whose net_due_date is exactly iv_days before iv_key_date
+    "-- Build one item whose NetDueDate is exactly iv_days before iv_key_date.
+    "-- Component names match ty_item (CamelCase = CDS element names).
     DATA(ls_item) = VALUE zcl_vendor_aging=>ty_item(
-      company_code       = '1000'
-      supplier           = '0000100001'
-      accounting_doc     = '1800000001'
-      net_due_date       = iv_key_date - iv_days
-      amount_cc_currency = '1000.00' ).
+      CompanyCode                 = '1000'
+      Supplier                    = '0000100001'
+      AccountingDocument          = '1800000001'
+      AccountingDocumentItem      = '0001'         "< candidate element; verify type/length
+      NetDueDate                  = iv_key_date - iv_days
+      AmountInCompanyCodeCurrency = '1000.00' ).
     INSERT ls_item INTO TABLE rt_items.
   ENDMETHOD.
 
@@ -95,7 +97,7 @@ CLASS zcl_vendor_aging_test IMPLEMENTATION.
       CHANGING  ct_items    = lt_items ).
 
     cl_abap_unit_assert=>assert_equals(
-      act = lt_items[ 1 ]-bucket
+      act = lt_items[ 1 ]-Bucket
       exp = '0-30'
       msg = 'Item aged 30 days must be in bucket 0-30' ).
   ENDMETHOD.
@@ -111,7 +113,7 @@ CLASS zcl_vendor_aging_test IMPLEMENTATION.
       CHANGING  ct_items    = lt_items ).
 
     cl_abap_unit_assert=>assert_equals(
-      act = lt_items[ 1 ]-bucket
+      act = lt_items[ 1 ]-Bucket
       exp = '31-60'
       msg = 'Item aged 31 days must be in bucket 31-60' ).
   ENDMETHOD.
@@ -127,7 +129,7 @@ CLASS zcl_vendor_aging_test IMPLEMENTATION.
       CHANGING  ct_items    = lt_items ).
 
     cl_abap_unit_assert=>assert_equals(
-      act = lt_items[ 1 ]-bucket
+      act = lt_items[ 1 ]-Bucket
       exp = '31-60'
       msg = 'Item aged 60 days must still be in bucket 31-60' ).
   ENDMETHOD.
@@ -143,7 +145,7 @@ CLASS zcl_vendor_aging_test IMPLEMENTATION.
       CHANGING  ct_items    = lt_items ).
 
     cl_abap_unit_assert=>assert_equals(
-      act = lt_items[ 1 ]-bucket
+      act = lt_items[ 1 ]-Bucket
       exp = '60+'
       msg = 'Item aged 61 days must be in bucket 60+' ).
   ENDMETHOD.
@@ -159,7 +161,7 @@ CLASS zcl_vendor_aging_test IMPLEMENTATION.
       CHANGING  ct_items    = lt_items ).
 
     cl_abap_unit_assert=>assert_equals(
-      act = lt_items[ 1 ]-bucket
+      act = lt_items[ 1 ]-Bucket
       exp = '0-30'
       msg = 'Item due today (0 days) must be in bucket 0-30' ).
   ENDMETHOD.
@@ -187,7 +189,7 @@ CLASS zcl_vendor_aging_test IMPLEMENTATION.
       CHANGING  ct_items    = lt_items ).
 
     cl_abap_unit_assert=>assert_equals(
-      act = lt_items[ 1 ]-bucket
+      act = lt_items[ 1 ]-Bucket
       exp = '0-30'
       msg = 'Item due today with default key date must be in bucket 0-30' ).
   ENDMETHOD.
@@ -209,7 +211,7 @@ CLASS zcl_vendor_aging_test IMPLEMENTATION.
       CHANGING  ct_items    = lt_items ).
 
     cl_abap_unit_assert=>assert_not_initial(
-      act = lt_items[ 1 ]-bucket
+      act = lt_items[ 1 ]-Bucket
       msg = 'Open item must receive a bucket label' ).
   ENDMETHOD.
 

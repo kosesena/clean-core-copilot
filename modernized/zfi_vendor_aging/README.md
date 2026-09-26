@@ -34,6 +34,10 @@ clause so all consumers automatically get the correct filter.
 The class method
 [`zcl_vendor_aging/select_open_items`](zcl_vendor_aging.abap)
 reads from the CDS view with a single ABAP SQL `SELECT`.
+`AccountingDocumentItem` *(candidate)* is added as a fourth key because one
+document can carry several vendor lines; `ty_item` component names are
+CamelCase, matching CDS element names exactly, so `INTO CORRESPONDING FIELDS`
+resolves without `AS` aliases.
 
 ---
 

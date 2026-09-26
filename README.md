@@ -97,7 +97,9 @@ Bobcoin. Reviewed by reading only — see
 [`docs/scoring/zfi_vendor_aging_modernization.md`](docs/scoring/zfi_vendor_aging_modernization.md):
 verification discipline intact, one probable activation error (CDS element
 names vs. class field names), one data-model gap (no item number in the
-key), one legacy bug carried over. Not activated on any system.
+key), one legacy bug carried over. A follow-up task (26 Sep, 1.03 Bobcoin)
+fixed the first two by reading; the legacy bug is left as is. Not activated
+on any system.
 
 ## Repo layout
 
