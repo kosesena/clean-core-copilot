@@ -110,17 +110,17 @@ approved for the task as a whole, files reviewed afterwards:
 | 6 | Fix review findings R3, R1 | the review's wording, one consistent naming approach requested | four diffs in `modernized/zfi_vendor_aging/` | 1.03 |
 | 7 | Modernize ZSD, ZMM, ZCC **in parallel** | one prompt: one sub-agent per program, same recipe as ZFI, R3 lesson stated | 13 files in `modernized/`, `PARALLEL_RUN.md` | 1.76 |
 
-Total **4.258 of 40 Bobcoin (≈4.3)** across seven tasks. The first six
+Total **4.258 of 40 Bobcoin (≈4.3; 10.6% of the allowance)** across seven tasks. The first six
 tasks used **2.498 Bobcoin (≈2.5)**; task 7 added 1.76. These are recorded
 Bob usage figures, not the total project cost: human work, Claude and Codex
 usage, and target-system checks are outside this budget. Different programs
 and approval workflows were involved, so these runs do not establish a
 cost or speed improvement from parallel execution.
 
-### What did about 2.5 Bobcoin actually buy?
+### What did 4.258 Bobcoin actually buy?
 
 Think of it as asking an assistant to inspect four old business programs,
-prepare a replacement draft for one, and revise that draft after review.
+prepare replacement drafts for all four, and revise one after review.
 The four synthetic examples cover supplier payments, open sales orders,
 material price updates and a material list — no customer code was used.
 
@@ -129,13 +129,17 @@ material price updates and a material list — no customer code was used.
 | Review four programs | Bob pointed to 40 places worth checking and explained its concerns. Against our pre-written answer key, it found 27 of the 29 main issues. The 40 findings include repeats and mistakes; they are not 40 confirmed defects. | 0.661 |
 | Draft a replacement for one program | For the supplier-payment ageing report, Bob wrote a new data-access definition, the calculation class, seven automated test cases, and an explanation of the changes and remaining decisions. | 0.807 |
 | Revise the draft after review | Bob aligned the field names across the files and added a document-item identifier to distinguish items within a document. These changes were reviewed by reading the code. | 1.030 |
-| **First six tasks** | **Four reviews, one replacement draft with tests, and one revision round.** | **2.498** |
+| Draft replacements for the other three programs in parallel | Three Bob sub-agents each prepared a replacement draft, tests and explanatory notes; together with a shared summary, this produced 13 files. These remain candidates requiring review and target-system checks. | 1.760 |
+| **All seven tasks** | **Four reviews, four replacement drafts with tests, and one revision round for ZFI.** | **4.258** |
 
-That is about **6.25% of the 40-Bobcoin allowance**. The practical output is
+The earlier **2.498** figure covered tasks 1–6 only; it is a historical
+subtotal, not the current total. All seven tasks used about **10.6% of the
+40-Bobcoin allowance**. The practical output is
 a reviewable starting point for a developer: where to look, what might replace
 the old code, and what still needs checking. It is **not a completed cloud
-migration**. Seven tests were written; this budget summary does not claim
-that they passed or that the replacement runs on the target system.
+migration**. Test code was written (including seven tests for ZFI); this
+budget summary does not claim that the tests passed or that the replacements
+run on the target system.
 See the current [activation record](docs/activation/README.md) for execution
 results. Human scoring was performed by Claude and confirmed by Sena;
 the demo interface was built with Codex, not with these Bobcoins.
