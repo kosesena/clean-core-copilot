@@ -59,10 +59,10 @@ function paintWorkspace(){
  document.querySelector('.report-stats').classList.toggle('hidden',page!=='findings');
  $('page-title').textContent={overview:'Can IBM Bob review old SAP code?',findings:'See exactly what Bob found.',evidence:'What we did, and what we did not.'}[page];
  $('page-subtitle').textContent={overview:'We tested Bob like an exam, with the answers written down in advance. Here are the results.',findings:`Bob flagged ${report.findings.length} places in this program. Click a highlighted line to see the code, Bob’s reason, and whether Bob was right.`,evidence:'Each program went through four steps. A dashed box means the step is not done, so we make no claim about it.'}[page];
- const findingsArt=['findings','evidence'].includes(page)&&window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true;
+ const findingsArt=['overview','findings','evidence'].includes(page)&&window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true;
  document.querySelector('.intro').classList.toggle('findings-hero',findingsArt);
  const heroMascot=document.querySelector('.intro [data-mascot]');
- if(heroMascot){heroMascot.src=findingsArt?`assets/bob-${page}.png`:'assets/ibm-bob.webp';heroMascot.alt=findingsArt?(page==='evidence'?'Bob presenting a checklist with completed and unfinished steps':'Bob pointing to a flagged line in a code panel'):'IBM Bob';}
+ if(heroMascot){heroMascot.src=findingsArt?`assets/bob-${page}.png`:'assets/ibm-bob.webp';heroMascot.alt=findingsArt?{overview:'Bob holding the four program folders reviewed in this study',evidence:'Bob presenting a checklist with completed and unfinished steps',findings:'Bob pointing to a flagged line in a code panel'}[page]:'IBM Bob';}
  $('breadcrumb-current').textContent=page;
  const recorded=!!recordedForCurrent();$('notice-label').textContent=recorded?'SAVED RESULTS':isDesign?'DESIGN EXAMPLE':'YOUR UPLOAD';$('notice-copy').textContent=recorded?'These are Bob’s answers from the hackathon runs, shown unchanged. Our judgements are kept separately.':isDesign?'Made-up findings that show how the page works. Bob did not produce them.':'Shown as found in your file. Nothing in it has been checked by us.';
  if(page==='overview')paintOverview();
