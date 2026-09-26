@@ -55,7 +55,7 @@ renderDetail=function(){const f=report.findings.find(x=>x.id===selected);if(!f){
  $('review-decision').value=reviewOf(f);$('review-decision').onchange=e=>{reviews.set(f.id,e.target.value);renderStats();notify('Review stored in this session. Export review to save.');};
 };
 
-document.querySelectorAll('[data-mascot]').forEach(img=>{if(window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true){img.src='assets/ibm-bob.webp';img.hidden=false;}});
+document.querySelectorAll('[data-mascot]').forEach(img=>{if(window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true){img.src='assets/ibm-bob.webp';img.hidden=false;img.closest('.mascot-slot')?.classList.add('has-mascot');}});
 // Retain review work across the site's two HTML documents in this tab only.
 try{const saved=JSON.parse(sessionStorage.getItem('ccc-workspace-v1')||'null');if(saved){
  const restored=saved.entries.map(([key,state])=>{validate(state.report);if(JSON.stringify(JSON.parse(state.rawText))!==JSON.stringify(state.report))throw Error('Saved raw report mismatch');if(!Array.isArray(state.reviews)||!Array.isArray(state.missed)||!state.missed.every(x=>typeof x==='string'))throw Error('Invalid saved review');for(const [id,v] of state.reviews)if(!state.report.findings.some(f=>f.id===id)||!['not_reviewed','correct','incorrect','partially_correct'].includes(v))throw Error('Invalid saved decision');return [key,{...state,reviews:new Map(state.reviews)}];});

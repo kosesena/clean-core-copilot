@@ -81,10 +81,12 @@ Loading this case replaces the current in-memory case; export edits first.
 
 ## Optional mascot display
 
-`demo-config.js` defaults to `SHOW_MASCOT: false` while permission is pending.
-The welcome block and greeting player are hidden, and the image, video and
-caption sources are not assigned when disabled. After permission is confirmed,
-change this single flag to `true` and reload to enable the existing greeting.
+`demo-config.js` enables the original static Bob image in the reserved slots
+with `SHOW_MASCOT: true`, as requested for the demo preview. Set it to `false`
+to restore neutral placeholders. `SHOW_MASCOT_GREETING: false` independently
+keeps the animated greeting disabled and its video/caption sources unassigned.
+Public-distribution permission is still pending; enabling the preview does not
+record or imply IBM approval.
 Missing configuration also keeps it disabled. This display switch does not
 remove media files from the repository, deployment directory or Git history.
 Exclude those assets separately from any distribution that must omit them.
@@ -120,7 +122,7 @@ Review state is also retained in tab-scoped sessionStorage when available so
 navigation to Before-after and back does not discard edits. Export remains
 the durable save path; closing the tab or blocked/full browser storage can
 lose local state. No data is sent to a server. Plex fonts load from Google
-Fonts with system fallbacks. Mascot slots stay neutral with SHOW_MASCOT=false.
+Fonts with system fallbacks. Mascot slots show the original static Bob; SHOW_MASCOT=false restores neutral placeholders.
 The case viewer likewise retains its case in tab-scoped sessionStorage and
 opens the recorded ZFI case on its first visit. Local declarations remain
 unverified and do not alter the Evidence Atlas.

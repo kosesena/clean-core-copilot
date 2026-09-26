@@ -61,10 +61,12 @@ rules, schema, mode draft and baseline.
 Bob audit and modernization run, `reports/`, `modernized/`, `bob_sessions/`,
 the measured results table, and the demo content that shows them.
 
-**Pending:** the demo prototype includes IBM's Bob mascot artwork and an
-animated greeting (`demo-prototype/assets/`). Permission to use them has been
-requested from IBM through the organisers. If it isn't confirmed, they will be
-removed before submission.
+**Mascot:** the demo shows IBM's Bob artwork (`demo-prototype/assets/ibm-bob.webp`,
+from bob.ibm.com, unchanged, IBM's property). Permission to use it was asked
+of IBM through the organisers on 25 Sep 2026 (Discord, Hamza / lablab.ai,
+reminder 26 Sep); no answer had arrived when the static image was enabled on
+26 Sep. The animated greeting stays disabled. If IBM objects, the image is
+removed with one flag (`SHOW_MASCOT` in `demo-prototype/demo-config.js`).
 
 ## How Bob is used
 
