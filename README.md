@@ -5,8 +5,12 @@ for the IBM Bob 2.0 Hackathon (lablab.ai, Sep 2026).
 
 > **Status:** four Bob audit runs recorded (25 Sep 2026), scored against an
 > author's answer key for synthetic samples — see [`docs/scoring/`](docs/scoring/).
-> No SAP connectivity or ATC run yet. Findings are advisory until checked on a
-> target system — see [`docs/verification-notes.md`](docs/verification-notes.md).
+> One rewrite was pushed to a BTP ABAP trial system on 26 Sep: the class
+> activated (ATC 0 findings), the CDS view did not — its two consumed views
+> are missing there, exactly the ones Bob had marked *candidate*
+> ([`docs/activation/`](docs/activation/)). Findings stay advisory until
+> checked on the customer's target — see
+> [`docs/verification-notes.md`](docs/verification-notes.md).
 
 ## The problem
 
