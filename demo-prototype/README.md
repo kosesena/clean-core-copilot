@@ -126,3 +126,7 @@ Fonts with system fallbacks. Mascot slots show the original static Bob; SHOW_MAS
 The case viewer likewise retains its case in tab-scoped sessionStorage and
 opens the recorded ZFI case on its first visit. Local declarations remain
 unverified and do not alter the Evidence Atlas.
+
+The Bobcoin metric uses `assets/bob-coins.png`, an AI-generated decorative
+illustration based on the original Bob reference, controlled by SHOW_MASCOT.
+It does not represent an official coin design or alter recorded usage values.

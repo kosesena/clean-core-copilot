@@ -31,3 +31,5 @@ body{background:var(--paper);color:var(--ink)}
 .mascot-slot.has-mascot{flex-shrink:0;background:radial-gradient(ellipse at 50% 70%,#fffaf3 0%,#eee5d9 75%)}
 .mascot-slot.has-mascot>span{display:none}
 .mascot-slot.has-mascot img{display:block;width:96px;height:96px;object-fit:contain;filter:drop-shadow(0 5px 5px #40283015)}
+
+.coin-value{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;flex-wrap:wrap}.coin-value strong{font:42px Georgia,serif;color:#6b1f2a;white-space:nowrap}.coin-value img{width:80px;height:80px;object-fit:contain;flex-shrink:0}@media(max-width:650px){.coin-value strong{font-size:32px}}
