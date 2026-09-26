@@ -70,11 +70,65 @@ removed with one flag (`SHOW_MASCOT` in `demo-prototype/demo-config.js`).
 
 ## How Bob is used
 
-<!-- Fill in during the hackathon: modes used, rules, screenshots. -->
+Everything Bob did happened in IBM Bob 2.2.0 (enterprise plan, hackathon
+account) between 25 Sep 20:10 and 26 Sep 14:40 TRT. One screenshot per task
+with the consumption badge is in [`bob_sessions/`](bob_sessions/).
 
-- Custom mode: …
-- Plan → Code workflow: …
-- Session reports: [`bob_sessions/`](bob_sessions/)
+**Custom mode.** Bob's Settings → Modes → *Create new mode* form was used to
+define **Clean Core Architect** (slug `clean-core-architect`, global scope).
+Role, "when to use" and the nine custom instructions were typed from the
+pre-event draft in [`bob-config-draft/`](bob-config-draft/); the wording is
+the same, the wrapper is Bob's. Tools enabled: **Read** and **Edit** only —
+no Execute, Browser, MCP, Subagent or Todo. That was deliberate: the audit
+should be reproducible from reading, and nothing should reach a system.
+
+**Workspace isolation.** Bob never opened this repository. It worked in
+`~/Desktop/ccc-bob-audit`, built by
+[`scripts/make-audit-workspace.sh`](scripts/make-audit-workspace.sh) from the
+frozen inputs only (samples, rule catalogue, verification rules, schema,
+mode draft). No `.git`, no plan, no answer key. The script refuses to build
+if the inputs don't match the committed `docs/freeze.sha256`.
+
+**Tasks.** Six tasks, all in the custom mode, one prompt each, every file
+write approved by hand:
+
+| # | Task | Prompt | Output | Bobcoin |
+|---|------|--------|--------|---------|
+| 1 | Audit ZFI_VENDOR_AGING | [`bob-config-draft/first-task.md`](bob-config-draft/first-task.md) with output paths spelled out | `reports/zfi_vendor_aging.{json,md}` | 0.165 |
+| 2 | Audit ZSD_OPEN_ORDERS | same template | `reports/zsd_open_orders.*` | 0.155 |
+| 3 | Audit ZMM_MASS_PRICE_UPDATE | same template | `reports/zmm_mass_price_update.*` | 0.187 |
+| 4 | Audit ZCC_LEGACY_MATERIALS | same template | `reports/zcc_legacy_materials.*` | 0.154 |
+| 5 | Modernize ZFI_VENDOR_AGING | audit JSON named as approved input; CDS + class + ABAP Unit + README requested | `modernized/zfi_vendor_aging/` | 0.807 |
+| 6 | Fix review findings R3, R1 | the review's wording, one consistent naming approach requested | four diffs in `modernized/zfi_vendor_aging/` | 1.03 |
+
+Total **≈2.5 of 40 Bobcoin**. Audits cost 0.15–0.19 each; producing code
+cost five times an audit; a follow-up cost as much as the original because
+Bob re-reads every file it touches.
+
+**What Bob's features did and didn't do here.**
+- *Document understanding:* each task started with Bob reading the catalogue,
+  the verification rules and the JSON schema, then the sample. The reports
+  cite rule IDs from the catalogue only — the mode's "never invent a rule ID"
+  instruction held in all 40 findings, though two stretched a rule
+  (`docs/scoring/`).
+- *Agent mode with approvals:* Bob proposed each write; 18 approvals were
+  given (two per audit, six in task 5, four in task 6), none rejected. In task 5 Bob noticed that its test class called a
+  method that did not exist, added `FRIENDS` and a wrapper, and applied the
+  fix as two diffs before finishing — a self-correction the screenshot in
+  `bob_sessions/2026-09-25_task5_*.png` records.
+- *Parallel tasks / sub-agents:* **not used.** The four audits ran one after
+  another so that each consumption figure and screenshot belongs to one
+  program. Running them in parallel would have been faster and is the
+  obvious next step for a real backlog.
+- *Execute / MCP:* **not used.** Bob never compiled, activated or ran
+  anything. Every "verified" field in its output is `observed` or
+  `needs_verification`; `verified_on_target` never appears.
+
+**What was not Bob.** The rule catalogue, samples, answer key and demo page
+were prepared before the kick-off (disclosed above). The scoring in
+`docs/scoring/` was done by Claude Code, reading Bob's JSON against the
+answer key; the demo page was built by Codex. Sena directed both, made the
+disclosure and mascot decisions, and approved each Bob write.
 
 ## Results
 
