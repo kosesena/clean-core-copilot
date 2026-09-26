@@ -11,7 +11,7 @@
       "F-05": "Match F4",
       "F-06": "Match F5",
       "F-07": "Bonus F10",
-      "F-08": "Undecided"
+      "F-08": "Partially correct"
     },
     "core": "6 / 6",
     "bonus": "1 / 5",
@@ -33,14 +33,14 @@
       "F-08": "Match S2",
       "F-09": "Match S3",
       "F-10": "Match S4",
-      "F-11": "Proposed incorrect",
+      "F-11": "Incorrect",
       "F-12": "Match S11",
       "F-13": "Duplicate S11",
       "F-14": "Duplicate S11",
       "F-15": "Match S12",
       "F-16": "Duplicate S12",
       "F-17": "Match S10",
-      "F-18": "Proposed correct extra"
+      "F-18": "Correct observation - unscored"
     },
     "core": "11 / 12",
     "bonus": "0 / 3",
@@ -58,8 +58,8 @@
       "F-04": "Match M4",
       "F-05": "Match M6",
       "F-06": "Match M5",
-      "F-07": "Proposed incorrect",
-      "F-08": "Proposed correct extra"
+      "F-07": "Incorrect",
+      "F-08": "Correct observation - unscored"
     },
     "core": "6 / 6",
     "bonus": "0 / 3",
@@ -72,7 +72,7 @@
     "report_sha256": "d26cb064f454b6fc3421507376a50890f839f7aad7bccd88c63422991286c971",
     "assessment": {
       "F-01": "Match L1",
-      "F-02": "Proposed correct extra",
+      "F-02": "Correct extra",
       "F-03": "Match L2",
       "F-04": "Match L4",
       "F-05": "Match L3",

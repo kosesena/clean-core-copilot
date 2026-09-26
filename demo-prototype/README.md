@@ -108,8 +108,8 @@ into full schema validation.
 The four-page navigation is Overview / Findings / Before-after / Evidence.
 `data/recorded-audits.json` contains verbatim copies of the four recorded
 reports and synthetic source programs, plus a separate transcription of
-Claude's proposed assessments from `docs/scoring/`. Assessment labels remain
-“Claude assessment · awaiting Sena”. A report only receives these assessments
+Claude's assessments confirmed by Sena on 26 Sep from `docs/scoring/`. Assessment labels remain
+“Scored by Claude - confirmed by Sena, 26 Sep”. A report only receives these assessments
 or the stored full source when its raw text exactly matches the recorded copy.
 Other imported reports retain the original excerpt-based inspection workflow.
 
@@ -132,6 +132,12 @@ illustration based on the original Bob reference, controlled by SHOW_MASCOT.
 It does not represent an official coin design or alter recorded usage values.
 
 The recorded ZFI case includes the task 6 class and README revision. R3 and
-R1 are addressed by source reading (Claude assessment, awaiting Sena); no
+R1 are addressed by source reading (Claude source review); no
 activation, ATC or unit execution record is supplied. Previously saved cases
 are preserved: use “Load task 6 ZFI case” to replace them explicitly.
+
+Audit precision is 29/32 over decided findings: 40 findings minus six duplicates
+and two unscored observations. The numerator is 27 core + one bonus + one correct
+extra. Two incorrect and one partially correct finding remain in the denominator.
+Source: `docs/scoring/zcc_legacy_materials.md`. This is sample-key scoring,
+not independent validation or target verification.

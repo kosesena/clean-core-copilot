@@ -14,13 +14,18 @@ test('study snapshots preserve raw reports and synthetic source exactly',()=>{
  assert.deepEqual(Object.keys(e.assessment).sort(),r.findings.map(f=>f.id).sort());
  }
 });
-test('study labels retain duplicates and unresolved proposals',()=>{
+test('confirmed scoring preserves exclusions and precision denominator',()=>{
  const a=entries.flatMap(e=>Object.values(e.assessment));
  assert.equal(a.filter(x=>x.startsWith('Match ')).length,27);
  assert.equal(a.filter(x=>x.startsWith('Bonus ')).length,1);
  assert.equal(a.filter(x=>x.startsWith('Duplicate ')).length,6);
- assert.equal(a.filter(x=>x==='Proposed incorrect').length,2);
- assert.equal(a.filter(x=>x==='Undecided').length,1);
+ assert.equal(a.filter(x=>x==='Incorrect').length,2);
+ assert.equal(a.filter(x=>x==='Partially correct').length,1);
+ assert.equal(a.filter(x=>x==='Correct extra').length,1);
+ assert.equal(a.filter(x=>x==='Correct observation - unscored').length,2);
+ const decided=a.filter(x=>!x.startsWith('Duplicate ')&&x!=='Correct observation - unscored');
+ assert.equal(decided.length,32);
+ assert.equal(decided.filter(x=>/^(Match |Bonus )/.test(x)||x==='Correct extra').length,29);
  assert.equal(Math.round((entries.reduce((n,e)=>n+e.coins,0)+.807)*1000),1468);
 });
 
