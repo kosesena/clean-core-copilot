@@ -1,3 +1,8 @@
+"! Friendship for the local test class: a PUBLIC global class cannot name a
+"! local class in FRIENDS, so the test include declares it here.
+CLASS ltc_vendor_aging DEFINITION DEFERRED.
+CLASS zcl_vendor_aging DEFINITION LOCAL FRIENDS ltc_vendor_aging.
+
 CLASS ltc_vendor_aging DEFINITION
   FINAL
   FOR TESTING

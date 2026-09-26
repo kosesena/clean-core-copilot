@@ -1,8 +1,9 @@
 CLASS zcl_vendor_aging DEFINITION
   PUBLIC
   FINAL
-  CREATE PUBLIC
-  FRIENDS ltc_vendor_aging.   "< ABAP Unit friend; test class may call private methods
+  CREATE PUBLIC.
+  " Friendship for the local test class is declared in the test include
+  " (LOCAL FRIENDS); a PUBLIC class accepts only GLOBAL FRIENDS here.
 
   "! Bucketed vendor ageing logic – modernised from ZFI_VENDOR_AGING.
   "!

@@ -1,4 +1,3 @@
 "! Local definitions include of ZCL_VENDOR_AGING.
-"! The global class names the local test class in FRIENDS; ABAP requires the
-"! forward declaration here, not in the main source.
-CLASS ltc_vendor_aging DEFINITION DEFERRED.
+"! Intentionally empty. The forward declaration and LOCAL FRIENDS for the
+"! test class live in the test classes include.
