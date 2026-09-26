@@ -110,10 +110,46 @@ approved for the task as a whole, files reviewed afterwards:
 | 6 | Fix review findings R3, R1 | the review's wording, one consistent naming approach requested | four diffs in `modernized/zfi_vendor_aging/` | 1.03 |
 | 7 | Modernize ZSD, ZMM, ZCC **in parallel** | one prompt: one sub-agent per program, same recipe as ZFI, R3 lesson stated | 13 files in `modernized/`, `PARALLEL_RUN.md` | 1.76 |
 
-Total **≈4.3 of 40 Bobcoin**. Audits cost 0.15–0.19 each; producing code
-cost five times an audit; a follow-up cost as much as the original because
-Bob re-reads every file it touches; three programs in parallel cost 0.59
-each, about a quarter less than one alone, in a third of the time.
+Total **4.258 of 40 Bobcoin (≈4.3)** across seven tasks. The first six
+tasks used **2.498 Bobcoin (≈2.5)**; task 7 added 1.76. These are recorded
+Bob usage figures, not the total project cost: human work, Claude and Codex
+usage, and target-system checks are outside this budget. Different programs
+and approval workflows were involved, so these runs do not establish a
+cost or speed improvement from parallel execution.
+
+### What did about 2.5 Bobcoin actually buy?
+
+Think of it as asking an assistant to inspect four old business programs,
+prepare a replacement draft for one, and revise that draft after review.
+The four synthetic examples cover supplier payments, open sales orders,
+material price updates and a material list — no customer code was used.
+
+| Work completed with Bob | In everyday language | Bobcoin |
+|-------------------------|----------------------|---------|
+| Review four programs | Bob pointed to 40 places worth checking and explained its concerns. Against our pre-written answer key, it found 27 of the 29 main issues. The 40 findings include repeats and mistakes; they are not 40 confirmed defects. | 0.661 |
+| Draft a replacement for one program | For the supplier-payment ageing report, Bob wrote a new data-access definition, the calculation class, seven automated test cases, and an explanation of the changes and remaining decisions. | 0.807 |
+| Revise the draft after review | Bob aligned the field names across the files and added a document-item identifier to distinguish items within a document. These changes were reviewed by reading the code. | 1.030 |
+| **First six tasks** | **Four reviews, one replacement draft with tests, and one revision round.** | **2.498** |
+
+That is about **6.25% of the 40-Bobcoin allowance**. The practical output is
+a reviewable starting point for a developer: where to look, what might replace
+the old code, and what still needs checking. It is **not a completed cloud
+migration**. Seven tests were written; this budget summary does not claim
+that they passed or that the replacement runs on the target system.
+See the current [activation record](docs/activation/README.md) for execution
+results. Human scoring was performed by Claude and confirmed by Sena;
+the demo interface was built with Codex, not with these Bobcoins.
+
+The quality figures describe these four prepared samples, not general SAP
+accuracy. Only 1 of 12 additional issues was found; among 32 findings with a
+scoring decision, 29 were correct (six duplicates and two unscored
+observations excluded). [Scoring details](docs/scoring/zcc_legacy_materials.md).
+
+**Architecture lesson:** define a bounded task, give it the relevant rules,
+review the output, request specific corrections, and track cost alongside
+quality. This demonstrates budget-aware development; proving cost
+optimization would require a like-for-like comparison, which we have not
+performed yet.
 
 **What Bob's features did and didn't do here.**
 - *Document understanding:* each task started with Bob reading the catalogue,
