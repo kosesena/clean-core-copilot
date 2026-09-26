@@ -5,10 +5,11 @@ for the IBM Bob 2.0 Hackathon (lablab.ai, Sep 2026).
 
 > **Status:** four Bob audit runs recorded (25 Sep 2026), scored against an
 > author's answer key for synthetic samples — see [`docs/scoring/`](docs/scoring/).
-> One rewrite was pushed to a BTP ABAP trial system on 26 Sep: the class
-> activated (ATC 0 findings), the CDS view did not — its two consumed views
-> are missing there, exactly the ones Bob had marked *candidate*
-> ([`docs/activation/`](docs/activation/)). Findings stay advisory until
+> One rewrite was pushed to a BTP ABAP trial system on 26 Sep: the CDS view
+> did not activate — its two consumed views are missing there, exactly the
+> ones Bob had marked *candidate*; the class and its unit tests are still
+> being activated ([`docs/activation/`](docs/activation/)). Three more
+> programs were rewritten in parallel by sub-agents. Findings stay advisory until
 > checked on the customer's target — see
 > [`docs/verification-notes.md`](docs/verification-notes.md).
 
