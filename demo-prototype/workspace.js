@@ -35,7 +35,10 @@ async function loadRecordedAudits(){try{
  if(activeReportKey==='design')switchReport('recorded-'+JSON.parse(recordedAudits[0].raw).program);
  renderReportPicker();paintWorkspace();
  }catch(e){notify(e.message);paintWorkspace();}}
-function paintAtlas(){$('atlas-view').innerHTML='<p>Evidence view is being prepared.</p>';}
+function paintAtlas(){
+ $('atlas-view').innerHTML=`<p class="assessment-label">Recorded study snapshot · ${assessmentLabel}</p><div class="table-scroll"><table class="atlas-table"><thead><tr><th>Program</th><th>01 / Audit</th><th>02 / Scored against key</th><th>03 / Modernized</th><th>04 / Verified on target</th></tr></thead><tbody>${recordedAudits.map((x,i)=>{const r=JSON.parse(x.raw);return `<tr><th>${esc(r.program)}</th><td><div class="atlas-record">Recorded report<small>${x.coins.toFixed(3)} Bobcoin</small></div></td><td><div class="atlas-review">Core ${x.core}<small>Bonus ${x.bonus} · draft assessment</small></div></td><td><div class="${i===0?'atlas-review':'atlas-empty'}">${i===0?'Candidate files':'Not performed'}<small>${i===0?'Task 5 · 0.807 Bobcoin · review open':''}</small></div></td><td><div class="atlas-empty">Not performed</div></td></tr>`;}).join('')}</tbody></table></div><div class="atlas-panels"><section class="panel"><div class="eyebrow">Selected program</div><h2>${esc(report.program)}</h2><p>Needs target verification</p><a href="#findings">Open recorded findings →</a></section><section class="panel"><div class="eyebrow">Next evidence needed</div><h2>Activation · ATC · ABAP Unit</h2><p>No target execution records are included in this study snapshot.</p><a href="walkthrough.html">Inspect the case or attach records →</a></section></div><p class="caption">Solid cells: recorded artifacts or draft assessments. Dashed cells: no performed step in this snapshot. Case imports are local and do not update this study table automatically.</p><section class="panel atlas-origin"><h2>Selected report origin</h2><div id="atlas-origin-rows"></div></section>`;
+ renderEvidence();$('atlas-origin-rows').innerHTML=$('evidence-rows').innerHTML;
+}
 const dossierPrograms=document.createElement('aside');dossierPrograms.className='dossier-programs';document.querySelector('.review-grid').prepend(dossierPrograms);
 renderList=function(){
  dossierPrograms.innerHTML=programButtons()+`<p class="assessment-label">${assessmentLabel}</p><p class="caption">Four recorded audits: core 27 / 29 · bonus 1 / 12. Snapshot, not scores for arbitrary imports.</p>`;bindPrograms(dossierPrograms);
@@ -51,4 +54,5 @@ renderDetail=function(){const f=report.findings.find(x=>x.id===selected);if(!f){
  $('review-decision').value=reviewOf(f);$('review-decision').onchange=e=>{reviews.set(f.id,e.target.value);renderStats();notify('Review stored in this session. Export review to save.');};
 };
 
+document.querySelectorAll('[data-mascot]').forEach(img=>{if(window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true){img.src='assets/ibm-bob.webp';img.hidden=false;}});
 paintWorkspace();loadRecordedAudits();
