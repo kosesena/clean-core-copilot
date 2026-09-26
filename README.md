@@ -152,8 +152,16 @@ Bobcoin. Reviewed by reading only — see
 verification discipline intact, one probable activation error (CDS element
 names vs. class field names), one data-model gap (no item number in the
 key), one legacy bug carried over. A follow-up task (26 Sep, 1.03 Bobcoin)
-fixed the first two by reading; the legacy bug is left as is. Not activated
-on any system.
+fixed the first two by reading; the legacy bug is left as is.
+
+**Activation attempt (26 Sep, BTP ABAP Environment trial):** the CDS view
+did not activate — its two consumed views, `I_OperationalAcctgDocItem` and
+`I_Supplier`, do not exist on the trial system (exactly the two Bob had
+marked *candidate*). The class activated; ATC reported 0 findings; the ABAP
+Unit run is pending. Messages and method in
+[`docs/activation/README.md`](docs/activation/README.md). The trial is not
+the customer's target release, so the status stays *Needs target
+verification*.
 
 ## Repo layout
 
