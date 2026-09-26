@@ -62,7 +62,7 @@ function paintWorkspace(){
  const findingsArt=['overview','findings','evidence'].includes(page)&&window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true;
  document.querySelector('.intro').classList.toggle('findings-hero',findingsArt);
  const heroMascot=document.querySelector('.intro [data-mascot]');
- if(heroMascot){heroMascot.src=findingsArt?`assets/bob-${page}.png`:'assets/ibm-bob.webp';heroMascot.alt=findingsArt?{overview:'Bob holding the four program folders reviewed in this study',evidence:'Bob presenting a checklist with completed and unfinished steps',findings:'Bob pointing to a flagged line in a code panel'}[page]:'IBM Bob';}
+ if(heroMascot){heroMascot.src=findingsArt?(page==='evidence'?'assets/bob-evidence-case.png':`assets/bob-${page}.png`):'assets/ibm-bob.webp';heroMascot.alt=findingsArt?{overview:'Bob holding the four program folders reviewed in this study',evidence:'Bob sorting completed, partial and missing evidence into an open case',findings:'Bob pointing to a flagged line in a code panel'}[page]:'IBM Bob';}
  $('breadcrumb-current').textContent=page;
  const recorded=!!recordedForCurrent();$('notice-label').textContent=recorded?'SAVED RESULTS':isDesign?'DESIGN EXAMPLE':'YOUR UPLOAD';$('notice-copy').textContent=recorded?'These are Bob’s answers from the hackathon runs, shown unchanged. Our judgements are kept separately.':isDesign?'Made-up findings that show how the page works. Bob did not produce them.':'Shown as found in your file. Nothing in it has been checked by us.';
  if(page==='overview')paintOverview();

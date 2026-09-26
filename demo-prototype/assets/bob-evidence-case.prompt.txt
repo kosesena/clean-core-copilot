@@ -1,0 +1,7 @@
+Tool: built-in image_gen. Selected evidence concept: open evidence case.
+Reference: bob-evidence.png, character identity only.
+Bob seated behind an open burgundy archive case, filing cream documents marked
+with a green check, amber partial circle and grey dashed empty square. Blue-purple
+hardhat, white robot, blue shoes, bold black outlines. Small magnifier resting
+beside the case. No clipboard, upright screen or pointing pose. Transparent alpha
+background, no text. Wide composition for a cream website hero.

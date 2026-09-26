@@ -5,6 +5,7 @@ body{background:var(--paper);color:var(--ink)}
 .app{grid-template-columns:238px minmax(0,1fr)}
 .sidebar{background:linear-gradient(160deg,#481420,#290b14);padding:34px 22px}
 .brand{font:28px/1.12 Georgia,serif;letter-spacing:-.6px;align-items:flex-start}
+.site-brand .site-logo{display:block;width:48px;height:48px;flex-shrink:0;object-fit:contain}
 .brand-mark{display:none}.brand small{color:#dbbfc2;letter-spacing:2px;font:10px/1.6 var(--sans);margin-top:12px}
 .workspace-label{color:#c9a4ac;margin:38px 10px 12px}.nav button{color:#e2cbd0;border-radius:3px;padding:13px 10px}.nav button.active{background:#6c2739;color:#fff}.nav button:hover{background:#572032}.nav-count{background:#8a4252}.program-switcher{margin-top:28px}.program-switcher label{display:block;margin:0 0 12px}.program-switcher select{width:100%;max-width:100%;background:#481824;color:#fff3ee;border-color:#80515d;font-size:11px;padding:12px 7px}.program-switcher p{font-size:11px;color:#c9a4ac;margin:10px 0}.case-nav{display:flex;justify-content:space-between;color:#f5e2db;text-decoration:none;padding:16px 0;border-bottom:1px solid #784553;font-size:12px;margin-bottom:26px}
 .session-card{border-color:#784553;background:#ffffff04;border-radius:3px}.session-card .eyebrow,.profile small{color:#cfacb3}.session-card p{color:#e1c7cc}.dot{background:#bb8d71}.profile{border-color:#784553}.avatar{border-color:#a77782;color:#f4e5df}
