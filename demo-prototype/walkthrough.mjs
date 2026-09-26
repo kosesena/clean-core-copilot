@@ -40,3 +40,5 @@ $('load-zfi').onclick=async()=>{const ver=revision;try{const response=await fetc
 $('case-file').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>14000000)throw Error('Case bundle must be smaller than 14 MB.');const next=validateCase(JSON.parse(await file.text()));data=next;revision++;await render();message('Case imported. Outcomes remain supplied declarations.');}catch(e){message(e.message);}finally{e.target.value='';}};
 $('export').onclick=()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='clean-core-case.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);message('Case exported with source, raw records and separate check declarations.');};
 render();
+
+document.querySelectorAll("[data-mascot]").forEach(img=>{if(window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true){img.src="assets/ibm-bob.webp";img.hidden=false;}});
