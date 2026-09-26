@@ -55,6 +55,8 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 | 16:06 | Sena | "I don't understand the page myself" → four clarity fixes sent to Codex (plain-sentence finding titles, human-readable answer-key labels, drop the duplicate ZCC card, one-line page intros) | Codex session |
 | 16:08 | Claude | **Bob mode changed**: Subagent and Todo tools switched **on** (Read, Edit unchanged; Execute, Browser, MCP, Skill, Subtask, Mode still off). Reason: run the remaining three modernizations as parallel sub-agents — the feature IBM highlighted at the kick-off — while keeping Bob off any system | this file; README §How Bob is used to be updated after the run |
 
+| 16:12 | Bob | **Task 7 started**: one prompt asking for the three remaining modernizations as parallel sub-agents. Bob's first action: a Todo list — read rules → spawn sub-agent ×3 (zsd, zmm, zcc) → write `modernized/PARALLEL_RUN.md`. First use of Todo and Subagent in this project | screenshot to follow in `bob_sessions/` |
+
 ## Open at the time of writing
 
 - Unit tests on BTP_TRIAL2 (test include to be pasted, then `abap_run_unit_tests`).
