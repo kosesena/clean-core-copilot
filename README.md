@@ -7,8 +7,10 @@ for the IBM Bob 2.0 Hackathon (lablab.ai, Sep 2026).
 > author's answer key for synthetic samples — see [`docs/scoring/`](docs/scoring/).
 > One rewrite was pushed to a BTP ABAP trial system on 26 Sep: the CDS view
 > did not activate — its two consumed views are missing there, exactly the
-> ones Bob had marked *candidate*; the class and its unit tests are still
-> being activated ([`docs/activation/`](docs/activation/)). Three more
+> ones Bob had marked *candidate*. With two labelled stub tables in place of
+> them, the class activated, **all seven ABAP Unit tests passed**, and ATC
+> reported 0 errors — proof of the logic, not of the SAP data link
+> ([`docs/activation/`](docs/activation/)). Three more
 > programs were rewritten in parallel by sub-agents. Findings stay advisory until
 > checked on the customer's target — see
 > [`docs/verification-notes.md`](docs/verification-notes.md).
@@ -209,16 +211,22 @@ names vs. class field names), one data-model gap (no item number in the
 key), one legacy bug carried over. A follow-up task (26 Sep, 1.03 Bobcoin)
 fixed the first two by reading; the legacy bug is left as is.
 
-**Activation attempt (26 Sep, BTP ABAP Environment trial):** the CDS view
+**Activation on a BTP ABAP Environment trial (26 Sep):** the CDS view
 did not activate — its two consumed views, `I_OperationalAcctgDocItem` and
 `I_Supplier`, do not exist on the trial system (exactly the two Bob had
-marked *candidate*). A first "class activated, ATC 0" result was withdrawn:
-the pasted object was still an empty skeleton. The real class is blocked by
-one line missing from the activation copy (`DEFINITION DEFERRED`), not by
-Bob's code; class activation and the ABAP Unit run are pending. Messages and method in
+marked *candidate*). To test the class anyway, two labelled stub tables and
+a stub version of the view were added (not Bob output, see
+[`docs/activation/stubs/`](docs/activation/stubs/)). Against them the
+class activated, **all seven ABAP Unit tests passed**, and ATC reported
+0 errors / 2 warnings on class + view. Getting there exposed two syntax
+defects in Bob's rewrite that only a compiler finds: `FRIENDS` on a
+`PUBLIC` class (must be `LOCAL FRIENDS` in the test include) and five uses
+of the old `sy-datum` variant, both flagged by ABAP for Cloud Development.
+An earlier "class activated, ATC 0" result had been withdrawn because the
+pasted object was still an empty skeleton. Full log in
 [`docs/activation/README.md`](docs/activation/README.md). The trial is not
-the customer's target release, so the status stays *Needs target
-verification*.
+the customer's target release and the read side ran against a stub, so
+the status stays *Needs target verification*.
 
 ## Repo layout
 

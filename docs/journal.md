@@ -69,7 +69,14 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 | 16:58 | Codex | README: plain-language "what did the Bobcoin buy" section, total 4.258 with the first six tasks (2.498) shown separately | `c75af41` |
 | 17:0x | Claude | Sena: "these labels are unreadable, show it so anyone understands". Demo rewritten in plain language: three-step "exam" strip, score cards that say what each number means, **Bobcoin card corrected from 2.498 to the full 4.258** with four spend lines (task 7 had been left out), "Bob was right / partly right / wrong" badges instead of answer-key codes, rule IDs with plain names, plain Evidence step names. Pitch cost line corrected ("about four Bobcoin"). 8/8 demo tests pass | `f5d2820` |
 
+| 20:5x | Sena | Decision (via Codex's note): build trial stubs so the tests can run; keep "logic proven" and "SAP integration unproven" as two separate results | Codex session |
+| 21:0x | Claude | Stub sources written: `ZFI_AGING_LOG`, `ZFI_VOI_STUB`, stub view with Bob's element names | `4350bbe` |
+| 21:21 | Claude | BTP_TRIAL2 session had expired: Retry Logon in VS Code, reentrance-ticket URL opened in Chrome, connection back. Class now fails only on the two missing objects (+ 5 `SY-DATUM` warnings, a further Bob defect) | `86ac1ca` |
+| 21:2x | Claude | Two stub tables created empty via ADT MCP (`abap_creation-create_object`) | this file |
+| 21:47–21:53 | Codex | Sources pasted into both tables and the view (view label shortened to 40 chars), all three activated | Codex session |
+| 21:5x | Claude | **Class activated. `abap_run_unit_tests`: PASSED (7 tests). ATC on class + stub view: 0 errors, 2 warnings, 43 infos.** Activation record, README status, demo Evidence page updated | `docs/activation/README.md` |
+
 ## Open at the time of writing
 
-- BTP_TRIAL2: paste the `bfd8a2d` friendship fix into three includes (Codex), then `abap_activate_objects` + `abap_run_unit_tests` (Claude); update `docs/activation/README.md` (add the GLOBAL FRIENDS result and Bob's original defect) and the README status.
+- Codex: VS Code Test Results screenshot with the seven test names → `bob_sessions/2026-09-26_abap_unit_7_tests.png`; link it from `docs/activation/README.md`.
 - Video recording; Sunday: credential scan, repo public, lablab form.

@@ -124,24 +124,49 @@ confirmed that the local test class source was actually saved into the
 system's test include (the VS Code tab that was open showed the local copy
 under `docs/activation/`, not the system object). Open item — see below.
 
+### Fifth attempt, 21:5x — class activated, tests passed (against stubs)
+
+With the three stubs active (Codex pasted the sources at 21:47–21:53;
+CDS label shortened to 40 characters):
+
+```
+abap_activate_objects  zcl_vendor_aging.clas.abap + .testclasses.abap
+  Activation successful.   (warnings: SY-DATUM old variant ×5, ABAP Doc position ×1)
+
+abap_run_unit_tests    zcl_vendor_aging.clas.abap
+  Overall Test Run Status: [PASSED]
+
+abap_atc_run           ZCL_VENDOR_AGING (CLAS) + ZI_VENDOROPENITEM_VAGEING (DDLS, stub)
+  45 findings in 2 objects: Errors 0 · Warnings 2 · Infos 43
+  worklist 36C73C3C01F51FD1AEBB76FE1BEC5072
+```
+
+The MCP tool reports only the overall status; the test include holds
+exactly seven `FOR TESTING` methods (`bucket_0_30`, `bucket_31_lower`,
+`bucket_60_upper`, `bucket_over_60`, `bucket_due_today`,
+`key_date_defaults_to_today`, `open_item_is_bucketed`), and the same tool
+answered "No executable tests found" earlier when the include was empty,
+so PASSED means these ran. A VS Code Test Results screenshot with the
+seven names is being captured as `bob_sessions/2026-09-26_abap_unit_7_tests.png`.
+
 ## What this changes in the project's claims
 
 | Claim | Before | After |
 |-------|--------|-------|
-| CDS view activates | unverified | **fails on trial**: 2 missing data sources, both pre-marked candidate |
-| Class activates | unverified | **not yet** — first result was on an empty skeleton; real source blocked by a missing `DEFINITION DEFERRED` line in the activation copy |
-| 7 unit tests pass | unverified | **not executed** (test include not confirmed in system) |
-| ATC clean | unverified | not meaningful yet (ran on the empty skeleton) |
-| R3 (field-name mismatch) fixed | fixed by reading | still by reading; the SELECT was not exercised against a real view |
+| CDS view activates | unverified | **fails on trial with Bob's sources**: 2 missing data sources, both pre-marked candidate. Replaced by a labelled stub for the test run |
+| Class activates | unverified | **yes**, once two copy-side fixes were made — and one syntax defect that is also in Bob's original (`FRIENDS` on a `PUBLIC` class) |
+| 7 unit tests pass | unverified | **yes, all seven** — against stub tables, so they prove the bucket/key-date logic, not SAP data access |
+| ATC clean | unverified | **0 errors, 2 warnings, 43 infos** on class + stub view (default variant) |
+| `sy-datum` in cloud code | not noticed | 5 activation warnings: old variant not to be used in ABAP for Cloud Development — a further Bob defect (syntax level) |
+| R3 (field-name mismatch) fixed | fixed by reading | the SELECT now compiles against a view with Bob's element names; still not exercised against real finance data |
 
 Overall status stays **Needs target verification**: the trial is not the
-customer's target release, and the read side did not activate.
+customer's target release, and the read side was proven only against a
+stub.
 
 ## Open
 
-- Paste `ZCL_VENDOR_AGING.clas.testclasses.abap` into the system's test
-  include (Classes → ZCL_VENDOR_AGING → Test Classes), save, activate, and
-  re-run `abap_run_unit_tests`. The seven tests need no database, so they
-  can pass without the CDS.
-- Optionally stub the read side (a local CDS over a Z table, or a test
-  double) to exercise `select_open_items` — out of hackathon scope.
+- Bob's original view remains unactivatable on the trial; on an S/4HANA
+  Cloud tenant the two sources may exist. Not testable here.
+- Exercising `select_open_items` with rows in `ZFI_VOI_STUB` (integration
+  test) — out of hackathon scope.
