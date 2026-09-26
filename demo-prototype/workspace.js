@@ -88,13 +88,27 @@ function paintAtlas(){
 }
 renderEvidence=function(){const recorded=!!recordedForCurrent();const rows=[['Program',report.program+(programPlain[report.program]?' · '+programPlain[report.program]:'')],['Code file',report.source_file],['Who wrote the findings',recorded?'IBM Bob, in our “Clean Core Architect” mode':isDesign?'Nobody: a made-up example':'Taken from your uploaded file'],['Rule list Bob used',report.provenance.catalogue_version],['Checked by people?',recorded?'Yes. Claude scored it and Sena confirmed it on 26 Sep':'Not by us'],['Tried on a real SAP system?',report.program==='ZFI_VENDOR_AGING'&&recorded?'Partly, on a free trial system (see step 4 above)':'No'],['Bob’s original answer','Kept unchanged. Our judgements are stored separately']];$('evidence-rows').innerHTML=rows.map(([a,b])=>`<div class="evidence-row"><span>${esc(a)}</span><span>${esc(b)}</span></div>`).join('');};
 const dossierPrograms=document.createElement('aside');dossierPrograms.className='dossier-programs';document.querySelector('.review-grid').prepend(dossierPrograms);
+let wrapSource=false;
+const sourcePanel=document.querySelector('[aria-label="Findings list"]');
+sourcePanel.classList.add('source-panel');
+const codeTools=document.createElement('div');codeTools.className='code-tools';
+codeTools.innerHTML='<span>ABAP <small>Original source</small></span><div><button type="button" id="jump-source">Go to selected line ↓</button><button type="button" id="wrap-source" aria-pressed="false">Wrap lines</button><button type="button" id="expand-source" aria-pressed="false">Expand code ↗</button></div>';
+sourcePanel.querySelector('.list-heading').after(codeTools);
+$('wrap-source').onclick=()=>{wrapSource=!wrapSource;sourcePanel.classList.toggle('wrap-source',wrapSource);$('wrap-source').setAttribute('aria-pressed',String(wrapSource));};
+$('expand-source').onclick=()=>{const expanded=document.querySelector('.review-grid').classList.toggle('code-expanded');$('expand-source').setAttribute('aria-pressed',String(expanded));$('expand-source').textContent=expanded?'Restore layout ↙':'Expand code ↗';};
+$('jump-source').onclick=()=>{const line=$('finding-list').querySelector('.selected-line');if(line)line.scrollIntoView({block:'center',behavior:'instant'});};
+let renderedSourceProgram=null;
 renderList=function(){
+ const oldDocument=$('finding-list').querySelector('.source-document');
+ const oldPosition=renderedSourceProgram===report.program&&oldDocument?{top:oldDocument.scrollTop,left:oldDocument.scrollLeft}:null;
+ renderedSourceProgram=report.program;
  dossierPrograms.innerHTML=programButtons()+`<p class="caption">Across all four programs Bob caught 27 of 29 rule problems and 1 of 12 logic bugs.</p>`;bindPrograms(dossierPrograms);
  const query=$('search').value.toLowerCase(),status=$('filter').value;
  const findings=report.findings.filter(f=>(status==='all'||f.verification_status===status)&&[f.id,f.rule,f.reason,f.evidence].join(' ').toLowerCase().includes(query));
  const current=recordedForCurrent();document.querySelector('.list-heading').textContent='The program’s code · '+report.source_file;
  $('finding-list').innerHTML=current?`<div class="source-document">${current.source.split('\n').map((line,i)=>{const matches=findings.filter(f=>i+1>=f.line_start&&i+1<=f.line_end);const start=matches.filter(f=>f.line_start===i+1);const level=matches.some(f=>f.level_hint==='D')?'level-d':matches.some(f=>f.level_hint==='C')?'level-c':'level-other';return `<div class="source-row ${matches.length?level:''} ${matches.some(f=>f.id===selected)?'selected-line':''}"><span class="source-number">${i+1}</span><code>${esc(line)||' '}</code><span>${start.map(f=>`<button class="source-pill" data-id="${esc(f.id)}" title="${esc(ruleLabel(f.rule))}">${esc(problemNo(f))} ${esc(verdictFor(f)[0].slice(0,1))}</button>`).join('')}</span></div>`;}).join('')}</div><p class="caption source-legend">Highlighted lines are the places Bob flagged. Red: Bob rates it the riskiest kind, such as writing straight into SAP tables. Green: it uses SAP internals that need a supported replacement. Click a label to open that problem.</p>`:findings.map(f=>`<button class="finding ${f.id===selected?'selected':''}" data-id="${esc(f.id)}"><strong>${esc(plainFinding(f))}</strong><p>${esc(problemNo(f))} · ${esc(ruleLabel(f.rule))}</p><span>${esc(linesText(f))}</span></button>`).join('');
  $('list-count').textContent=`${findings.length} problems shown`;
+ const newDocument=$('finding-list').querySelector('.source-document');if(oldPosition&&newDocument){newDocument.scrollTop=oldPosition.top;newDocument.scrollLeft=oldPosition.left;}
  $('finding-list').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{selected=b.dataset.id;renderList();});renderDetail();
 };
 renderDetail=function(){const f=report.findings.find(x=>x.id===selected);if(!f){$('detail').innerHTML='<p class="empty">Click a highlighted line to see a problem.</p>';return;}
