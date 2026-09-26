@@ -1,4 +1,3 @@
-CLASS ltc_vendor_aging DEFINITION DEFERRED.
 CLASS zcl_vendor_aging DEFINITION
   PUBLIC
   FINAL
