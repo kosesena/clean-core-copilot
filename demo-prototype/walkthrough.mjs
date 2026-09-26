@@ -45,3 +45,5 @@ document.querySelectorAll("[data-mascot]").forEach(img=>{if(window.CLEAN_CORE_DE
 // Keep case edits while navigating between the four views in this browser tab.
 try{const saved=sessionStorage.getItem('ccc-case-v1');if(saved){data=validateCase(JSON.parse(saved));revision++;render();}else{$('load-zfi').click();}}catch{message('Saved case could not be restored. Import an exported case to recover it.');}
 window.addEventListener('pagehide',()=>{try{sessionStorage.setItem('ccc-case-v1',JSON.stringify(data));}catch{/* Export remains the durable save path. */}});
+
+if(window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true){document.querySelectorAll('[data-case-art]').forEach(img=>{img.src=img.dataset.caseArt;img.closest('.case-illustration').hidden=false;});}
