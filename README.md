@@ -168,8 +168,10 @@ fixed the first two by reading; the legacy bug is left as is.
 **Activation attempt (26 Sep, BTP ABAP Environment trial):** the CDS view
 did not activate — its two consumed views, `I_OperationalAcctgDocItem` and
 `I_Supplier`, do not exist on the trial system (exactly the two Bob had
-marked *candidate*). The class activated; ATC reported 0 findings; the ABAP
-Unit run is pending. Messages and method in
+marked *candidate*). A first "class activated, ATC 0" result was withdrawn:
+the pasted object was still an empty skeleton. The real class is blocked by
+one line missing from the activation copy (`DEFINITION DEFERRED`), not by
+Bob's code; class activation and the ABAP Unit run are pending. Messages and method in
 [`docs/activation/README.md`](docs/activation/README.md). The trial is not
 the customer's target release, so the status stays *Needs target
 verification*.
