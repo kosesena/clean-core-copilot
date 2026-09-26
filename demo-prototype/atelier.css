@@ -134,3 +134,22 @@ body{background:var(--paper);color:var(--ink)}
 .audit-page .intro.findings-hero{grid-template-columns:minmax(0,1fr) 280px;gap:12px 30px}.audit-page .intro.findings-hero .mascot-slot{width:280px;height:215px;margin:0;border:0;border-radius:0;background:none}.audit-page .intro.findings-hero .mascot-slot img{width:280px;height:215px;filter:none}.audit-page .intro.findings-hero .actions{flex-wrap:wrap}
 @media(max-width:700px){.audit-page .intro.findings-hero{grid-template-columns:minmax(0,1fr) 180px;gap:16px}.audit-page .intro.findings-hero .mascot-slot,.audit-page .intro.findings-hero .mascot-slot img{width:180px;height:160px}.audit-page .intro.findings-hero .actions{grid-column:1/-1}}
 @media(max-width:480px){.audit-page .intro.findings-hero{grid-template-columns:1fr}.audit-page .intro.findings-hero .mascot-slot{grid-column:1;grid-row:2;justify-self:center;width:220px;height:170px}.audit-page .intro.findings-hero .mascot-slot img{width:220px;height:170px}.audit-page .intro.findings-hero .actions{grid-row:3}}
+
+/* A compact headline with Bob, followed by handwritten actions. */
+.audit-page .intro.findings-hero{grid-template-columns:minmax(0,max-content) 230px;justify-content:start;align-items:center;gap:8px 18px;padding:28px 0 24px;min-height:0}
+.audit-page .intro.findings-hero .intro-copy{display:contents}
+.audit-page .intro.findings-hero .eyebrow{grid-column:1/-1;grid-row:1}
+.audit-page .intro.findings-hero h1{grid-column:1;grid-row:2;margin:0;max-width:100%;font-size:clamp(32px,3.5vw,58px)}
+.audit-page .intro.findings-hero .mascot-slot{grid-column:2;grid-row:2;width:230px;height:185px;justify-self:start}
+.audit-page .intro.findings-hero .mascot-slot img{width:230px;height:185px}
+.audit-page .intro.findings-hero #page-subtitle{grid-column:1;grid-row:3;margin:0;align-self:start}
+.audit-page .intro.findings-hero .recorded-note{grid-column:1;grid-row:4;align-self:start}
+.audit-page .intro.findings-hero .actions{grid-column:2;grid-row:3/5;display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding-left:8px}
+.audit-page .intro.findings-hero .actions .btn{font-family:"Chalkboard SE","Chalkboard","Comic Sans MS",cursive;font-weight:400;font-size:18px;line-height:1.25;white-space:normal;text-align:left;background:transparent;color:#6b1f2a;border:0;border-radius:0;box-shadow:none;padding:5px 0;gap:9px;transform:rotate(-1deg)}
+.audit-page .intro.findings-hero .actions .btn:nth-child(2){transform:rotate(1deg)}
+.audit-page .intro.findings-hero .actions .btn:hover{color:#39151c;text-decoration:underline;text-underline-offset:5px}
+.audit-page .intro.findings-hero .actions .btn:focus-visible{outline:2px dashed #6b1f2a;outline-offset:5px}
+.audit-page .intro.findings-hero .actions .btn>svg{display:none}
+.audit-page .intro.findings-hero .actions .btn::before{content:"";display:block;width:37px;height:26px;flex:0 0 37px;background:center/contain no-repeat url("assets/sketch-arrow.svg")}
+@media(max-width:700px){.audit-page .intro.findings-hero{grid-template-columns:minmax(0,1fr) 150px;gap:10px}.audit-page .intro.findings-hero .mascot-slot,.audit-page .intro.findings-hero .mascot-slot img{width:150px;height:145px}.audit-page .intro.findings-hero #page-subtitle{grid-column:1/-1;grid-row:3}.audit-page .intro.findings-hero .recorded-note{grid-column:1/-1;grid-row:4}.audit-page .intro.findings-hero .actions{grid-column:1/-1;grid-row:5;padding:10px 0 0;gap:10px}}
+@media(max-width:430px){.audit-page .intro.findings-hero{grid-template-columns:minmax(0,1fr) 100px}.audit-page .intro.findings-hero .mascot-slot,.audit-page .intro.findings-hero .mascot-slot img{width:100px;height:120px}.audit-page .intro.findings-hero h1{font-size:29px}}
