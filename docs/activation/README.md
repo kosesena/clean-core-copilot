@@ -43,21 +43,35 @@ meant. The other candidates (`NetDueDate`, `IsCleared`, `AccountType`,
 `AmountInCompanyCodeCurrency`, `SupplierName`) could not be checked because
 the parser stops at the missing sources.
 
-### Class — activated
+### Class — first result withdrawn
 
-`abap_activate_objects` on `zcl_vendor_aging.clas.abap` → *Activation
-successful.* The class was activated without its CDS source existing;
-the ABAP SQL `SELECT … FROM ZI_VendorOpenItem_VAgeing` did not block
-activation on this system (to be checked: whether the compiler resolves the
-data source lazily or the trial's activation is lenient — not investigated).
+`abap_activate_objects` on `zcl_vendor_aging.clas.abap` at 15:58 →
+*Activation successful.* **Withdrawn at 16:19:** Codex found that the
+system object still held the empty skeleton at that time; the paste had not
+reached the system. An empty class activates trivially, so this result said
+nothing about Bob's code. (It also explains why "activation succeeded
+without the CDS source" looked odd.) The class (224 lines) and test include
+(217 lines) were then pasted for real.
 
-### ATC — 0 findings
+Second attempt, 16:22, with the real source:
 
-Default check variant, run `36C73C3C01F51FD1AEB5388BE54DD072`:
-`ZCL_VENDOR_AGING` 0 findings, `ZI_VENDOROPENITEM_VAGEING` 0 findings. The
-CDS result is not meaningful: an inactive object with parser errors has
-nothing for ATC to check. The class result is meaningful for the checks in
-the default variant only.
+```
+zcl_vendor_aging.clas.abap
+  - Type "LTC_VENDOR_AGING" is unknown. [Ln 5, Col 11]
+```
+
+Cause: my activation copy, not Bob's code. Naming a local test class in
+`FRIENDS` needs `CLASS ltc_vendor_aging DEFINITION DEFERRED.` before the
+global class. Added to `ZCL_VENDOR_AGING.clas.abap` here; to be applied in
+the system and re-run.
+
+### ATC — 0 findings, on the empty skeleton
+
+Default check variant, run `36C73C3C01F51FD1AEB5388BE54DD072`, 15:58:
+`ZCL_VENDOR_AGING` 0 findings, `ZI_VENDOROPENITEM_VAGEING` 0 findings.
+Neither result is meaningful: the CDS is inactive with parser errors, and
+the class was still the empty skeleton (see above). To be re-run after the
+real source activates.
 
 ### ABAP Unit — not executed
 
@@ -73,9 +87,9 @@ under `docs/activation/`, not the system object). Open item — see below.
 | Claim | Before | After |
 |-------|--------|-------|
 | CDS view activates | unverified | **fails on trial**: 2 missing data sources, both pre-marked candidate |
-| Class activates | unverified | **activates on trial** |
+| Class activates | unverified | **not yet** — first result was on an empty skeleton; real source blocked by a missing `DEFINITION DEFERRED` line in the activation copy |
 | 7 unit tests pass | unverified | **not executed** (test include not confirmed in system) |
-| ATC clean | unverified | class: 0 findings, default variant |
+| ATC clean | unverified | not meaningful yet (ran on the empty skeleton) |
 | R3 (field-name mismatch) fixed | fixed by reading | still by reading; the SELECT was not exercised against a real view |
 
 Overall status stays **Needs target verification**: the trial is not the

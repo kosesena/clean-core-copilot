@@ -82,9 +82,11 @@ with the consumption badge is in [`bob_sessions/`](bob_sessions/).
 define **Clean Core Architect** (slug `clean-core-architect`, global scope).
 Role, "when to use" and the nine custom instructions were typed from the
 pre-event draft in [`bob-config-draft/`](bob-config-draft/); the wording is
-the same, the wrapper is Bob's. Tools enabled: **Read** and **Edit** only —
-no Execute, Browser, MCP, Subagent or Todo. That was deliberate: the audit
-should be reproducible from reading, and nothing should reach a system.
+the same, the wrapper is Bob's. Tools enabled for tasks 1–6: **Read** and
+**Edit** only — no Execute, Browser, MCP, Subagent or Todo. That was
+deliberate: the audit should be reproducible from reading, and nothing
+should reach a system. For task 7, **Subagent** and **Todo** were added
+(26 Sep 16:08, `docs/journal.md`); Execute, Browser and MCP stayed off.
 
 **Workspace isolation.** Bob never opened this repository. It worked in
 `~/Desktop/ccc-bob-audit`, built by
