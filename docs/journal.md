@@ -64,8 +64,12 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 | 16:39–16:45 | Codex | Four clarity fixes on the demo (plain-sentence titles, human-readable answer-key labels, "Your imports" separated, page intros); Evidence shows task 7 rewrites. Tried the `DEFERRED` line in the main source: "statement CLASS is unexpected" — correct place is the `locals_def` include | `ecb8b5a`, `b416a59` |
 | 16:45 | Claude | Activation copy corrected (`…clas.locals_def.abap`); memory and journal brought up to date; session closed | `1daf60e` |
 
+| 16:5x | Codex | Put `CLASS ltc_vendor_aging DEFINITION DEFERRED.` into the class's definitions include in BTP_TRIAL2; committed the confirmed scoring + precision card | `c975ab9` |
+| 16:58 | Claude | Activation: LTC now found, new error `Only the addition "GLOBAL FRIENDS" exists for PUBLIC classes` [Ln 1]. Again my activation copy — but **Bob's original has the same defect** (`FRIENDS zcl_vendor_aging_test` on a PUBLIC class), so it would not have activated either. Copy fixed: friendship moved to `CLASS zcl_vendor_aging DEFINITION LOCAL FRIENDS ltc_vendor_aging.` in the test include; definitions include emptied. Codex asked to paste | `bfd8a2d` |
+| 16:58 | Codex | README: plain-language "what did the Bobcoin buy" section, total 4.258 with the first six tasks (2.498) shown separately | `c75af41` |
+| 17:0x | Claude | Sena: "these labels are unreadable, show it so anyone understands". Demo rewritten in plain language: three-step "exam" strip, score cards that say what each number means, **Bobcoin card corrected from 2.498 to the full 4.258** with four spend lines (task 7 had been left out), "Bob was right / partly right / wrong" badges instead of answer-key codes, rule IDs with plain names, plain Evidence step names. Pitch cost line corrected ("about four Bobcoin"). 8/8 demo tests pass | `f5d2820` |
+
 ## Open at the time of writing
 
-- BTP_TRIAL2: paste the `DEFERRED` line into the `locals_def` include (Codex), then `abap_activate_objects` + `abap_run_unit_tests` (Claude); update `docs/activation/README.md` and the README status.
-- Demo: "confirmed by Sena" labels + precision card (Codex has it uncommitted in the working tree).
+- BTP_TRIAL2: paste the `bfd8a2d` friendship fix into three includes (Codex), then `abap_activate_objects` + `abap_run_unit_tests` (Claude); update `docs/activation/README.md` (add the GLOBAL FRIENDS result and Bob's original defect) and the README status.
 - Video recording; Sunday: credential scan, repo public, lablab form.
