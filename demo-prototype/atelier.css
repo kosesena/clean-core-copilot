@@ -32,4 +32,6 @@ body{background:var(--paper);color:var(--ink)}
 .mascot-slot.has-mascot>span{display:none}
 .mascot-slot.has-mascot img{display:block;width:96px;height:96px;object-fit:contain;filter:drop-shadow(0 5px 5px #40283015)}
 
-.coin-value{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;flex-wrap:wrap}.coin-value strong{font:42px Georgia,serif;color:#6b1f2a;white-space:nowrap}.coin-value img{width:80px;height:80px;object-fit:contain;flex-shrink:0}@media(max-width:650px){.coin-value strong{font-size:32px}}
+.coin-value{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;flex-wrap:wrap}.coin-value strong{font:42px Georgia,serif;color:#6b1f2a;white-space:nowrap}.coin-value img{width:160px;height:160px;object-fit:contain;flex-shrink:0}@media(max-width:650px){.coin-value strong{font-size:32px}}
+
+.metric.metric-coins{background:var(--paper);border-color:transparent}.metric-coins .coin-value{justify-content:center;column-gap:12px;row-gap:0}.metric-coins .coin-value strong{font-size:36px}
