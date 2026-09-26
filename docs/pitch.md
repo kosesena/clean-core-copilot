@@ -27,7 +27,8 @@ Bob had marked *candidate*.
 
 Bob is a strong first reviewer for catalogue rules and a weak one for
 business logic. The human stays in the loop — and now I can say where, with
-numbers. Total cost: two and a half Bobcoin.
+numbers. Total cost: about four Bobcoin of a forty-coin budget, three more
+rewrites included.
 
 ## 15 seconds (if someone asks in the hallway)
 
