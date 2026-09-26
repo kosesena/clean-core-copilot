@@ -61,7 +61,11 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 
 | 16:30–16:40 | Sena | **Scoring judgements confirmed**: ZFI F-08 partially correct, ZSD F-11 incorrect, ZMM F-07 incorrect, ZCC F-02 correct extra; ZSD F-18 and ZMM F-08 recorded as correct observations but **unscored** (they match the key's own unscored human-decision notes — counting them would score what the key's author chose not to). Precision 29 / 32 either way | `docs/scoring/*.md` |
 
+| 16:39–16:45 | Codex | Four clarity fixes on the demo (plain-sentence titles, human-readable answer-key labels, "Your imports" separated, page intros); Evidence shows task 7 rewrites. Tried the `DEFERRED` line in the main source: "statement CLASS is unexpected" — correct place is the `locals_def` include | `ecb8b5a`, `b416a59` |
+| 16:45 | Claude | Activation copy corrected (`…clas.locals_def.abap`); memory and journal brought up to date; session closed | `1daf60e` |
+
 ## Open at the time of writing
 
-- Unit tests on BTP_TRIAL2 (test include to be pasted, then `abap_run_unit_tests`).
+- BTP_TRIAL2: paste the `DEFERRED` line into the `locals_def` include (Codex), then `abap_activate_objects` + `abap_run_unit_tests` (Claude); update `docs/activation/README.md` and the README status.
+- Demo: "confirmed by Sena" labels + precision card (Codex has it uncommitted in the working tree).
 - Video recording; Sunday: credential scan, repo public, lablab form.
