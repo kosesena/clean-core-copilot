@@ -53,7 +53,7 @@ review — see the provenance note in the baseline.
 
 | Bob | Rule | Lines | What it says | Proposed judgement |
 |-----|------|-------|--------------|--------------------|
-| F-08 | CC-09 | 8 | The program is a classic `REPORT` with `PARAMETERS` and `START-OF-SELECTION`; "has no place in ABAP Cloud". Bob itself notes there is no `WRITE`/`ULINE`/`SKIP`. | **Undecided — Sena to judge.** The observation is defensible (classic executable programs with a selection screen are not part of ABAP for Cloud Development), but CC-09 in the catalogue covers *list output* only, and this program has none. Under the counting rules this is *partially correct* at best (right observation, rule doesn't fit) or *incorrect* (rule misapplied). Either way it is not a hit; it only changes the precision denominator. |
+| F-08 | CC-09 | 8 | The program is a classic `REPORT` with `PARAMETERS` and `START-OF-SELECTION`; "has no place in ABAP Cloud". Bob itself notes there is no `WRITE`/`ULINE`/`SKIP`. | **Partially correct — decided by Sena, 26 Sep.** Right observation (classic executable programs with a selection screen are not part of ABAP for Cloud Development), wrong rule: CC-09 covers *list output* only and this program has none. Counts in the precision denominator, never in the numerator. |
 
 ## Verdicts
 
@@ -68,9 +68,9 @@ review — see the provenance note in the baseline.
 
 - Core recall: **6 / 6**
 - Bonus hits: **1 of 5** (the one hit had a comment pointing at it)
-- Precision over decided findings: **7 / 7** if F-08 is excluded as
-  undecided; **7 / 8** if Sena rules it incorrect or partially correct
-- Duplicates: 0 · Undecided: 1 (F-08) · Incorrect: 0 so far
+- Precision over decided findings: **7 / 8** (F-08 partially correct,
+  decided by Sena)
+- Duplicates: 0 · Undecided: 0 · Incorrect: 0 · Partially correct: 1
 
 ## What this run does not show
 

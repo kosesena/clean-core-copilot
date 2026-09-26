@@ -37,8 +37,8 @@ program; Bob circled it without landing.
 
 | Bob | Rule | Lines | What it says | Proposed judgement |
 |-----|------|-------|--------------|--------------------|
-| F-07 | CC-10 | 10–14 | Chained `DATA:` with `TYPE c` and structures typed on SAP tables are "migration-time code quality issues"; Bob adds "not forbidden by CC-10 per se" | **Incorrect** (proposed). Nothing on lines 10–14 is in the CC-10 list; Bob says so itself and files it anyway. Same pattern as task 2 F-11 |
-| F-08 | Unclassified | 33–36 | `STPRS` raised without checking price control `VPRSV`; moving-average materials should not get a direct standard-price update | **Correct extra** (proposed). This is the key's own unscored "human must decide" note for this sample, and Bob also puts the VPRSV guard in its human list |
+| F-07 | CC-10 | 10–14 | Chained `DATA:` with `TYPE c` and structures typed on SAP tables are "migration-time code quality issues"; Bob adds "not forbidden by CC-10 per se" | **Incorrect — decided by Sena, 26 Sep.** Nothing on lines 10–14 is in the CC-10 list; Bob says so itself and files it anyway. Same pattern as task 2 F-11 |
+| F-08 | Unclassified | 33–36 | `STPRS` raised without checking price control `VPRSV`; moving-average materials should not get a direct standard-price update | **Correct observation, unscored — decided 26 Sep.** The key's own unscored *human must decide* note; not counted either way (see the ZSD F-18 reasoning). Bob later added this guard to the rewrite in task 7 |
 
 ## Verdicts
 
@@ -54,8 +54,8 @@ program; Bob circled it without landing.
 - Core recall: **6 / 6**
 - Bonus hits: **0 / 3**
 - Duplicates: 0
-- Precision over decided findings: **7 / 8** if Sena confirms F-08 correct
-  and F-07 incorrect
+- Precision over decided findings: **6 / 7** (F-07 incorrect; F-08
+  recorded but unscored)
 
 ## Pattern across tasks 1–3
 

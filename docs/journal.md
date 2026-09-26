@@ -59,8 +59,9 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 | 16:19 | Codex | Found that the class pasted into BTP earlier was an empty skeleton — the "class activated / ATC 0" record was for empty code. Re-pasted class (224 lines) and test include (217 lines) | Codex session |
 | 16:22 | Claude | Real activation attempt: `Type "LTC_VENDOR_AGING" is unknown` — my activation copy lacked `CLASS … DEFINITION DEFERRED` for the local test class named in `FRIENDS`. Fixed in `docs/activation/`, Codex asked to apply the one line in the system | `4caba09` |
 
+| 16:30–16:40 | Sena | **Scoring judgements confirmed**: ZFI F-08 partially correct, ZSD F-11 incorrect, ZMM F-07 incorrect, ZCC F-02 correct extra; ZSD F-18 and ZMM F-08 recorded as correct observations but **unscored** (they match the key's own unscored human-decision notes — counting them would score what the key's author chose not to). Precision 29 / 32 either way | `docs/scoring/*.md` |
+
 ## Open at the time of writing
 
 - Unit tests on BTP_TRIAL2 (test include to be pasted, then `abap_run_unit_tests`).
-- Sena's confirmation of the five proposed scoring judgements.
 - Video recording; Sunday: credential scan, repo public, lablab form.

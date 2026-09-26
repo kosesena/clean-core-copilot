@@ -5,8 +5,7 @@
 `reports/zsd_open_orders.md`, copied unchanged.
 
 Scored by Claude against the private answer key (12 core, 3 bonus for this
-sample) with its counting rules. Judgements marked *proposed* are for Sena
-to confirm.
+sample) with its counting rules. All judgements confirmed by Sena on 26 Sep.
 
 ## Core
 
@@ -43,9 +42,9 @@ but did not reason about what they do at runtime.
 
 | Bob | Rule | Lines | What it says | Proposed judgement |
 |-----|------|-------|--------------|--------------------|
-| F-11 | CC-10 | 45–46 | `MOVE-CORRESPONDING` is obsolete because CC-10 lists `MOVE` | **Incorrect** (proposed). `MOVE-CORRESPONDING` is a valid statement in ABAP for Cloud Development; the catalogue entry is the scalar `MOVE`. Bob half-knew this — it adds "verify whether this specific form is prohibited" and puts the question in the human list — but still filed it as a finding |
+| F-11 | CC-10 | 45–46 | `MOVE-CORRESPONDING` is obsolete because CC-10 lists `MOVE` | **Incorrect — decided by Sena, 26 Sep.** `MOVE-CORRESPONDING` is a valid statement in ABAP for Cloud Development; the catalogue entry is the scalar `MOVE`. Bob half-knew this — it adds "verify whether this specific form is prohibited" and puts the question in the human list — but still filed it as a finding |
 | F-05 | CC-10 | 25–27 | `SELECT-OPTIONS`/`PARAMETERS` belong to the selection-screen framework, not available in ABAP Cloud | **Duplicate of S8** for the `LIKE` part; the selection-screen claim is a defensible observation with no catalogue rule (same pattern as F-08 in task 1). Counted as duplicate, not as a separate extra |
-| F-18 | Unclassified | 42 | Comment says "no delivery yet" but `LFSTA <> 'C'` only excludes *fully* delivered items; partially delivered items pass. Asks the business rule for "open" | **Correct extra** (proposed). This is the key's own unscored "human must decide" note for this sample. Bob's reason is precise: "the filter is logically correct (exclude fully delivered), but the comment is misleading" |
+| F-18 | Unclassified | 42 | Comment says "no delivery yet" but `LFSTA <> 'C'` only excludes *fully* delivered items; partially delivered items pass. Asks the business rule for "open" | **Correct observation, unscored — decided by Sena, 26 Sep.** The key lists this as a *human must decide* note and deliberately does not score it; counting it as a correct extra would score through the back door what the key's author chose not to score. Recorded, excluded from both numerator and denominator. Bob's reason is precise: "the filter is logically correct (exclude fully delivered), but the comment is misleading" |
 
 ## Verdicts
 
@@ -67,9 +66,9 @@ than on a miss.
 - Bonus hits: **0 / 3**
 - Duplicates: **5** (F-03, F-05, F-13, F-14, F-16) — excluded from ratios
 - Decided findings: 18 − 5 = **13**
-- Precision over decided findings: **12 / 13** if Sena confirms F-18
-  correct and F-11 incorrect; **11 / 13** if F-18 is not accepted
-- Undecided: 0 pending Sena's confirmation of the two proposals above
+- Precision over decided findings: **11 / 12** (F-11 incorrect; F-18
+  recorded but unscored, so 18 − 5 duplicates − 1 unscored = 12)
+- Undecided: 0
 
 ## What this run adds to task 1
 

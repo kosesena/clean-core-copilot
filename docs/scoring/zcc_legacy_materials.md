@@ -33,7 +33,7 @@ the set, the only core entry that is not a catalogue rule.
 
 | Bob | Rule | Lines | What it says | Proposed judgement |
 |-----|------|-------|--------------|--------------------|
-| F-02 | Unclassified | 6 | `SELECT-OPTIONS` is a selection-screen declaration; no SAP GUI in ABAP Cloud; "no catalogue rule explicitly names SELECT-OPTIONS, so this is filed as Unclassified" | **Correct extra** (proposed). The observation is right and, unlike ZSD F-05 and ZFI F-08, Bob filed it under *Unclassified* instead of stretching a rule ID. This is the behaviour the mode asks for |
+| F-02 | Unclassified | 6 | `SELECT-OPTIONS` is a selection-screen declaration; no SAP GUI in ABAP Cloud; "no catalogue rule explicitly names SELECT-OPTIONS, so this is filed as Unclassified" | **Correct extra — decided by Sena, 26 Sep.** Not a human-decision note in the key, so it does count. The observation is right and, unlike ZSD F-05 and ZFI F-08, Bob filed it under *Unclassified* instead of stretching a rule ID. This is the behaviour the mode asks for |
 
 ## Verdicts
 
@@ -53,27 +53,33 @@ Bob seems to escalate whenever the program is GUI-bound end to end.
 - Bonus hits: **0 / 1**
 - Duplicates: **1** (F-06)
 - Decided findings: 6 − 1 = **5**
-- Precision over decided findings: **5 / 5** if Sena confirms F-02 as a
-  correct extra
+- Precision over decided findings: **5 / 5** (F-02 correct extra)
 
 ## Totals, tasks 1–4
 
-| Sample | Core | Bonus | Bob findings | Dup. | Proposed incorrect | Proposed correct extra | Verdict vs key |
-|--------|------|-------|--------------|------|--------------------|------------------------|----------------|
-| ZFI_VENDOR_AGING | 6 / 6 | 1 / 5 | 8 | 0 | 0 (F-08 undecided) | 0 | Rebuild = Rebuild |
-| ZSD_OPEN_ORDERS | 11 / 12 | 0 / 3 | 18 | 5 | 1 (F-11) | 1 (F-18) | Rebuild ≠ Refactor |
-| ZMM_MASS_PRICE_UPDATE | 6 / 6 | 0 / 3 | 8 | 0 | 1 (F-07) | 1 (F-08) | Rebuild = Rebuild |
-| ZCC_LEGACY_MATERIALS | 4 / 5 | 0 / 1 | 6 | 1 | 0 | 1 (F-02) | Rebuild ≠ Refactor |
-| **Total** | **27 / 29** | **1 / 12** | **40** | **6** | **2** | **3** | 2 of 4 match |
+| Sample | Core | Bonus | Bob findings | Dup. | Incorrect | Partially correct | Correct extra | Unscored obs. | Verdict vs key |
+|--------|------|-------|--------------|------|-----------|-------------------|---------------|---------------|----------------|
+| ZFI_VENDOR_AGING | 6 / 6 | 1 / 5 | 8 | 0 | 0 | 1 (F-08) | 0 | 0 | Rebuild = Rebuild |
+| ZSD_OPEN_ORDERS | 11 / 12 | 0 / 3 | 18 | 5 | 1 (F-11) | 0 | 0 | 1 (F-18) | Rebuild ≠ Refactor |
+| ZMM_MASS_PRICE_UPDATE | 6 / 6 | 0 / 3 | 8 | 0 | 1 (F-07) | 0 | 0 | 1 (F-08) | Rebuild = Rebuild |
+| ZCC_LEGACY_MATERIALS | 4 / 5 | 0 / 1 | 6 | 1 | 0 | 0 | 1 (F-02) | 0 | Rebuild ≠ Refactor |
+| **Total** | **27 / 29** | **1 / 12** | **40** | **6** | **2** | **1** | **1** | **2** | 2 of 4 match |
+
+All judgements confirmed by Sena on 26 Sep 2026. The two *unscored
+observations* are Bob findings that match the key's own "human must decide"
+notes; the key does not score those, so neither do we — in either direction.
 
 - Core recall **27 / 29 = 93 %**. Both misses are non-syntactic: an
   `APPEND` through a header line (ZSD 47) and a runtime field-catalogue
   mismatch (ZCC 12, 27–29).
 - Bonus **1 / 12**. The single hit (ZFI F10) had a source comment pointing
   at it. Bob does not reason about runtime behaviour or business effect.
-- Precision over decided findings: 27 core + 1 bonus + 3 correct extras =
-  31 of 34 decided → **91 %** if Sena confirms all proposals as written
-  (denominator excludes 6 duplicates; ZFI F-08 counted as undecided).
+- Precision over decided findings: 27 core + 1 bonus + 1 correct extra =
+  **29 of 32 → 91 %** (denominator: 40 − 6 duplicates − 2 unscored
+  observations; the 3 misses are 2 incorrect + 1 partially correct).
+  Counting the two unscored observations as hits would give 31 / 34 = 91 %
+  as well — the rate does not move, which is why the stricter reading costs
+  nothing to adopt.
 - Cost: 0.165 + 0.155 + 0.187 + 0.154 = **0.66 of 40 Bobcoin** for four
   audits.
 - Status discipline held in all four runs: no `verified_on_target`, every

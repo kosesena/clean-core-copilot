@@ -144,17 +144,20 @@ disclosure and mascot decisions, and approved each Bob write.
 
 ## Results
 
-<!-- Measured, not claimed: findings reviewed by hand. -->
+<!-- Measured, not claimed: findings scored by Claude, judgements confirmed by Sena. -->
 
 | Program | Findings | Correct | Wrong | Missed | Verdict hint |
 |---------|----------|---------|-------|--------|--------------|
-| ZSD_OPEN_ORDERS | 18 (5 duplicates) | 11 core + 1 extra | 1 (proposed) | 1 core + 3 bonus | Rebuild (key says Refactor) — see [`docs/scoring/zsd_open_orders.md`](docs/scoring/zsd_open_orders.md) |
-| ZFI_VENDOR_AGING | 8 | 6 core + 1 bonus | 0 (1 undecided) | 4 bonus | Rebuild — see [`docs/scoring/zfi_vendor_aging.md`](docs/scoring/zfi_vendor_aging.md) |
-| ZMM_MASS_PRICE_UPDATE | 8 | 6 core + 1 extra | 1 (proposed) | 3 bonus | Rebuild — see [`docs/scoring/zmm_mass_price_update.md`](docs/scoring/zmm_mass_price_update.md) |
+| ZSD_OPEN_ORDERS | 18 (5 duplicates) | 11 core | 1 (F-11) | 1 core + 3 bonus | Rebuild (key says Refactor) — see [`docs/scoring/zsd_open_orders.md`](docs/scoring/zsd_open_orders.md) |
+| ZFI_VENDOR_AGING | 8 | 6 core + 1 bonus | 0 (1 partially correct) | 4 bonus | Rebuild — see [`docs/scoring/zfi_vendor_aging.md`](docs/scoring/zfi_vendor_aging.md) |
+| ZMM_MASS_PRICE_UPDATE | 8 | 6 core | 1 (F-07) | 3 bonus | Rebuild — see [`docs/scoring/zmm_mass_price_update.md`](docs/scoring/zmm_mass_price_update.md) |
 | ZCC_LEGACY_MATERIALS | 6 (1 duplicate) | 4 core + 1 extra | 0 | 1 core (runtime) + 1 bonus | Rebuild (key says Refactor) — see [`docs/scoring/zcc_legacy_materials.md`](docs/scoring/zcc_legacy_materials.md) |
 
 Totals across the four audits: core recall 27 / 29, bonus 1 / 12, 40 raw
-findings of which 6 are duplicates, 0.66 Bobcoin.
+findings of which 6 are duplicates, precision over decided findings 29 / 32,
+0.66 Bobcoin. All judgements confirmed by Sena on 26 Sep; two Bob findings
+that match the key's own "human must decide" notes are recorded but scored
+neither way (`docs/scoring/zcc_legacy_materials.md`, totals).
 
 **Modernization (ZFI_VENDOR_AGING, task 5):** CDS view entity, class, ABAP
 Unit tests and per-finding README in
