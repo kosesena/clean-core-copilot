@@ -65,6 +65,48 @@ Cause: my activation copy, not Bob's code. Naming a local test class in
 global class. Added to `ZCL_VENDOR_AGING.clas.abap` here; to be applied in
 the system and re-run.
 
+Third attempt, 16:58 (Codex had put the `DEFERRED` line into the
+definitions include):
+
+```
+zcl_vendor_aging.clas.abap
+  - Only the addition "GLOBAL FRIENDS" exists for PUBLIC classes, not the addition "FRIENDS" addition. [Ln 1, Col 1]
+```
+
+This one is **not** a copy artefact: Bob's original class also declares
+`FRIENDS zcl_vendor_aging_test` on a `PUBLIC` class, which ABAP rejects.
+Bob's file would not have activated either. Recorded as a Bob defect in
+the modernization output (syntax, not logic). Fix in the copy: the
+friendship moved to the test include as
+`CLASS zcl_vendor_aging DEFINITION LOCAL FRIENDS ltc_vendor_aging.`;
+the definitions include is empty again (commit `bfd8a2d`; Codex applied
+it in the system at 17:1x).
+
+Fourth attempt, 21:2x, after re-logon (the BTP session had expired):
+
+```
+zcl_vendor_aging.clas.abap
+  - "ZI_VENDOROPENITEM_VAGEING" is not declared as a table, projection view, or database view ... or does not exist in an active version. [Ln 146]
+  - "ZFI_AGING_LOG" is not declared ... or does not exist in an active version. [Ln 182]
+  warnings:
+  - ABAP Doc comment is in the wrong position. [Ln 6]
+  - The old variant of "SY-DATUM" should not be used in the current ABAP language version. [Ln 43, 71, 95, 110, 112]
+```
+
+The class source itself now passes; what blocks it are the two objects
+it depends on: Bob's CDS view (inactive, see above) and the `ZFI_AGING_LOG`
+table Bob assumed as "customer-owned". The `SY-DATUM` warnings are a
+further ABAP-Cloud finding against Bob's rewrite (`sy-datum` → 
+`cl_abap_context_info=>get_system_date( )` in the cloud language version).
+
+### Decision: trial stubs (21:1x, Sena)
+
+To run the seven tests the class has to compile, so two test doubles were
+added on the trial — see `stubs/README.md`. They prove the class logic,
+not the SAP integration; the CDS failure above stays the integration
+result. Tables created empty through the ADT MCP server
+(`abap_creation-create_object`); sources pasted by Codex.
+
 ### ATC — 0 findings, on the empty skeleton
 
 Default check variant, run `36C73C3C01F51FD1AEB5388BE54DD072`, 15:58:
