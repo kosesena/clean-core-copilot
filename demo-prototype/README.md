@@ -100,3 +100,27 @@ Export JSON exports only the selected report and its review overlay; export
 each report before closing or reloading. No report is automatically fetched,
 persisted or scored, and this does not turn the viewer's basic import checks
 into full schema validation.
+
+## Approved UI brief, 26 September
+
+The four-page navigation is Overview / Findings / Before-after / Evidence.
+`data/recorded-audits.json` contains verbatim copies of the four recorded
+reports and synthetic source programs, plus a separate transcription of
+Claude's proposed assessments from `docs/scoring/`. Assessment labels remain
+“Claude assessment · awaiting Sena”. A report only receives these assessments
+or the stored full source when its raw text exactly matches the recorded copy.
+Other imported reports retain the original excerpt-based inspection workflow.
+
+Overview totals and the Evidence Atlas describe the recorded study snapshot;
+imports and local check declarations do not update those totals. The coin
+sum for five tasks is 1.468 (rounded to approximately 1.5). Core 27/29 includes
+a non-catalogue issue and is therefore labelled “Core issues found”.
+
+Review state is also retained in tab-scoped sessionStorage when available so
+navigation to Before-after and back does not discard edits. Export remains
+the durable save path; closing the tab or blocked/full browser storage can
+lose local state. No data is sent to a server. Plex fonts load from Google
+Fonts with system fallbacks. Mascot slots stay neutral with SHOW_MASCOT=false.
+The case viewer likewise retains its case in tab-scoped sessionStorage and
+opens the recorded ZFI case on its first visit. Local declarations remain
+unverified and do not alter the Evidence Atlas.
