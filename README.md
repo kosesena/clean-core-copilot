@@ -75,7 +75,7 @@ removed with one flag (`SHOW_MASCOT` in `demo-prototype/demo-config.js`).
 ## How Bob is used
 
 Everything Bob did happened in IBM Bob 2.2.0 (enterprise plan, hackathon
-account) between 25 Sep 20:10 and 26 Sep 14:40 TRT. One screenshot per task
+account) between 25 Sep 20:10 and 26 Sep 16:28 TRT. One screenshot per task
 with the consumption badge is in [`bob_sessions/`](bob_sessions/).
 
 **Custom mode.** Bob's Settings → Modes → *Create new mode* form was used to
@@ -93,8 +93,9 @@ frozen inputs only (samples, rule catalogue, verification rules, schema,
 mode draft). No `.git`, no plan, no answer key. The script refuses to build
 if the inputs don't match the committed `docs/freeze.sha256`.
 
-**Tasks.** Six tasks, all in the custom mode, one prompt each, every file
-write approved by hand:
+**Tasks.** Seven tasks, all in the custom mode, one prompt each. Tasks 1–6:
+every file write approved by hand. Task 7: sub-agent spawns and file writes
+approved for the task as a whole, files reviewed afterwards:
 
 | # | Task | Prompt | Output | Bobcoin |
 |---|------|--------|--------|---------|
@@ -104,10 +105,12 @@ write approved by hand:
 | 4 | Audit ZCC_LEGACY_MATERIALS | same template | `reports/zcc_legacy_materials.*` | 0.154 |
 | 5 | Modernize ZFI_VENDOR_AGING | audit JSON named as approved input; CDS + class + ABAP Unit + README requested | `modernized/zfi_vendor_aging/` | 0.807 |
 | 6 | Fix review findings R3, R1 | the review's wording, one consistent naming approach requested | four diffs in `modernized/zfi_vendor_aging/` | 1.03 |
+| 7 | Modernize ZSD, ZMM, ZCC **in parallel** | one prompt: one sub-agent per program, same recipe as ZFI, R3 lesson stated | 13 files in `modernized/`, `PARALLEL_RUN.md` | 1.76 |
 
-Total **≈2.5 of 40 Bobcoin**. Audits cost 0.15–0.19 each; producing code
+Total **≈4.3 of 40 Bobcoin**. Audits cost 0.15–0.19 each; producing code
 cost five times an audit; a follow-up cost as much as the original because
-Bob re-reads every file it touches.
+Bob re-reads every file it touches; three programs in parallel cost 0.59
+each, about a quarter less than one alone, in a third of the time.
 
 **What Bob's features did and didn't do here.**
 - *Document understanding:* each task started with Bob reading the catalogue,
@@ -120,10 +123,12 @@ Bob re-reads every file it touches.
   method that did not exist, added `FRIENDS` and a wrapper, and applied the
   fix as two diffs before finishing — a self-correction the screenshot in
   `bob_sessions/2026-09-25_task5_*.png` records.
-- *Parallel tasks / sub-agents:* **not used.** The four audits ran one after
-  another so that each consumption figure and screenshot belongs to one
-  program. Running them in parallel would have been faster and is the
-  obvious next step for a real backlog.
+- *Sub-agents (parallel):* used in task 7. The mode's tool list was
+  changed on 26 Sep 16:08 to add **Subagent** and **Todo** (still no
+  Execute, Browser or MCP); Bob then modernized three programs at once, one
+  sub-agent each, 16 minutes, 1.76 Bobcoin. The four audits had run one
+  after another on purpose, so that each consumption figure and screenshot
+  belongs to one program. Review: `docs/scoring/parallel_modernization.md`.
 - *Execute / MCP:* **not used.** Bob never compiled, activated or ran
   anything. Every "verified" field in its output is `observed` or
   `needs_verification`; `verified_on_target` never appears.

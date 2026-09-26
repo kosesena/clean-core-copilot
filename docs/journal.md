@@ -57,9 +57,12 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 
 | 16:12 | Bob | **Task 7 started**: one prompt asking for the three remaining modernizations as parallel sub-agents. Bob's first action: a Todo list — read rules → spawn sub-agent ×3 (zsd, zmm, zcc) → write `modernized/PARALLEL_RUN.md`. First use of Todo and Subagent in this project | screenshot to follow in `bob_sessions/` |
 
+| 16:12–16:28 | Bob | **Task 7 done**: three sub-agents in parallel (zsd, zmm, zcc), 13 files, 1.76 coin. ZMM sub-agent could not find a released MBEW view and wrote "Do NOT activate until confirmed" | `modernized/`, `bob_sessions/…task7…` (3 screenshots), `docs/scoring/parallel_modernization.md` |
+| 16:19 | Codex | Found that the class pasted into BTP earlier was an empty skeleton — the "class activated / ATC 0" record was for empty code. Re-pasted class (224 lines) and test include (217 lines) | Codex session |
+| 16:22 | Claude | Real activation attempt: `Type "LTC_VENDOR_AGING" is unknown` — my activation copy lacked `CLASS … DEFINITION DEFERRED` for the local test class named in `FRIENDS`. Fixed in `docs/activation/`, Codex asked to apply the one line in the system | `4caba09` |
+
 ## Open at the time of writing
 
 - Unit tests on BTP_TRIAL2 (test include to be pasted, then `abap_run_unit_tests`).
-- Task 7: parallel modernization of ZSD, ZMM, ZCC via sub-agents.
 - Sena's confirmation of the five proposed scoring judgements.
 - Video recording; Sunday: credential scan, repo public, lablab form.
