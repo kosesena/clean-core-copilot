@@ -99,6 +99,7 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 | 15:0x | Claude | BTP re-logon (VS Code + Chrome extension); Codex pasted the differential test | `5d2f3d9` |
 | 15:27 | Codex | ABAP Unit **8 of 8** (Bob's 7 + legacy_rule_equivalence, 431 cases) | Test Results panel |
 | 15:33 | Codex | Planted bug: threshold 30→31 → **2 failed** (`bucket_31_lower`, `legacy_rule_equivalence`), 6 passed. Revert pending | `bob_sessions/2026-09-27_planted_bug_caught.png` |
+| 15:4x | Claude | Overview after field review: solution-first title, proof strip first (8/8 on BTP, planted bug 2 failed, 16 min parallel with no ratio claim), "what Bob never did" before the scores, scoring step no longer names Claude up front (moved to "Where these numbers come from"). Deployed | `0697507` |
 
 ## Open at the time of writing
 
