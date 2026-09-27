@@ -249,3 +249,7 @@ re-running the audit happens in Bob.
 ## Author
 
 Sena Köse — SAP ABAP intern @ NTT DATA, Fırat University Software Engineering.
+
+## License
+
+MIT — see [LICENSE](LICENSE). The IBM Bob artwork in `demo-prototype/assets/` is IBM's and is used under the hackathon disclosure noted in the README; it is not covered by this license.
