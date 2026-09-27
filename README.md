@@ -41,6 +41,18 @@ A Bob custom mode, **Clean Core Architect**, that:
 4. **Lists what a human must still decide** — it does not pretend to know
    what it can't verify.
 
+## Try it on your own code
+
+Clean Core Copilot is a Bob mode, so it runs wherever Bob runs. Ten minutes:
+
+1. Copy [`bob-config-draft/clean-core-architect.mode.md`](bob-config-draft/clean-core-architect.mode.md) into a Bob custom mode (role definition, when-to-use, custom instructions), and put [`docs/clean-core-rules.md`](docs/clean-core-rules.md), [`docs/verification-rules.md`](docs/verification-rules.md) and [`docs/findings.schema.json`](docs/findings.schema.json) into your workspace under `docs/`. Grant the mode Read and Edit only.
+2. Open your legacy `.abap` file, select the mode, and send one prompt: *"Audit this program against the catalogue and write `reports/<program>.json` and `.md`."* Bob cites one rule ID per finding and lists what it could not verify.
+3. Ask Bob to modernize it. It drafts a CDS view, a class and ABAP Unit tests, marking every unverified object name `candidate`.
+4. Open the [demo site](https://clean-core-copilot.vercel.app), go to **Proof**, and upload the JSON to browse the findings on your code and record your own verdicts. Nothing leaves your browser.
+5. Activate, run ATC and the tests on **your** SAP release. The mode never claims that step happened; only your system can.
+
+The exam numbers in this repository describe our four sample programs, not your code.
+
 ## Prepared before the hackathon
 
 The kick-off was 25 September 2026, 18:00 TRT (15:00 UTC). The organisers
