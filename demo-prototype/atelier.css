@@ -153,3 +153,29 @@ body{background:var(--paper);color:var(--ink)}
 .audit-page .intro.findings-hero .actions .btn::before{content:"";display:block;width:37px;height:26px;flex:0 0 37px;background:center/contain no-repeat url("assets/sketch-arrow.svg")}
 @media(max-width:700px){.audit-page .intro.findings-hero{grid-template-columns:minmax(0,1fr) 150px;gap:10px}.audit-page .intro.findings-hero .mascot-slot,.audit-page .intro.findings-hero .mascot-slot img{width:150px;height:145px}.audit-page .intro.findings-hero #page-subtitle{grid-column:1/-1;grid-row:3}.audit-page .intro.findings-hero .recorded-note{grid-column:1/-1;grid-row:4}.audit-page .intro.findings-hero .actions{grid-column:1/-1;grid-row:5;padding:10px 0 0;gap:10px}}
 @media(max-width:430px){.audit-page .intro.findings-hero{grid-template-columns:minmax(0,1fr) 100px}.audit-page .intro.findings-hero .mascot-slot,.audit-page .intro.findings-hero .mascot-slot img{width:100px;height:120px}.audit-page .intro.findings-hero h1{font-size:29px}}
+
+/* Overview dossier: original IBM Bob artwork with a separate study folder. */
+.audit-page .intro.dossier-hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,1fr);grid-template-rows:auto auto;align-items:center;gap:22px 48px;padding:46px 0 34px;min-height:0}
+.audit-page .intro.dossier-hero .intro-copy{display:block;grid-column:1;grid-row:1;align-self:end;max-width:650px}
+.audit-page .intro.dossier-hero .eyebrow{margin-bottom:20px}
+.audit-page .intro.dossier-hero h1{font-size:clamp(36px,4.2vw,64px);line-height:1.08;letter-spacing:-1.8px;margin:0 0 20px}
+.audit-page .intro.dossier-hero #page-subtitle{font-size:16px;line-height:1.65;margin:0 0 14px;max-width:540px}
+.audit-page .intro.dossier-hero .recorded-note{display:block;max-width:530px;font-size:11px;line-height:1.6}
+.audit-page .intro.dossier-hero>.mascot-slot{display:none}
+.audit-page .intro.dossier-hero .actions{grid-column:1;grid-row:2;align-self:start;flex-direction:row;flex-wrap:wrap;gap:10px;padding:0;justify-content:flex-start}
+.audit-page .intro.dossier-hero .actions .btn{font:600 13px/1.4 var(--sans);transform:none;border:1px solid #6b1f2a;border-radius:5px;padding:14px 18px;background:#6b1f2a;color:#fffaf3;white-space:normal;min-height:49px}
+.audit-page .intro.dossier-hero .actions .btn:nth-child(2){transform:none;background:transparent;color:#6b1f2a}
+.audit-page .intro.dossier-hero .actions .btn::before{display:none}
+.audit-page .intro.dossier-hero .actions .btn>svg{display:block;width:18px;height:18px}
+.hero-dossier{grid-column:2;grid-row:1/3;position:relative;isolation:isolate;padding:130px 8px 12px 18px;min-width:0}
+.dossier-bob{position:absolute;z-index:3;width:155px;height:155px;object-fit:contain;top:0;right:32px}
+.dossier-sheet{position:relative;padding:27px 25px 22px;background:#fffaf2;border:1px solid #dfd0c0;border-radius:6px;box-shadow:0 12px 30px #4423300b}
+.dossier-sheet::before{content:"";position:absolute;inset:-14px 14px 10px -12px;z-index:-1;border:1px solid #d4c0b3;border-radius:7px;background:#ece0d0;transform:rotate(-4deg)}
+.dossier-sheet::after{content:"";position:absolute;z-index:-2;left:12px;top:-28px;width:130px;height:40px;border-radius:7px 7px 0 0;background:#6b1f2a;transform:rotate(-4deg)}
+.dossier-kicker{font:600 10px var(--mono);letter-spacing:1.5px;color:#86616a}
+.dossier-sheet h2{font:27px/1.12 Georgia,serif;color:#421d25;margin:12px 0}
+.dossier-sheet p{font-size:12px;line-height:1.6;color:#776b70;margin-bottom:20px}
+.dossier-files{display:grid;gap:0;border-top:1px solid #e7dbcf}.dossier-files>span{display:flex;align-items:center;gap:12px;border-bottom:1px solid #e7dbcf;padding:10px 0;font-size:12px;color:#503c40}.dossier-files b{font:11px var(--mono);color:#996b74}.dossier-files code{margin-left:auto;font:10px var(--mono);color:#80686c}
+.dossier-sheet>a{display:flex;justify-content:space-between;margin-top:18px;font-size:12px;font-weight:600;color:#6b1f2a;text-decoration:none}
+@media(max-width:950px){.audit-page .intro.dossier-hero{gap:24px;grid-template-columns:minmax(0,1fr) minmax(275px,.85fr)}.audit-page .intro.dossier-hero h1{font-size:40px}.dossier-sheet{padding:22px 19px}}
+@media(max-width:650px){.audit-page .intro.dossier-hero{grid-template-columns:1fr;padding:28px 0;gap:22px}.audit-page .intro.dossier-hero .intro-copy{grid-column:1;grid-row:1}.audit-page .intro.dossier-hero .actions{grid-column:1;grid-row:2}.hero-dossier{grid-column:1;grid-row:3;width:min(100%,420px);justify-self:center;box-sizing:border-box}.audit-page .intro.dossier-hero h1{font-size:39px;letter-spacing:-1px}}

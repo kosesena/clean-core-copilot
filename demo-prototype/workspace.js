@@ -61,6 +61,8 @@ function paintWorkspace(){
  $('page-subtitle').textContent={overview:'We tested Bob like an exam, with the answers written down in advance. Here are the results.',findings:`Bob flagged ${report.findings.length} places in this program. Click a highlighted line to see the code, Bob’s reason, and whether Bob was right.`,evidence:'Each program went through four steps. A dashed box means the step is not done, so we make no claim about it.'}[page];
  const findingsArt=['overview','findings','evidence'].includes(page)&&window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true;
  document.querySelector('.intro').classList.toggle('findings-hero',findingsArt);
+ document.querySelector('.intro').classList.toggle('dossier-hero',page==='overview');
+ document.querySelector('.hero-dossier').hidden=page!=='overview';
  const heroMascot=document.querySelector('.intro [data-mascot]');
  if(heroMascot){heroMascot.src=findingsArt?(page==='evidence'?'assets/bob-evidence-case.png':`assets/bob-${page}.png`):'assets/ibm-bob.webp';heroMascot.alt=findingsArt?{overview:'Bob holding the four program folders reviewed in this study',evidence:'Bob sorting completed, partial and missing evidence into an open case',findings:'Bob pointing to a flagged line in a code panel'}[page]:'IBM Bob';}
  $('breadcrumb-current').textContent=page;
