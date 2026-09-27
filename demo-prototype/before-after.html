@@ -55,8 +55,8 @@ body{margin:0;background:var(--ba-paper);color:var(--ba-ink);font:15px/1.6 Inter
 <p class="note">Everything on this page is recorded output from the hackathon runs. Bob's code is shown as written; the trial results come from a free SAP system with stand-in tables, not from a customer's system.</p>
 
 <section class="ba-strip" aria-label="Summary">
-<article><span>Problems Bob found</span><strong>8</strong><small>6 are fixed in the rewrite. 2 became explicit decisions for a person, which is the right answer for them.</small></article>
-<article><span>Business rule preserved</span><strong>7 of 7</strong><small>Seven automatic tests pin the old ageing rule to the new code. All seven passed on a real SAP trial system.</small></article>
+<article><span>Problems Bob found</span><strong>8</strong><small>Bob proposed replacement code and left integration choices for a person. The rows below distinguish changes from open decisions.</small></article>
+<article><span>Tests passed on the trial</span><strong>8 of 8</strong><small>Bob’s seven tests plus one team-authored comparison test. Run with stand-in tables; real SAP data access remains untested.</small></article>
 <article><span>Old rule vs new code</span><strong>431 of 431</strong><small>Every age from 30 days early to 400 days overdue gives the same bucket in the old rule and in Bob's class. When we planted a wrong threshold, two tests caught it.</small></article>
 </section>
 
@@ -66,7 +66,7 @@ body{margin:0;background:var(--ba-paper);color:var(--ba-ink);font:15px/1.6 Inter
 <thead><tr><th>Before, in the old program</th><th>After, in Bob's rewrite</th><th>Where it stands</th></tr></thead>
 <tbody>
 <tr><td><b>Reads the finance tables directly</b>Pulls open invoices straight from SAP's internal accounting and supplier tables.<span class="ba-line">lines 30–36 · problems 1 and 2</span></td><td><b>Reads through a data view</b>A new view (<code>ZI_VendorOpenItem_VAgeing</code>) sits between the code and SAP's data, the way cloud code is supposed to. The "open items only" filter moved into the view.</td><td><span class="tag wait">Needs the customer's system</span><small>On the free trial the view could not start: the two SAP sources it reads do not exist there. Bob had marked exactly those two as "confirm on target".</small></td></tr>
-<tr><td><b>Talks to the database in a raw way</b>Uses a database-specific command the cloud version forbids to stamp a "last run" date.<span class="ba-line">lines 39–41 · problem 3</span></td><td><b>Standard update statement</b>Plain ABAP SQL writes the same date to the same log table (<code>write_log</code>).</td><td><span class="tag good">Compiles and runs</span><small>Runs against a stand-in log table on the trial. Whether the real log table is customer-owned is a question for the customer.</small></td></tr>
+<tr><td><b>Talks to the database in a raw way</b>Uses a database-specific command the cloud version forbids to stamp a "last run" date.<span class="ba-line">lines 39–41 · problem 3</span></td><td><b>Standard update statement</b>Plain ABAP SQL writes the same date to the same log table (<code>write_log</code>).</td><td><span class="tag good">Compiles with a stand-in</span><small>The trial provides a stand-in log table; the tests do not establish production database-write behaviour. Whether the real log table is customer-owned is a question for the customer.</small></td></tr>
 <tr><td><b>Outdated way of declaring a table</b>A construct from the desktop era that the cloud version rejects.<span class="ba-line">line 19 · problem 4</span></td><td><b>Modern declaration and loop</b>Typed table, inline loop, no hidden header row (<code>assign_buckets</code>).</td><td><span class="tag good">Done</span><small>Covered by the seven tests.</small></td></tr>
 <tr><td><b>Writes a file on the server</b>Drops a CSV on the application server for a nightly pickup.<span class="ba-line">lines 55–64 · problem 5</span></td><td><b>A hand-off method, left open on purpose</b><code>hand_off_to_treasury</code> is a stub with four options written in the code: HTTP call, application job, event, or a feed the treasury system polls.</td><td><span class="tag human">A person decides</span><small>Bob refused to guess the integration channel. That is the behaviour we wanted.</small></td></tr>
 <tr><td><b>Launches another old program</b>Starts the treasury upload report directly.<span class="ba-line">line 67 · problem 6</span></td><td><b>Folded into the same hand-off</b>Whatever channel is chosen above replaces the direct launch.</td><td><span class="tag human">A person decides</span><small>Depends on who owns the treasury program.</small></td></tr>
@@ -120,14 +120,21 @@ ENDIF.</pre></figure>
 <p class="note" style="margin-top:12px">Bob wrote each of these into the code as a <code>candidate</code> note instead of guessing. That is the behaviour the custom mode asks for.</p></div>
 </div>
 
+<h2>We checked that the tests can catch a mistake</h2>
+<div class="ba-strip" aria-label="Threshold mutation test">
+<article><span>1 · Original threshold: 30 days</span><strong>8 / 8</strong><small>All eight test methods passed on the trial.</small></article>
+<article><span>2 · Deliberately changed to 31</span><strong>2 failed</strong><small>Bob’s boundary test and our independent comparison both caught the wrong bucket for day 31. <a href="https://github.com/kosesena/clean-core-copilot/blob/main/bob_sessions/2026-09-27_planted_bug_caught.png">See the failure</a>.</small></article>
+<article><span>3 · Restored to 30 days</span><strong>8 / 8</strong><small>The change was undone, the class reactivated and every test passed again. <a href="https://github.com/kosesena/clean-core-copilot/blob/main/bob_sessions/2026-09-27_equivalence_8_tests.png">See the final run</a>.</small></article>
+</div>
+<p class="note">27 Sep · Team-run experiment, not another Bob generation. The added test checks 431 age values inside one test method. Stand-in tables isolate the test from unavailable SAP data sources.</p>
 <h2>Where this was tried</h2>
 <div class="ba-trial">
 <div><b>Data view</b><span class="tag wait">Did not start</span><small>Two SAP sources missing on the free trial. Exactly the two Bob had flagged.</small></div>
-<div><b>Class</b><span class="tag good">Compiled</span><small>After two syntax fixes the compiler found: a friendship declaration in the wrong place, and an outdated date variable.</small></div>
+<div><b>Class</b><span class="tag good">Compiled</span><small>After adapting the object names and local test-class friendship declaration. Date-variable warnings remain in the activation record.</small></div>
 <div><b>Tests</b><span class="tag good">8 of 8 passed</span><small>Bob's seven plus our 431-case old-vs-new comparison, with two stand-in tables. A planted bug was caught.</small></div>
 <div><b>SAP code check (ATC)</b><span class="tag good">0 errors</span><small>2 warnings, 43 hints, on the class and the stand-in view.</small></div>
 </div>
-<p class="note" style="margin-top:12px">What this proves: the logic Bob wrote works. What it does not prove: the connection to real SAP finance data. Full log in the <a href="https://github.com/kosesena/clean-core-copilot/blob/main/docs/activation/README.md" target="_blank" rel="noopener">activation record</a>.</p>
+<p class="note" style="margin-top:12px">The tests confirm the checked behaviours and the same age-to-bucket result for 431 inputs. They do not prove every business rule or access to real SAP finance data. Full log in the <a href="https://github.com/kosesena/clean-core-copilot/blob/main/docs/activation/README.md" target="_blank" rel="noopener">activation record</a>.</p>
 
 <div class="ba-foot">
 <a href="https://github.com/kosesena/clean-core-copilot/blob/main/samples/legacy/zfi_vendor_aging.abap" target="_blank" rel="noopener">Old program (full source)</a>
