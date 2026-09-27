@@ -2,108 +2,133 @@
 <html lang="en"><head><meta charset="utf-8"><title>Clean Core Copilot — slides</title>
 <style>
 @page{size:1280px 720px;margin:0}
-:root{--bg:#f6f1e7;--ink:#2a1d20;--mute:#6b5a5f;--wine:#6b1f2a;--green:#1f5a38;--line:#e2d8c8;--card:#fffdf8}
+:root{--bg:#f6f1e7;--ink:#2a1d20;--mute:#6b5a5f;--wine:#6b1f2a;--green:#1f5a38;--amber:#b8741a;--line:#e2d8c8;--card:#fffdf8}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font-family:-apple-system,"Helvetica Neue",Arial,sans-serif}
-.s{width:1280px;height:720px;padding:64px 80px;position:relative;page-break-after:always;overflow:hidden;background:var(--bg)}
-.s.dark{background:#241a1c;color:#f6f1e7}.s.dark .k,.s.dark .mute{color:#c9b8a8}
-.k{font:600 14px/1 ui-monospace,Menlo,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--wine);margin-bottom:26px}
-h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.01em}
-h1{font-size:76px;line-height:1.04}h2{font-size:54px;line-height:1.08;margin-bottom:30px}
-.mute{color:var(--mute)}p.lead{font-size:26px;line-height:1.4;max-width:900px}
-.foot{position:absolute;left:80px;right:80px;bottom:34px;display:flex;justify-content:space-between;font:12px ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
-.big{font-family:Georgia,serif;font-size:190px;line-height:.9;color:var(--wine)}
-.grid{display:grid;gap:22px}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g2{grid-template-columns:1fr 1fr}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:26px 26px 24px}
-.card strong{display:block;font-family:Georgia,serif;font-weight:400;font-size:76px;line-height:1;color:var(--green);margin-bottom:10px}
-.card strong.w{color:var(--wine)}
-.card b{display:block;font-size:20px;margin-bottom:8px}.card small{font-size:16px;line-height:1.45;color:var(--mute)}
-.step{border-top:3px solid var(--wine);padding-top:16px}.step b{display:block;font-size:22px;margin-bottom:10px}.step small{font-size:17px;line-height:1.45;color:var(--mute)}
-.note{margin-top:26px;font-size:17px;color:var(--mute);max-width:1060px;line-height:1.45}
-ul.l{list-style:none;font-size:23px;line-height:1.45}ul.l li{padding:10px 0;border-bottom:1px solid var(--line)}ul.l li b{color:var(--wine)}
-.bob{position:absolute;right:70px;bottom:60px;width:230px}
+.s{display:flex;flex-direction:column;justify-content:center;width:1280px;height:720px;padding:64px 84px 90px;position:relative;page-break-after:always;overflow:hidden;background:var(--bg)}
+.s.dark{background:#1d1517;color:#f6f1e7}
+.k{font:600 14px/1 ui-monospace,Menlo,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--wine);margin-bottom:24px}
+.dark .k{color:#e2a0a8}
+h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:-.015em}
+h1{font-size:72px;line-height:1.04}h2{font-size:52px;line-height:1.08}
+.lead{font-size:26px;line-height:1.4;color:var(--mute);max-width:780px}
+.dark .lead{color:#c9b8a8}
+.foot{position:absolute;left:84px;right:84px;bottom:32px;display:flex;justify-content:space-between;font:12px ui-monospace,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.dark .foot{color:#8f7d80}
+.art{position:absolute;right:70px;bottom:64px}
+.big{font-family:Georgia,serif;font-size:170px;line-height:.9;color:var(--wine)}
+.row{display:flex;gap:22px}
+.card{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:28px 28px 26px}
+.card strong{display:block;font-family:Georgia,serif;font-weight:400;font-size:84px;line-height:1;margin-bottom:12px}
+.card b{display:block;font-size:21px}
+.g{color:var(--green)}.w{color:var(--wine)}.a{color:var(--amber)}
+.steps{display:flex;gap:18px;margin-top:40px}
+.step{flex:1;border-top:4px solid var(--wine);padding-top:16px;font-size:22px;font-weight:600}
+.step small{display:block;font-weight:400;font-size:19px;color:var(--mute);margin-top:6px;line-height:1.4}
+.chips{display:flex;gap:14px;margin-top:26px}
+.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-size:18px}
+.chip i{font-style:normal;color:var(--green);font-weight:700;margin-right:6px}
+/* the moment */
+.tl{display:flex;align-items:stretch;gap:0;margin-top:34px}
+.tl .t{flex:1;border-radius:16px;padding:26px 24px;background:#2a1f22;border:1px solid #3e2f33}
+.tl .t strong{display:block;font-family:Georgia,serif;font-weight:400;font-size:78px;line-height:1}
+.tl .t b{display:block;font-size:19px;margin-top:10px;color:#f6f1e7}
+.tl .t small{display:block;font-size:15px;color:#b3a2a5;margin-top:6px}
+.tl .arrow{width:56px;display:grid;place-items:center;font-size:34px;color:#8f7d80}
+.ok{color:#8fd1a8}.bad{color:#f08a96}
+.caption{margin-top:26px;font:15px ui-monospace,Menlo,monospace;color:#b3a2a5;letter-spacing:.04em}
+.use{list-style:none;margin-top:6px;max-width:840px}
+.use li{display:flex;align-items:baseline;gap:22px;padding:16px 0;border-bottom:1px solid var(--line);font-size:24px}
+.use li strong{font-family:Georgia,serif;font-weight:400;font-size:44px;color:var(--wine);min-width:190px}
+.quote{font-family:Georgia,serif;font-size:58px;line-height:1.14}
+.quote span{display:block}
 </style></head><body>
 
 <section class="s">
- <div class="k">IBM Bob 2.0 Hackathon · Sep 2026</div>
- <h1>Every legacy SAP program<br>needs a Clean Core review<br>before 2027.</h1>
- <p class="lead mute" style="margin-top:30px"><b style="color:var(--ink)">Clean Core Copilot</b> is an IBM Bob mode that does the first pass,<br>and measures how far to trust it.</p>
- <img class="bob" src="../../demo-prototype/assets/bob-building.png" alt="">
- <div class="foot"><span>Sena Köse · solo</span><span>clean-core-copilot.vercel.app</span></div>
+ <div class="k">IBM Bob 2.0 Hackathon</div>
+ <h1>Can IBM Bob review<br>old SAP code?</h1>
+ <p class="lead" style="margin-top:28px">We tested it against problems we planted in advance.<br>Then we broke its code on purpose.</p>
+ <img class="art" src="../../demo-prototype/assets/ibm-bob.webp" width="300" alt="">
+ <div class="foot"><span>Clean Core Copilot · Sena Köse</span><span>clean-core-copilot.vercel.app</span></div>
 </section>
 
 <section class="s">
- <div class="k">01 · The problem</div>
+ <div class="k">01 · The need</div>
  <div class="big">31.12.2027</div>
- <p class="lead" style="margin-top:28px">SAP ends mainstream maintenance for ECC 6.0. Companies carry hundreds of custom ABAP programs that break the cloud rules. Each one is reviewed <b>by hand</b>, by the few people who know both worlds.</p>
- <p class="lead mute" style="margin-top:18px">A project manager's question is not “can AI do this?” but <b style="color:var(--wine)">“how well, measured, and where does it fail?”</b></p>
+ <p class="lead" style="margin-top:26px;max-width:720px">SAP ends mainstream maintenance for ECC 6.0. Picture the one ABAP developer at a mid-size manufacturer with <b style="color:var(--ink)">600 custom programs</b> to review by hand.</p>
+ <img class="art" src="../../demo-prototype/assets/bob-problem.png" width="300" alt="">
  <div class="foot"><span>Clean Core Copilot</span><span>02</span></div>
 </section>
 
 <section class="s">
  <div class="k">02 · The solution</div>
- <h2>A Bob custom mode that reviews old SAP code,<br>and knows what it must not claim.</h2>
- <div class="grid g4">
-  <div class="step"><b>1 · Bob reads</b><small>A 12-rule Clean Core catalogue and the program. Read and edit tools only, no system access.</small></div>
-  <div class="step"><b>2 · Bob reports</b><small>Every finding with a line range, one rule ID and a reason. Nothing outside the catalogue is invented.</small></div>
-  <div class="step"><b>3 · Bob rewrites</b><small>A data view, a class and unit tests. Every unverified SAP name is marked <i>candidate</i>.</small></div>
-  <div class="step"><b>4 · Your system decides</b><small>Activation, ATC and tests run on SAP. Bob never claims this step happened.</small></div>
+ <h2>A Bob custom mode that reviews<br>old SAP code for the cloud.</h2>
+ <div class="steps" style="max-width:840px">
+  <div class="step">Bob reads<small>12-rule Clean Core catalogue. Read + Edit only.</small></div>
+  <div class="step">Bob reports<small>Line, rule, reason. No invented rules.</small></div>
+  <div class="step">Bob rewrites<small>View, class, unit tests.</small></div>
+  <div class="step">Tests decide<small>On a real SAP system.</small></div>
  </div>
- <p class="note">Mode “Clean Core Architect”: role, 9 custom instructions, rule catalogue and verification rules, all in the public repo.</p>
+ <img class="art" src="../../demo-prototype/assets/bob-does.png" width="270" alt="">
  <div class="foot"><span>Clean Core Copilot</span><span>03</span></div>
 </section>
 
 <section class="s">
- <div class="k">03 · We tested Bob like an exam</div>
- <div class="grid g3" style="margin-top:20px">
-  <div class="card"><strong class="w">4</strong><b>old-style programs</b><small>Supplier invoices, sales orders, material prices, material list. Synthetic, written for this test.</small></div>
-  <div class="card"><strong class="w">41</strong><b>planted problems</b><small>29 break a written Clean Core rule. 12 are business-logic mistakes no rule list covers.</small></div>
-  <div class="card"><strong class="w">24 Sep</strong><b>answer key sealed</b><small>SHA-256 committed before Bob saw any code. Nothing could be adjusted afterwards.</small></div>
+ <div class="k">03 · The exam</div>
+ <h2 style="margin-bottom:40px">Answers written down before Bob saw any code.</h2>
+ <div class="row">
+  <div class="card"><strong class="w">4</strong><b>old SAP programs</b></div>
+  <div class="card"><strong class="w">41</strong><b>planted problems</b></div>
+  <div class="card"><strong class="w">24 Sep</strong><b>answer key sealed by hash</b></div>
  </div>
  <div class="foot"><span>Clean Core Copilot</span><span>04</span></div>
 </section>
 
 <section class="s">
- <div class="k">04 · Results against the sealed key</div>
- <div class="grid g3">
-  <div class="card"><strong>27/29</strong><b>rule problems found</b><small>On the right lines, citing the right rule.</small></div>
-  <div class="card"><strong class="w">1/12</strong><b>logic bugs found</b><small>A person still has to check the business logic. Now we know where.</small></div>
-  <div class="card"><strong>29/32</strong><b>findings correct</b><small>91 % of the findings we could judge. Two wrong, one partly right.</small></div>
+ <div class="k">04 · What Bob found</div>
+ <div class="row" style="margin-top:6px">
+  <div class="card"><strong class="g">27/29</strong><b>rule problems</b></div>
+  <div class="card"><strong class="a">1/12</strong><b>logic bugs</b></div>
+  <div class="card"><strong class="g">29/32</strong><b>findings right</b></div>
  </div>
- <div class="grid g2" style="margin-top:22px">
-  <div class="card" style="padding:20px 26px"><b style="margin:0">0 of 40 findings invented a rule.</b></div>
-  <div class="card" style="padding:20px 26px"><b style="margin:0">0 of 40 claimed a check on a system it had not seen.</b></div>
+ <div class="chips">
+  <div class="chip"><i>✓</i>0 of 40 invented a rule</div>
+  <div class="chip"><i>✓</i>0 of 40 claimed a system check</div>
  </div>
- <div class="foot"><span>Clean Core Copilot</span><span>05</span></div>
+ <p class="lead" style="margin-top:30px;font-size:22px">Strong on the rules. Weak on business logic, so a person still checks that.</p>
+ <div class="foot"><span>Synthetic programs · these numbers describe this test only</span><span>05</span></div>
 </section>
 
 <section class="s dark">
- <div class="k" style="color:#e2a0a8">05 · Then we ran it on a real SAP system</div>
- <div class="grid g3" style="margin-top:10px">
-  <div class="card" style="background:#2f2427;border-color:#4a3a3d"><strong style="color:#8fd1a8">8/8</strong><b>ABAP Unit tests passed</b><small style="color:#c9b8a8">On an SAP BTP trial. Bob's 7 tests plus our check against the old code on 431 cases.</small></div>
-  <div class="card" style="background:#2f2427;border-color:#4a3a3d"><strong style="color:#e2a0a8">2 failed</strong><b>when we planted a bug</b><small style="color:#c9b8a8">One limit changed from 30 to 31 days. The tests really guard the logic.</small></div>
-  <div class="card" style="background:#2f2427;border-color:#4a3a3d"><strong style="color:#8fd1a8">0</strong><b>ATC errors</b><small style="color:#c9b8a8">The compiler found two syntax slips in Bob's code that reading did not. Logic errors: none.</small></div>
+ <div class="k">05 · Then we broke it on purpose</div>
+ <h2>Do the tests really guard Bob’s code?</h2>
+ <div class="tl">
+  <div class="t"><strong class="ok">8/8</strong><b>tests pass</b><small>Bob’s rewrite on SAP BTP</small></div>
+  <div class="arrow">→</div>
+  <div class="t"><strong class="bad">2 fail</strong><b>limit 30 → 31 days</b><small>we planted the bug</small></div>
+  <div class="arrow">→</div>
+  <div class="t"><strong class="ok">8/8</strong><b>fixed, pass again</b><small>the tests caught it</small></div>
  </div>
- <p class="note" style="color:#c9b8a8">The trial lacks two SAP data sources, exactly the ones Bob had marked <i>candidate</i>. Two small stand-in tables replaced them: the logic is tested, the link to real SAP data is not.</p>
+ <p class="caption">SAP BTP trial · stand-in tables · Bob’s 7 tests + 1 team-added test (431 cases)</p>
  <div class="foot"><span>Clean Core Copilot</span><span>06</span></div>
 </section>
 
 <section class="s">
  <div class="k">06 · How IBM Bob was used</div>
- <ul class="l">
-  <li><b>Custom mode</b> “Clean Core Architect”: strict rules, Read + Edit only, no Execute, Browser or MCP.</li>
-  <li><b>7 Bob tasks</b>: 4 audits, 1 rewrite, 1 fix after review, 1 parallel run. Every task summary is in <code>bob_sessions/</code>.</li>
-  <li><b>Parallel sub-agents</b>: three programs, three sub-agents, 13 files in 16 minutes.</li>
-  <li><b>Asked before every write</b>; for the treasury hand-off it wrote four options and left the choice to a person.</li>
-  <li><b>4.258 of 40 Bobcoin</b> for the whole project.</li>
+ <ul class="use">
+  <li><strong>1 mode</strong>“Clean Core Architect”, written by us, no Execute</li>
+  <li><strong>7 tasks</strong>4 audits · 1 rewrite · 1 fix · 1 parallel run</li>
+  <li><strong>3 agents</strong>sub-agents in parallel · 13 files in 16 minutes</li>
+  <li><strong>4.3 / 40</strong>Bobcoin for the whole project</li>
  </ul>
- <div class="foot"><span>Clean Core Copilot</span><span>07</span></div>
+ <img class="art" src="../../demo-prototype/assets/bob-coins.png" width="210" alt="" style="bottom:70px">
+ <div class="foot"><span>Every task summary is in bob_sessions/</span><span>07</span></div>
 </section>
 
 <section class="s">
  <div class="k">07 · What it means</div>
- <h2>A strong first reviewer for Clean Core rules.<br>A weak one for business logic.<br><span style="color:var(--wine)">The human stays in the loop, and now we know where.</span></h2>
- <p class="lead mute">Try it: copy the mode and the catalogue into your Bob workspace, open a legacy .abap file, send one prompt. Browse every finding next to the code on the evidence site.</p>
+ <p class="quote"><span>Bob accelerates the review.</span><span>People make the decisions.</span><span style="color:var(--wine)">Tests check the result.</span></p>
+ <img class="art" src="../../demo-prototype/assets/bob-verifying.png" width="230" alt="">
  <div class="foot"><span>clean-core-copilot.vercel.app</span><span>github.com/kosesena/clean-core-copilot</span></div>
 </section>
 
