@@ -225,3 +225,23 @@ body.program-dialog-open{overflow:hidden}
 @media(prefers-reduced-motion:reduce){.program-dialog[open],.program-dialog[open]::backdrop{animation:none}}
 
 .program-dialog .finding-card-title>span{display:block;-webkit-line-clamp:unset;overflow:visible}
+
+/* Evidence matrix: fixed columns on desktop, labelled steps on small screens. */
+.atlas-table-wrap{overflow:visible}
+.atlas-table{min-width:0;table-layout:fixed}
+.atlas-table th,.atlas-table td{width:20%;padding:10px;vertical-align:middle;box-sizing:border-box}
+.atlas-table thead th{font-size:16px;line-height:1.3}
+.atlas-table tbody th{max-width:none}
+.atlas-table .atlas-program-title{font-size:14px;line-height:1.3}
+.atlas-table small{font:12px/1.35 var(--sans);margin-top:6px}
+.atlas-table .atlas-record,.atlas-table .atlas-review,.atlas-table .atlas-empty{box-sizing:border-box;min-height:96px;padding:12px;font:13px/1.35 var(--sans)}
+.atlas-link{display:flex;flex-direction:column;justify-content:center;position:relative;padding-right:23px!important;text-decoration:none;border:1px solid transparent;transition:background .15s,border-color .15s}
+.atlas-link:hover{border-color:#9e7774;background:#eee0d0}
+.atlas-link-arrow{position:absolute;right:7px;top:7px;font-size:13px}
+.atlas-name-help{display:block;position:relative;margin-top:6px;cursor:help}
+.atlas-name-help .technical-name{font:10px/1.4 var(--mono);overflow-wrap:anywhere}
+.atlas-name-tooltip{display:none;position:absolute;z-index:5;top:100%;left:0;width:240px;max-width:75vw;padding:12px;border-radius:6px;background:#351d25;color:#fffaf3;box-shadow:0 8px 24px #0003;font:12px/1.5 var(--sans)}
+.atlas-name-help:hover .atlas-name-tooltip,.atlas-name-help:focus .atlas-name-tooltip{display:block}
+.atlas-name-help:focus-visible{outline:2px solid #b57553;outline-offset:3px}
+@media(max-width:800px){.atlas-table thead{display:none}.atlas-table,.atlas-table tbody{display:block}.atlas-table tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:10px;border-bottom:1px solid var(--line)}.atlas-table th,.atlas-table td{display:block;width:auto;border:0;padding:6px}.atlas-table tbody th{grid-column:1/-1;padding-bottom:14px}.atlas-table td::before{content:attr(data-step);display:block;font:600 12px/1.4 var(--sans);margin-bottom:7px}.atlas-table .atlas-record,.atlas-table .atlas-review,.atlas-table .atlas-empty{min-height:100px}.atlas-table .technical-name{overflow-wrap:anywhere}}
+@media(prefers-reduced-motion:reduce){.atlas-link{transition:none}}
