@@ -84,26 +84,26 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 |------|-------|------|----------|
 | 10:2x | Codex | Findings hero code linked to the plain-language card; program titles in everyday words; Evidence table name notes | `b436294`, `29f93b6` |
 | 13:2x | Claude | Video plan brought in line with results; walkthrough stale sentences flagged to Codex | `429d432` |
-| 13:3x | Codex | Walkthrough text updated with the trial result | `4f91732` |
-| 13:4x | Claude | Plain-language spec for non-SAP readers (explainer, glossary, rule names, 24 headlines) | `559ccbd`; applied by Codex in `4a0e7bf` |
+| 13:3x | Codex | Walkthrough text updated with the trial result | `f080860` |
+| 13:4x | Claude | Plain-language spec for non-SAP readers (explainer, glossary, rule names, 24 headlines) | `559ccbd`; applied by Codex in `77f7200` |
 | 13:5x | Claude | Field check of 333 submissions; closest rivals; top contenders (FlakeHunter, LockSmith, ReviewReady, ZeroCov) | `docs/competitive-notes.md` |
-| 14:0x | Claude | Draft video v1: tour page for self-driving screen recordings, stills, macOS TTS, captions | `video/`, `2ed2b20` |
-| 14:1x | Claude | MIT license added (rules require MIT-compliant); form drafts (420 + 346 words); cover image | `dcdc608`, `432b9d0` |
-| 14:1x | Claude | Demo deployed to Vercel: https://clean-core-copilot.vercel.app | `2fc934a` |
+| 14:0x | Claude | Draft video v1: tour page for self-driving screen recordings, stills, macOS TTS, captions | `video/`, `cb8f8e8` |
+| 14:1x | Claude | MIT license added (rules require MIT-compliant); form drafts (420 + 346 words); cover image | `ba79b49`, `fbee60d` |
+| 14:1x | Claude | Demo deployed to Vercel: https://clean-core-copilot.vercel.app | `bfe99b6` |
 | 14:2x | Claude | Video v2 with ElevenLabs "Bella" narration, 2:36 | `video/clean-core-copilot-demo-v2.mp4` (not in git) |
-| 14:2x | Claude | New plain-language Before/after page; case viewer kept as "Advanced" | `a7f332c` |
-| 14:3x | Claude | Differential test written: legacy rule as oracle vs Bob's class, 431 ages; planted-bug run planned | `5d2f3d9` |
-| 14:3x | Claude | README "Honest limits"; credential scan of tree and history: clean | `0530471` |
+| 14:2x | Claude | New plain-language Before/after page; case viewer kept as "Advanced" | `2082068` |
+| 14:3x | Claude | Differential test written: legacy rule as oracle vs Bob's class, 431 ages; planted-bug run planned | `65c4f4f` |
+| 14:3x | Claude | README "Honest limits"; credential scan of tree and history: clean | `d876744` |
 
-| 14:1x–15:3x | Claude | Demo: plain Before/after page; product box + "try it on your own code" + four-step flow; Ask Bob replay avatar (recorded answers, cloud-ready ring, to-do list with Bob's suggestions); did-well strip; findings panel simplified; reviewer tools moved to Proof; Evidence per-program summaries; step navigation. Deployed after each step | `a7f332c` … `382f480` |
-| 15:0x | Claude | BTP re-logon (VS Code + Chrome extension); Codex pasted the differential test | `5d2f3d9` |
+| 14:1x–15:3x | Claude | Demo: plain Before/after page; product box + "try it on your own code" + four-step flow; Ask Bob replay avatar (recorded answers, cloud-ready ring, to-do list with Bob's suggestions); did-well strip; findings panel simplified; reviewer tools moved to Proof; Evidence per-program summaries; step navigation. Deployed after each step | `2082068` … `2957a04` |
+| 15:0x | Claude | BTP re-logon (VS Code + Chrome extension); Codex pasted the differential test | `65c4f4f` |
 | 15:27 | Codex | ABAP Unit **8 of 8** (Bob's 7 + legacy_rule_equivalence, 431 cases) | Test Results panel |
 | 15:33 | Codex | Planted bug: threshold 30→31 → **2 failed** (`bucket_31_lower`, `legacy_rule_equivalence`), 6 passed. Revert pending | `bob_sessions/2026-09-27_planted_bug_caught.png` |
-| 15:4x | Claude | Overview after field review: solution-first title, proof strip first (8/8 on BTP, planted bug 2 failed, 16 min parallel with no ratio claim), "what Bob never did" before the scores, scoring step no longer names Claude up front (moved to "Where these numbers come from"). Deployed | `0697507` |
-| 15:5x | Claude | Past-winner review (Pedigree, Atlas, Sandbox): README top gets ECC 2027 hook + stats table + 8/8; test PNGs in bob_sessions labelled as test evidence; form and pitch updated; 8-page slide deck | `86a6e53`, `c09c186` |
-| 16:0x | Claude | Sena's review of the live site: Proof page report card (stats, details, open decisions, JSON download), bring-your-own panel fixed (was printing `null` after a repaint) and tested with a real upload, ring legend, explained "Not run on SAP" cells; Findings shows the 13 problems the sealed key lists as missed. Deployed | `d368b28` |
-| 16:2x | Claude | Full site review (all pages, links, mobile, numbers): mobile horizontal scroll fixed (notice line), overview reordered, plain Ask Bob wording, stale "dashed box"/7-of-7 text, rewrite rows aligned; all GitHub links point to tracked files (live once public). Deployed | `1e867ef` |
-| 16:4x | Claude + Codex | Octo post-mortem check (7 items): named user line added, `docs/JUDGE-GUIDE.md` (claim → file → command, plus what we do not do). Codex drew 6 Bob candidates; problem-b and does-a placed in README | `6d45992` |
+| 15:4x | Claude | Overview after field review: solution-first title, proof strip first (8/8 on BTP, planted bug 2 failed, 16 min parallel with no ratio claim), "what Bob never did" before the scores, scoring step no longer names Claude up front (moved to "Where these numbers come from"). Deployed | `1492d2f` |
+| 15:5x | Claude | Past-winner review (Pedigree, Atlas, Sandbox): README top gets ECC 2027 hook + stats table + 8/8; test PNGs in bob_sessions labelled as test evidence; form and pitch updated; 8-page slide deck | `68a489e`, `05337d9` |
+| 16:0x | Claude | Sena's review of the live site: Proof page report card (stats, details, open decisions, JSON download), bring-your-own panel fixed (was printing `null` after a repaint) and tested with a real upload, ring legend, explained "Not run on SAP" cells; Findings shows the 13 problems the sealed key lists as missed. Deployed | `8b6c9aa` |
+| 16:2x | Claude | Full site review (all pages, links, mobile, numbers): mobile horizontal scroll fixed (notice line), overview reordered, plain Ask Bob wording, stale "dashed box"/7-of-7 text, rewrite rows aligned; all GitHub links point to tracked files (live once public). Deployed | `f70356e` |
+| 16:4x | Claude + Codex | Octo post-mortem check (7 items): named user line added, `docs/JUDGE-GUIDE.md` (claim → file → command, plus what we do not do). Codex drew 6 Bob candidates; problem-b and does-a placed in README | `a6befde` |
 
 ## Open at the time of writing
 
