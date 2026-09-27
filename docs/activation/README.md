@@ -150,6 +150,27 @@ so PASSED means these ran. VS Code's Test Results panel (run 22:1x,
 2.1 s) confirms it — **Test classes 1 · Test methods 7 · Passed 7** — see
 [`bob_sessions/2026-09-26_abap_unit_7_tests.png`](../../bob_sessions/2026-09-26_abap_unit_7_tests.png).
 
+### Sixth step, 27 Sep 15:2x — differential test and a planted bug
+
+Team-authored addition (not Bob output), source in
+`ZCL_VENDOR_AGING.clas.testclasses.equivalence-addition.abap`: the legacy
+ageing rule (report lines 44–51) ported verbatim as an oracle and compared
+with Bob's class for every age from 30 days before due to 400 days overdue,
+431 cases in one test method.
+
+```
+ABAP Unit, ZCL_VENDOR_AGING           8 of 8 passed  (Bob's 7 + legacy_rule_equivalence)
+
+Planted bug: c_threshold_30 changed 30 → 31 in the class, re-activated
+ABAP Unit                             2 failed, 6 passed
+  failed: bucket_31_lower (Bob's own test)  ·  legacy_rule_equivalence (ours)
+Reverted to 30, re-activated          8 of 8 passed
+```
+
+Screenshots: `bob_sessions/2026-09-27_planted_bug_caught.png`,
+`bob_sessions/2026-09-27_equivalence_8_tests.png`. Pasted and run in VS
+Code by Codex; results read from the Test Results panel.
+
 ## What this changes in the project's claims
 
 | Claim | Before | After |
@@ -157,6 +178,7 @@ so PASSED means these ran. VS Code's Test Results panel (run 22:1x,
 | CDS view activates | unverified | **fails on trial with Bob's sources**: 2 missing data sources, both pre-marked candidate. Replaced by a labelled stub for the test run |
 | Class activates | unverified | **yes**, once two copy-side fixes were made — and one syntax defect that is also in Bob's original (`FRIENDS` on a `PUBLIC` class) |
 | 7 unit tests pass | unverified | **yes, all seven** — against stub tables, so they prove the bucket/key-date logic, not SAP data access |
+| Old rule = new code | unverified | **yes for 431 ages** (differential test, team-authored); a planted threshold bug was caught by two tests |
 | ATC clean | unverified | **0 errors, 2 warnings, 43 infos** on class + stub view (default variant) |
 | `sy-datum` in cloud code | not noticed | 5 activation warnings: old variant not to be used in ABAP for Cloud Development — a further Bob defect (syntax level) |
 | R3 (field-name mismatch) fixed | fixed by reading | the SELECT now compiles against a view with Bob's element names; still not exercised against real finance data |

@@ -95,6 +95,11 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 | 14:3x | Claude | Differential test written: legacy rule as oracle vs Bob's class, 431 ages; planted-bug run planned | `5d2f3d9` |
 | 14:3x | Claude | README "Honest limits"; credential scan of tree and history: clean | `0530471` |
 
+| 14:1x–15:3x | Claude | Demo: plain Before/after page; product box + "try it on your own code" + four-step flow; Ask Bob replay avatar (recorded answers, cloud-ready ring, to-do list with Bob's suggestions); did-well strip; findings panel simplified; reviewer tools moved to Proof; Evidence per-program summaries; step navigation. Deployed after each step | `a7f332c` … `382f480` |
+| 15:0x | Claude | BTP re-logon (VS Code + Chrome extension); Codex pasted the differential test | `5d2f3d9` |
+| 15:27 | Codex | ABAP Unit **8 of 8** (Bob's 7 + legacy_rule_equivalence, 431 cases) | Test Results panel |
+| 15:33 | Codex | Planted bug: threshold 30→31 → **2 failed** (`bucket_31_lower`, `legacy_rule_equivalence`), 6 passed. Revert pending | `bob_sessions/2026-09-27_planted_bug_caught.png` |
+
 ## Open at the time of writing
 
 - Video (docs/video-plan.md); Sunday: credential scan, repo public, lablab form.

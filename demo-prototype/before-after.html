@@ -57,7 +57,7 @@ body{margin:0;background:var(--ba-paper);color:var(--ba-ink);font:15px/1.6 Inter
 <section class="ba-strip" aria-label="Summary">
 <article><span>Problems Bob found</span><strong>8</strong><small>6 are fixed in the rewrite. 2 became explicit decisions for a person, which is the right answer for them.</small></article>
 <article><span>Business rule preserved</span><strong>7 of 7</strong><small>Seven automatic tests pin the old ageing rule to the new code. All seven passed on a real SAP trial system.</small></article>
-<article><span>Compiler found</span><strong>2</strong><small>Syntax mistakes in Bob's code that reading alone would not catch. Both fixed; neither was a logic error.</small></article>
+<article><span>Old rule vs new code</span><strong>431 of 431</strong><small>Every age from 30 days early to 400 days overdue gives the same bucket in the old rule and in Bob's class. When we planted a wrong threshold, two tests caught it.</small></article>
 </section>
 
 <h2>What Bob changed</h2>
@@ -75,7 +75,7 @@ body{margin:0;background:var(--ba-paper);color:var(--ba-ink);font:15px/1.6 Inter
 </tbody></table>
 
 <h2>The same rule, side by side</h2>
-<p class="note">The part of the program a finance person actually cares about: how overdue is "overdue". Bob kept the thresholds and made them testable.</p>
+<p class="note">The part of the program a finance person actually cares about: how overdue is "overdue". Bob kept the thresholds and made them testable. We then ported the old rule verbatim as an oracle and ran both for 431 different ages: identical every time. Changing one threshold to 31 made two tests fail, so the check is real.</p>
 <div class="ba-pair">
 <figure><figcaption>Before · lines 44–51 of the old report</figcaption><pre>gv_days = p_keydt - gt_items-zfbdt.
 IF gv_days &lt;= <mark>30</mark>.
@@ -124,7 +124,7 @@ ENDIF.</pre></figure>
 <div class="ba-trial">
 <div><b>Data view</b><span class="tag wait">Did not start</span><small>Two SAP sources missing on the free trial. Exactly the two Bob had flagged.</small></div>
 <div><b>Class</b><span class="tag good">Compiled</span><small>After two syntax fixes the compiler found: a friendship declaration in the wrong place, and an outdated date variable.</small></div>
-<div><b>Seven tests</b><span class="tag good">7 of 7 passed</span><small>With two labelled stand-in tables in place of the missing SAP sources.</small></div>
+<div><b>Tests</b><span class="tag good">8 of 8 passed</span><small>Bob's seven plus our 431-case old-vs-new comparison, with two stand-in tables. A planted bug was caught.</small></div>
 <div><b>SAP code check (ATC)</b><span class="tag good">0 errors</span><small>2 warnings, 43 hints, on the class and the stand-in view.</small></div>
 </div>
 <p class="note" style="margin-top:12px">What this proves: the logic Bob wrote works. What it does not prove: the connection to real SAP finance data. Full log in the <a href="https://github.com/kosesena/clean-core-copilot/blob/main/docs/activation/README.md" target="_blank" rel="noopener">activation record</a>.</p>
