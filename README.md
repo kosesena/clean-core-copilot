@@ -3,7 +3,7 @@
   &nbsp;&nbsp;&nbsp;
   <img src="docs/readme/ibm-bob.png" height="96" alt="IBM Bob">
 </p>
-<p align="center"><sub>Built with IBM Bob · not an official IBM project</sub></p>
+<p align="center"><sub>Built with IBM Bob for the IBM Bob 2.0 Hackathon</sub></p>
 
 <h1 align="center">Clean Core Copilot</h1>
 
