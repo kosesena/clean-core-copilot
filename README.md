@@ -1,6 +1,7 @@
 <p align="center">
   <img src="docs/readme/ibm-logo.svg" width="150" alt="IBM">
 </p>
+<p align="center"><sub>Built with IBM Bob · not an official IBM project</sub></p>
 
 <h1 align="center">Clean Core Copilot</h1>
 
