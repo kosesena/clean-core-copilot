@@ -1,191 +1,191 @@
 1
-00:00:03,550 --> 00:00:06,533
+00:00:03,630 --> 00:00:07,064
 Every company moving to SAP's cloud carries hundreds of custom
 
 2
-00:00:06,633 --> 00:00:08,383
+00:00:07,214 --> 00:00:09,215
 ABAP programs written over fifteen years.
 
 3
-00:00:08,483 --> 00:00:11,465
+00:00:09,365 --> 00:00:12,799
 Each one must be checked against Clean Core rules before
 
 4
-00:00:11,565 --> 00:00:14,856
+00:00:12,949 --> 00:00:16,742
 it can move, and today that review is done by hand,
 
 5
-00:00:14,956 --> 00:00:17,323
+00:00:16,892 --> 00:00:19,610
 by the few people who know both worlds.
 
 6
-00:00:17,423 --> 00:00:21,022
+00:00:19,760 --> 00:00:23,911
 I asked a narrower question than "can IBM Bob do this review":
 
 7
-00:00:21,122 --> 00:00:23,180
+00:00:24,061 --> 00:00:26,420
 how well does it do it, measured?
 
 8
-00:00:23,280 --> 00:00:26,362
+00:00:26,570 --> 00:00:29,839
 So I built the exam before the demo.
 
 9
-00:00:26,462 --> 00:00:30,736
+00:00:29,989 --> 00:00:34,541
 Four synthetic legacy programs with forty-one planted problems, a twelve-rule catalogue,
 
 10
-00:00:30,836 --> 00:00:34,713
+00:00:34,691 --> 00:00:38,816
 and an answer key sealed by hash on September twenty-fourth,
 
 11
-00:00:34,813 --> 00:00:36,702
+00:00:38,966 --> 00:00:40,953
 before Bob saw any code.
 
 12
-00:00:36,802 --> 00:00:38,690
+00:00:41,103 --> 00:00:43,090
 The organisers confirmed this preparation.
 
 13
-00:00:38,790 --> 00:00:41,911
+00:00:43,240 --> 00:00:46,804
 In Bob I built a custom mode, Clean Core Architect:
 
 14
-00:00:42,011 --> 00:00:45,133
+00:00:46,954 --> 00:00:50,519
 a senior SAP architect that audits against the catalogue only,
 
 15
-00:00:45,233 --> 00:00:48,354
+00:00:50,669 --> 00:00:54,233
 never invents a rule, and never claims something is verified
 
 16
-00:00:48,454 --> 00:00:50,609
+00:00:54,383 --> 00:00:56,833
 on a system it has not seen.
 
 17
-00:00:50,709 --> 00:00:52,220
+00:00:56,983 --> 00:00:58,690
 Read and edit tools only.
 
 18
-00:00:52,320 --> 00:00:53,675
+00:00:58,840 --> 00:01:00,313
 One prompt per program.
 
 19
-00:00:53,775 --> 00:00:58,041
+00:01:00,463 --> 00:01:05,181
 Bob reads the rules and the sample, then writes a JSON report;
 
 20
-00:00:58,141 --> 00:01:00,224
+00:01:05,331 --> 00:01:07,616
 every write is approved by hand.
 
 21
-00:01:00,324 --> 00:01:03,134
+00:01:07,766 --> 00:01:10,861
 Four audits cost zero point six six Bobcoin.
 
 22
-00:01:03,234 --> 00:01:07,500
+00:01:11,011 --> 00:01:15,730
 Later, three programs were rewritten by three parallel sub-agents in sixteen minutes.
 
 23
-00:01:07,600 --> 00:01:10,722
+00:01:15,880 --> 00:01:19,310
 This is Bob's output on the vendor ageing report.
 
 24
-00:01:10,822 --> 00:01:11,438
+00:01:19,460 --> 00:01:20,106
 Problem three:
 
 25
-00:01:11,538 --> 00:01:14,303
+00:01:20,256 --> 00:01:23,289
 raw database SQL that the cloud version forbids.
 
 26
-00:01:14,403 --> 00:01:15,019
+00:01:23,439 --> 00:01:24,084
 Problem seven:
 
 27
-00:01:15,119 --> 00:01:19,315
+00:01:24,234 --> 00:01:28,858
 Bob noticed the comment promises a currency conversion the code never does.
 
 28
-00:01:19,415 --> 00:01:22,896
+00:01:29,008 --> 00:01:32,837
 And the right column lists what Bob could not verify,
 
 29
-00:01:22,996 --> 00:01:23,970
+00:01:32,987 --> 00:01:34,030
 instead of guessing.
 
 30
-00:01:24,070 --> 00:01:25,272
+00:01:34,180 --> 00:01:35,476
 Against the sealed key:
 
 31
-00:01:25,372 --> 00:01:28,200
+00:01:35,626 --> 00:01:38,728
 twenty-seven of twenty-nine rule problems, on the right lines.
 
 32
-00:01:28,300 --> 00:01:30,478
+00:01:38,878 --> 00:01:41,258
 But only one of twelve business-logic bugs.
 
 33
-00:01:30,578 --> 00:01:33,081
+00:01:41,408 --> 00:01:44,149
 Ninety-one percent of the judged findings were right.
 
 34
-00:01:33,181 --> 00:01:36,335
+00:01:44,299 --> 00:01:47,763
 Bob is a strong first reviewer for rules and a
 
 35
-00:01:36,435 --> 00:01:40,240
+00:01:47,913 --> 00:01:52,100
 weak one for logic, and now I can say that with numbers.
 
 36
-00:01:40,340 --> 00:01:42,017
+00:01:52,250 --> 00:01:54,085
 Then Bob rewrote one program:
 
 37
-00:01:42,117 --> 00:01:44,861
+00:01:54,235 --> 00:01:57,262
 a data view, a class, seven unit tests.
 
 38
-00:01:44,961 --> 00:01:48,416
+00:01:57,412 --> 00:02:01,232
 On a real SAP trial system the view failed on
 
 39
-00:01:48,516 --> 00:01:51,260
+00:02:01,382 --> 00:02:04,409
 exactly the two objects Bob had marked candidate.
 
 40
-00:01:51,360 --> 00:01:55,171
+00:02:04,559 --> 00:02:08,776
 With stand-in tables the class compiled and all seven tests passed,
 
 41
-00:01:55,271 --> 00:01:58,370
+00:02:08,926 --> 00:02:12,350
 after two syntax fixes that only a compiler finds.
 
 42
-00:01:58,470 --> 00:02:00,066
+00:02:12,500 --> 00:02:14,350
 This is the honest picture:
 
 43
-00:02:00,166 --> 00:02:03,119
+00:02:14,500 --> 00:02:17,950
 four programs audited and scored, four rewritten, one tested,
 
 44
-00:02:03,219 --> 00:02:05,154
+00:02:18,100 --> 00:02:20,350
 none verified on a customer's system.
 
 45
-00:02:05,254 --> 00:02:08,885
+00:02:20,500 --> 00:02:24,750
 Every dashed cell is a claim we chose not to make.
 
 46
-00:02:08,985 --> 00:02:09,563
+00:02:24,900 --> 00:02:25,550
 Total cost:
 
 47
-00:02:09,663 --> 00:02:11,259
+00:02:25,700 --> 00:02:27,550
 about four of forty Bobcoin.
 
 48
-00:02:11,359 --> 00:02:14,990
+00:02:27,700 --> 00:02:31,950
 The human stays in the loop, and now I know where.
