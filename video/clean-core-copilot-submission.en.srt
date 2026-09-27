@@ -1,0 +1,223 @@
+1
+00:00:00,500 --> 00:00:03,277
+Companies moving to SAP's cloud need to review years
+
+2
+00:00:03,277 --> 00:00:04,248
+of custom code.
+
+3
+00:00:04,461 --> 00:00:08,170
+Clean Core Copilot gives IBM Bob a focused job,
+
+4
+00:00:08,383 --> 00:00:11,723
+find migration risks, propose rewrites, and show where a
+
+5
+00:00:11,723 --> 00:00:12,733
+person must decide.
+
+6
+00:00:13,413 --> 00:00:16,772
+This is our working review site. It displays Save
+
+7
+00:00:16,772 --> 00:00:19,316
+Bob reports, not a live AI analysis.
+
+8
+00:00:19,937 --> 00:00:22,461
+Choose a program, open a finding, and trace the
+
+9
+00:00:22,461 --> 00:00:24,053
+answer back to the source code.
+
+10
+00:00:24,053 --> 00:00:28,015
+Our four sample programs contain known problems with an
+
+11
+00:00:28,015 --> 00:00:29,976
+answer key sealed before Bob saw them.
+
+12
+00:00:30,791 --> 00:00:33,917
+Inside Bob, we created the Clean Core Architect mode.
+
+13
+00:00:34,170 --> 00:00:36,947
+It uses a 12-rule catalog in a structured
+
+14
+00:00:36,947 --> 00:00:37,917
+report format.
+
+15
+00:00:38,791 --> 00:00:41,879
+Read and Edit tools are enabled. Command Execution is
+
+16
+00:00:41,879 --> 00:00:42,170
+not.
+
+17
+00:00:42,927 --> 00:00:46,306
+The instructions tell Bob to record uncertainty and never
+
+18
+00:00:46,306 --> 00:00:48,306
+claim a system check it has not performed.
+
+19
+00:00:48,306 --> 00:00:52,694
+Here is an actual audit session. Bob reads the
+
+20
+00:00:52,694 --> 00:00:55,044
+program and the rules, then writes its findings.
+
+21
+00:00:55,393 --> 00:00:59,587
+Each proposed write needs approval. The task summaries preserve
+
+22
+00:00:59,587 --> 00:01:01,490
+the outputs and the Bobcoin cost.
+
+23
+00:01:02,189 --> 00:01:05,646
+Later, three subagents worked in parallel to rewrite three
+
+24
+00:01:05,646 --> 00:01:09,451
+programs, producing 13 candidate files in 16 minutes.
+
+25
+00:01:10,189 --> 00:01:13,859
+Those three rewrites still need review. Back in the
+
+26
+00:01:13,859 --> 00:01:16,286
+viewer, each finding points to a specific line.
+
+27
+00:01:16,286 --> 00:01:20,539
+In the supplier invoice program, Bob flagged native database
+
+28
+00:01:20,539 --> 00:01:21,160
+SQL.
+
+29
+00:01:21,976 --> 00:01:25,374
+It also caught a comment promising currency conversion that
+
+30
+00:01:25,374 --> 00:01:26,714
+the code never performs.
+
+31
+00:01:27,519 --> 00:01:31,063
+The explanation and unanswered questions stay beside the code.
+
+32
+00:01:31,743 --> 00:01:35,005
+Against our sealed answer key, Bob found 27 of
+
+33
+00:01:35,005 --> 00:01:38,752
+29 rule problems and one of 12 logic bugs.
+
+34
+00:01:38,752 --> 00:01:42,383
+29 of 32 decided findings were correct.
+
+35
+00:01:42,927 --> 00:01:46,461
+These are sample results, not a general accuracy benchmark.
+
+36
+00:01:47,141 --> 00:01:50,519
+Here is the original program beside Bob's proposed replacement.
+
+37
+00:01:51,257 --> 00:01:53,024
+Bob wrote seven tests.
+
+38
+00:01:53,218 --> 00:01:56,422
+We added one independent test comparing the old rule
+
+39
+00:01:56,422 --> 00:01:59,005
+and the new code across 431 inputs.
+
+40
+00:01:59,005 --> 00:02:02,422
+On the SAP trial, all eight passed.
+
+41
+00:02:02,636 --> 00:02:05,218
+Then we changed a 30-day boundary to 31.
+
+42
+00:02:05,626 --> 00:02:06,869
+Two tests failed.
+
+43
+00:02:07,393 --> 00:02:09,743
+Bob's boundary test and our equivalence test.
+
+44
+00:02:10,053 --> 00:02:12,170
+Restore 30 and all eight pass again.
+
+45
+00:02:12,597 --> 00:02:15,316
+The evidence page separates what was done from what
+
+46
+00:02:15,316 --> 00:02:16,092
+remains open.
+
+47
+00:02:16,500 --> 00:02:18,461
+The class runs with stand-in tables.
+
+48
+00:02:18,888 --> 00:02:21,762
+The original data view could not activate because two
+
+49
+00:02:21,762 --> 00:02:23,393
+SAP sources were missing.
+
+50
+00:02:23,393 --> 00:02:26,927
+Real finance data access is still unproven.
+
+51
+00:02:27,180 --> 00:02:30,811
+The seven Bob tasks used 4.258 Bobcoin
+
+52
+00:02:30,811 --> 00:02:31,432
+out of 40.
+
+53
+00:02:31,820 --> 00:02:34,248
+Every task has a recorded cost and output.
+
+54
+00:02:34,655 --> 00:02:36,286
+Bob accelerates the review.
+
+55
+00:02:36,597 --> 00:02:37,917
+People make the decisions.
+
+56
+00:02:38,345 --> 00:02:39,316
+Tests check the result.
