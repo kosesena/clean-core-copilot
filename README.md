@@ -321,7 +321,7 @@ re-running the audit happens in Bob.
 
 ## Author
 
-Sena Köse — SAP ABAP intern @ NTT DATA, Fırat University Software Engineering.
+Sena Köse — Software Engineering student.
 
 ## License
 
