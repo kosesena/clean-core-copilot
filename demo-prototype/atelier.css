@@ -273,3 +273,4 @@ body.program-dialog-open{overflow:hidden}
 .product-cols{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;margin-top:16px}
 .why-box.compact{margin:0;padding:16px 18px}.why-box.compact p{font-size:14px;margin:0 0 8px}
 @media(max-width:900px){.product-cols{grid-template-columns:1fr}.product-head{flex-direction:column}}
+.intro > .actions{display:none!important}
