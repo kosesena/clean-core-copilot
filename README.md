@@ -1,5 +1,7 @@
 <p align="center">
-  <img src="docs/readme/ibm-logo.svg" width="150" alt="IBM">
+  <img src="docs/readme/ibm-logo.svg" height="64" alt="IBM">
+  &nbsp;&nbsp;&nbsp;
+  <img src="docs/readme/ibm-bob.png" height="96" alt="IBM Bob">
 </p>
 <p align="center"><sub>Built with IBM Bob · not an official IBM project</sub></p>
 
