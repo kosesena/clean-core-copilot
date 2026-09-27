@@ -78,6 +78,23 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 
 | 22:1x–22:22 | Codex + Claude | ABAP Unit run in VS Code: Test classes 1, methods 7, passed 7 (2.1 s). Codex's first capture was the wrong screen; window captured by Claude (`screencapture -l`) | `bob_sessions/2026-09-26_abap_unit_7_tests.png` |
 
+## 27 Sep (Sunday, submission day)
+
+| Time | Actor | What | Evidence |
+|------|-------|------|----------|
+| 10:2x | Codex | Findings hero code linked to the plain-language card; program titles in everyday words; Evidence table name notes | `b436294`, `29f93b6` |
+| 13:2x | Claude | Video plan brought in line with results; walkthrough stale sentences flagged to Codex | `429d432` |
+| 13:3x | Codex | Walkthrough text updated with the trial result | `4f91732` |
+| 13:4x | Claude | Plain-language spec for non-SAP readers (explainer, glossary, rule names, 24 headlines) | `559ccbd`; applied by Codex in `4a0e7bf` |
+| 13:5x | Claude | Field check of 333 submissions; closest rivals; top contenders (FlakeHunter, LockSmith, ReviewReady, ZeroCov) | `docs/competitive-notes.md` |
+| 14:0x | Claude | Draft video v1: tour page for self-driving screen recordings, stills, macOS TTS, captions | `video/`, `2ed2b20` |
+| 14:1x | Claude | MIT license added (rules require MIT-compliant); form drafts (420 + 346 words); cover image | `dcdc608`, `432b9d0` |
+| 14:1x | Claude | Demo deployed to Vercel: https://clean-core-copilot.vercel.app | `2fc934a` |
+| 14:2x | Claude | Video v2 with ElevenLabs "Bella" narration, 2:36 | `video/clean-core-copilot-demo-v2.mp4` (not in git) |
+| 14:2x | Claude | New plain-language Before/after page; case viewer kept as "Advanced" | `a7f332c` |
+| 14:3x | Claude | Differential test written: legacy rule as oracle vs Bob's class, 431 ages; planted-bug run planned | `5d2f3d9` |
+| 14:3x | Claude | README "Honest limits"; credential scan of tree and history: clean | `0530471` |
+
 ## Open at the time of writing
 
 - Video (docs/video-plan.md); Sunday: credential scan, repo public, lablab form.
