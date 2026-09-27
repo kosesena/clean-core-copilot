@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Tour</title>
+<style>html,body{margin:0;height:100%;background:#f6f1ea;overflow:hidden}iframe{border:0;width:100vw;height:100vh;display:block}</style></head>
+<body><iframe id="f"></iframe>
+<script>
+// Video helper: plays one scripted scene of the demo inside an iframe (same origin).
+// tour.html?scene=N  — used only to record the hackathon video; not part of the product.
+const scenes={
+ 1:{url:'index.html#overview',steps:[[6000,'scroll','.explain-steps',-40],[13000,'scroll','.metric-grid',-30]]},
+ 5:{url:'index.html#findings',steps:[[1500,'click','.source-pill[data-id="F-03"]'],[2000,'scrollpill','F-03'],[9000,'click','.source-pill[data-id="F-07"]'],[9500,'scrollpill','F-07']]},
+ 6:{url:'index.html#overview',steps:[[300,'scroll','.metric-grid',-30],[9000,'scroll','.metric-coins',-30]]},
+ 7:{url:'walkthrough.html',steps:[[2500,'scrollY',900],[6500,'scrollY',1800]]},
+ 8:{url:'index.html#evidence',steps:[[300,'scroll','.atlas-table',-90],[9000,'scroll','.atlas-panels',-40]]}
+};
+const n=new URLSearchParams(location.search).get('scene')||'1';const sc=scenes[n];
+const f=document.getElementById('f');f.src=sc.url;
+f.addEventListener('load',()=>{const w=f.contentWindow,d=f.contentDocument;
+ d.documentElement.style.scrollBehavior='smooth';
+ for(const [t,kind,sel,off] of sc.steps){setTimeout(()=>{
+  if(kind==='scroll'){const el=d.querySelector(sel);if(el){const y=el.getBoundingClientRect().top+w.scrollY+(off||0);w.scrollTo({top:y,behavior:'smooth'});}}
+  if(kind==='scrollY'){w.scrollTo({top:sel,behavior:'smooth'});}
+  if(kind==='click'){const el=d.querySelector(sel);if(el)el.click();}
+  if(kind==='scrollpill'){const el=d.querySelector('.source-pill[data-id="'+sel+'"]');if(el){el.scrollIntoView({behavior:'smooth',block:'center'});}}
+ },t);}
+});
+</script></body></html>

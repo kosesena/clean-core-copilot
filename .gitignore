@@ -1,3 +1,5 @@
 .DS_Store
 .env
 *.key
+video/*.mp4
+video/*.mov
