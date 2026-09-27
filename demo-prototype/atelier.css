@@ -285,3 +285,5 @@ body.program-dialog-open{overflow:hidden}
 .todo-list{margin:0;padding-left:0;list-style:none;display:grid;gap:8px}.todo-list li{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:start;background:#fff;border:1px solid #e6dbd0;border-radius:6px;padding:8px 10px}.todo-list b{font-weight:600;font-size:13.5px}.todo-list small{grid-column:2;color:#5b4a4f;font-size:12.5px;line-height:1.45}
 .todo-tag{font-size:11px;font-weight:700;border-radius:999px;padding:3px 8px;white-space:nowrap;margin-top:2px}.todo-tag.blk{background:#f8e1e3;color:#8a1f2c}.todo-tag.rep{background:#fbf0d9;color:#7a5412}.todo-tag.dec{background:#eef0f3;color:#4b5563}.todo-tag.syn{background:#e8eef7;color:#2f4b7a}
 @media(max-width:900px){.flow{grid-template-columns:1fr 1fr}}
+
+.atlas-summary{display:flex;gap:10px;align-items:flex-start;margin-top:10px}.atlas-summary svg{flex-shrink:0}.atlas-summary small{font-size:12px;line-height:1.45;color:#5b4a4f;display:block}.atlas-summary b{color:#3d2229}

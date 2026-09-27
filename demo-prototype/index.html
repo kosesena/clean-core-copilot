@@ -13,7 +13,7 @@
 .bob-welcome{display:flex;align-items:center;gap:22px;margin-bottom:24px;padding:12px 24px 12px 14px;background:linear-gradient(110deg,#eaf1ff,#f0f4ed 70%);border:1px solid #dce5ed;border-radius:12px}.bob-welcome img{width:112px;height:112px;object-fit:contain;flex-shrink:0}.bob-welcome h2{font-size:19px;font-weight:550;letter-spacing:-.5px;margin:4px 0 6px}.bob-welcome p{font-size:12px;color:#607365;margin:0}.bob-welcome a{display:inline-block;font-size:10px;color:#697c85;margin-top:8px}.bob-welcome .eyebrow{color:#4663a2}@media(max-width:800px){.bob-welcome{gap:12px;padding:12px}.bob-welcome img{width:82px;height:82px}.bob-welcome h2{font-size:17px}}
 .bob-trigger{border:0;background:transparent;padding:0;flex-shrink:0;border-radius:10px;display:grid;justify-items:center}.bob-trigger span{font-size:10px;color:var(--green)}.bob-player{margin:0 0 24px;padding:16px;border:1px solid var(--line);border-radius:12px;background:white}.bob-player video{display:block;width:100%;max-width:640px;aspect-ratio:16/9;margin:auto;border-radius:8px;background:#f6f7f3}.bob-player-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:10px}.bob-player-footer p{margin:0;font-size:11px;color:var(--muted)}
 </style>
-<link rel="stylesheet" href="atelier.css?v=ask-bob-5">
+<link rel="stylesheet" href="atelier.css?v=ask-bob-6">
 </head>
 <body class="audit-page">
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg"><symbol id="grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol><symbol id="file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></symbol><symbol id="book" viewBox="0 0 24 24"><path d="M12 5c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1v15"/></symbol><symbol id="up" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 15v6h16v-6"/></symbol><symbol id="down" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 17v4h16v-4"/></symbol><symbol id="search-icon" viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/></symbol></svg>
@@ -75,6 +75,6 @@ $('bob-play').addEventListener('click',async()=>{if(!showMascot)return;$('bob-pl
 bobVideo.addEventListener('ended',closeBob);bobVideo.addEventListener('error',()=>{closeBob();notify('The Bob greeting could not be loaded.');});
 $('bob-stop').addEventListener('click',()=>{closeBob();$('bob-play').focus()});
 </script>
-<script src="workspace.js?v=ask-bob-5"></script>
+<script src="workspace.js?v=ask-bob-6"></script>
 </body>
 </html>
