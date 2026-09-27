@@ -328,3 +328,5 @@ body.program-dialog-open{overflow:hidden}
 .ring-legend{font-size:13px;color:#5b4a4f;margin:6px 0 14px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}.ring-legend span{display:inline-flex;align-items:center;gap:6px}.ring-legend i{width:12px;height:12px;border-radius:50%;display:inline-block;border:1px solid #d9cdbf}
 .atlas-table .atlas-empty{background:#f1ebe3;border:1px solid #e2d8c8!important;border-radius:6px;color:#6f5f63}.atlas-table .atlas-empty b{display:block;font-weight:600;color:#5b4a4f}
 .ring-legend .rl-lead{font-style:normal;flex-basis:100%}
+.rc-src{font:400 11px var(--sans,system-ui);letter-spacing:0;text-transform:none;color:#8a7a7e}
+@media(max-width:700px){.notice,#notice-copy{white-space:normal!important;min-width:0}}
