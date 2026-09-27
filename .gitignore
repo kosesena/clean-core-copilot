@@ -3,3 +3,4 @@
 *.key
 video/*.mp4
 video/*.mov
+.vercel
