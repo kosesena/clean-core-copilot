@@ -19,37 +19,7 @@ custom Z program needs a Clean Core review before it can move. Clean Core
 Copilot lets IBM Bob do the first pass, and measures how far to trust it.**
 Built with IBM Bob for the IBM Bob 2.0 Hackathon (lablab.ai, Sep 2026).
 
-<p align="center">
-  <img src="demo-prototype/assets/bob-overview.png" width="150" alt="IBM Bob holding the four program folders">
-  <img src="demo-prototype/assets/bob-findings.png" width="150" alt="IBM Bob pointing at a finding">
-  <img src="demo-prototype/assets/bob-building.png" width="150" alt="IBM Bob building the rewrite">
-  <img src="demo-prototype/assets/bob-verifying.png" width="150" alt="IBM Bob checking the tests">
-  <img src="demo-prototype/assets/bob-coins.png" width="150" alt="IBM Bob with the Bobcoin spent">
-</p>
-<p align="center"><sub>IBM Bob artwork © IBM, shown under the hackathon's disclosure rule; our own illustrations of Bob are derived from it and flagged as such in <code>demo-prototype/assets/</code>.</sub></p>
-
-| | |
-|---|---|
-| Bob work | 7 Bob tasks in a custom mode, incl. 3 parallel sub-agents — screenshots in [`bob_sessions/`](bob_sessions/) |
-| Cost | **4.258 of 40** Bobcoin |
-| Audit vs. sealed answer key | **27 of 29** rule problems, **1 of 12** logic bugs, **29 of 32** findings correct — [`docs/scoring/`](docs/scoring/) |
-| On a real SAP BTP trial | **8 of 8** ABAP Unit tests (Bob's 7 + a 431-case check against the old code); a planted bug made **2 fail** — [`docs/activation/`](docs/activation/) |
-
-> **Status:** four Bob audit runs recorded (25 Sep 2026), scored against an
-> author's answer key for synthetic samples — see [`docs/scoring/`](docs/scoring/).
-> One rewrite was pushed to a BTP ABAP trial system on 26 Sep: the CDS view
-> did not activate — its two consumed views are missing there, exactly the
-> ones Bob had marked *candidate*. With two labelled stub tables in place of
-> them, the class activated, **all seven of Bob's ABAP Unit tests passed**, and ATC
-> reported 0 errors. On 27 Sep a differential test against the legacy rule
-> (431 ages) passed too, **8 of 8**, and a planted threshold bug (30 → 31 days)
-> made two tests fail — proof of the logic, not of the SAP data link
-> ([`docs/activation/`](docs/activation/)). Three more
-> programs were rewritten in parallel by sub-agents. Findings stay advisory until
-> checked on the customer's target — see
-> [`docs/verification-notes.md`](docs/verification-notes.md).
->
-> **Live demo:** https://clean-core-copilot.vercel.app — recorded evidence, no live analyzer.
+Evidence: [scoring](docs/scoring/) · [SAP trial record](docs/activation/) · [Bob sessions](bob_sessions/) · [verification notes](docs/verification-notes.md). The site shows recorded evidence, not a live analyzer.
 
 ## The problem
 
@@ -62,6 +32,8 @@ Today that review is manual, slow, and done by the few people who know both
 the old and the new world.
 
 ## What it does
+
+<img align="right" src="demo-prototype/assets/bob-overview.png" width="130" alt="">
 
 A Bob custom mode, **Clean Core Architect**, that:
 
@@ -92,6 +64,8 @@ Clean Core Copilot is a Bob mode, so it runs wherever Bob runs. Ten minutes:
 The exam numbers in this repository describe our four sample programs, not your code.
 
 ## Prepared before the hackathon
+
+<img align="right" src="demo-prototype/assets/bob-verifying.png" width="130" alt="">
 
 The kick-off was 25 September 2026, 18:00 TRT (15:00 UTC). The organisers
 confirmed that pre-prepared synthetic sample code and demo UI templates may be
@@ -326,3 +300,5 @@ Sena Köse — Software Engineering student.
 ## License
 
 MIT — see [LICENSE](LICENSE). The IBM Bob artwork in `demo-prototype/assets/` is IBM's and is used under the hackathon disclosure noted in the README; it is not covered by this license.
+
+<sub>IBM Bob artwork © IBM, shown under the hackathon's disclosure rule; our own illustrations of Bob are derived from it and flagged as such in <code>demo-prototype/assets/</code>.</sub>
