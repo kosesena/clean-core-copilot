@@ -293,7 +293,6 @@ The legacy samples are synthetic, written for this demo. No customer code.
 
 ## Demo page
 
-<img align="right" src="demo-prototype/assets/bob-evidence.png" width="130" alt="">
 
 The demo URL renders the recorded `reports/*.json` files: Bob's output plus
 the human review columns. It is an evidence page, not a live analyzer —
