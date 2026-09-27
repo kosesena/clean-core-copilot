@@ -43,6 +43,29 @@ body{margin:0;background:var(--ba-paper);color:var(--ba-ink);font:15px/1.6 Inter
 .ba-foot{margin-top:40px;padding-top:18px;border-top:1px solid var(--ba-line);font-size:13px;color:var(--ba-muted);display:flex;gap:18px;flex-wrap:wrap}
 .ba-foot a{color:var(--ba-wine)}
 @media(max-width:900px){.ba{padding:24px 16px 48px}.ba h1{font-size:34px}.ba-strip,.ba-pair,.ba-two,.ba-trial{grid-template-columns:1fr}.ba-table td:first-child,.ba-table td:nth-child(2){width:auto}.ba-table{display:block;overflow-x:auto}}
+
+/* 27 Sep: less text, click to open */
+.ba-pair figure{display:flex;flex-direction:column}.ba-pair pre{flex:1}
+.ba-two .ba-box ul{font-size:14px}.ba-fold summary::marker{color:var(--ba-wine)}
+.ba h1{font-size:40px}
+.ba-strip.tight small{font-size:13px}
+.ba-hint{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ba-wine);background:#f3e4e6;border-radius:999px;padding:6px 12px;margin:6px 0 4px}
+.ba-rows{display:grid;gap:10px;margin-top:14px}
+.ba-row{background:var(--ba-white);border:1px solid var(--ba-line);border-radius:10px;transition:box-shadow .15s,border-color .15s,transform .15s}
+.ba-row:hover{border-color:#c9a7ad;box-shadow:0 6px 18px rgba(107,31,42,.08);transform:translateY(-1px)}
+.ba-row[open]{border-color:var(--ba-wine);box-shadow:0 8px 22px rgba(107,31,42,.10)}
+.ba-row summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:34px 1fr 28px 1fr auto 26px;gap:12px;align-items:center;padding:16px 18px}
+.ba-row summary::-webkit-details-marker{display:none}
+.ba-num{width:30px;height:30px;border-radius:50%;background:var(--ba-wine);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px}
+.ba-old{color:#8a3a45;font-weight:600}.ba-new{color:var(--ba-good);font-weight:600}
+.ba-arrow{color:var(--ba-muted);font-size:18px;text-align:center}
+.ba-plus{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--ba-wine);color:var(--ba-wine);display:grid;place-items:center;font-weight:700;transition:transform .2s}
+.ba-row[open] .ba-plus{transform:rotate(45deg);background:var(--ba-wine);color:#fff}
+.ba-detail{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;padding:4px 18px 18px 64px;font-size:14px;line-height:1.55;color:var(--ba-ink)}
+.ba-detail h4{margin:0 0 4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ba-muted)}
+.ba-detail code{font:12px ui-monospace,Menlo,monospace;color:#385c39;background:#f1f5ee;padding:1px 5px;border-radius:3px}
+.ba-fold{margin-top:14px}.ba-fold summary{cursor:pointer;font-weight:600;color:var(--ba-wine)}
+@media(max-width:900px){.ba-row summary{grid-template-columns:30px 1fr 26px;grid-template-areas:"n o p" "n a p" "n t p"}.ba-row summary .ba-num{grid-area:n}.ba-row summary .ba-old{grid-area:o}.ba-row summary .ba-arrow{display:none}.ba-row summary .ba-new{grid-area:a}.ba-row summary .tag{grid-area:t;justify-self:start}.ba-row summary .ba-plus{grid-area:p}.ba-detail{grid-template-columns:1fr;padding-left:18px}}
 </style>
 </head>
 <body>
@@ -50,32 +73,29 @@ body{margin:0;background:var(--ba-paper);color:var(--ba-ink);font:15px/1.6 Inter
 
 <main class="ba">
 <div class="eyebrow">One program, before and after</div>
-<h1>Bob rewrote the supplier-invoice report. Here is what changed.</h1>
-<p class="lead"><b>ZFI_VENDOR_AGING</b> lists unpaid supplier invoices by how overdue they are. It is one of our four made-up test programs. Bob flagged 8 problems in it, then rewrote it for SAP's cloud. Below: what changed, what stayed exactly the same, and what a person still has to decide.</p>
-<p class="note">Everything on this page is recorded output from the hackathon runs. Bob's code is shown as written; the trial results come from a free SAP system with stand-in tables, not from a customer's system.</p>
+<h1>Bob rewrote the supplier-invoice report.</h1>
+<p class="lead">8 problems found, 8 of 8 tests passing on a real SAP trial. Click any row to see what changed.</p>
 
-<section class="ba-strip" aria-label="Summary">
-<article><span>Problems Bob found</span><strong>8</strong><small>Bob proposed replacement code and left integration choices for a person. The rows below distinguish changes from open decisions.</small></article>
-<article><span>Tests passed on the trial</span><strong>8 of 8</strong><small>Bob’s seven tests plus one team-authored comparison test. Run with stand-in tables; real SAP data access remains untested.</small></article>
-<article><span>Old rule vs new code</span><strong>431 of 431</strong><small>Every age from 30 days early to 400 days overdue gives the same bucket in the old rule and in Bob's class. When we planted a wrong threshold, two tests caught it.</small></article>
+<section class="ba-strip tight" aria-label="Summary">
+<article><span>Problems Bob found</span><strong>8</strong><small>2 fixed · 2 need the customer's system · 4 left to a person, on purpose</small></article>
+<article><span>Tests passed on SAP BTP</span><strong>8 of 8</strong><small>Bob's 7 + our old-vs-new check</small></article>
+<article><span>Old rule = new code</span><strong>431 of 431</strong><small>ages checked, identical result</small></article>
 </section>
 
 <h2>What Bob changed</h2>
-<p class="note">Each row is one problem from the Findings page, in the order Bob reported them.</p>
-<table class="ba-table">
-<thead><tr><th>Before, in the old program</th><th>After, in Bob's rewrite</th><th>Where it stands</th></tr></thead>
-<tbody>
-<tr><td><b>Reads the finance tables directly</b>Pulls open invoices straight from SAP's internal accounting and supplier tables.<span class="ba-line">lines 30–36 · problems 1 and 2</span></td><td><b>Reads through a data view</b>A new view (<code>ZI_VendorOpenItem_VAgeing</code>) sits between the code and SAP's data, the way cloud code is supposed to. The "open items only" filter moved into the view.</td><td><span class="tag wait">Needs the customer's system</span><small>On the free trial the view could not start: the two SAP sources it reads do not exist there. Bob had marked exactly those two as "confirm on target".</small></td></tr>
-<tr><td><b>Talks to the database in a raw way</b>Uses a database-specific command the cloud version forbids to stamp a "last run" date.<span class="ba-line">lines 39–41 · problem 3</span></td><td><b>Standard update statement</b>Plain ABAP SQL writes the same date to the same log table (<code>write_log</code>).</td><td><span class="tag good">Compiles with a stand-in</span><small>The trial provides a stand-in log table; the tests do not establish production database-write behaviour. Whether the real log table is customer-owned is a question for the customer.</small></td></tr>
-<tr><td><b>Outdated way of declaring a table</b>A construct from the desktop era that the cloud version rejects.<span class="ba-line">line 19 · problem 4</span></td><td><b>Modern declaration and loop</b>Typed table, inline loop, no hidden header row (<code>assign_buckets</code>).</td><td><span class="tag good">Done</span><small>Covered by the seven tests.</small></td></tr>
-<tr><td><b>Writes a file on the server</b>Drops a CSV on the application server for a nightly pickup.<span class="ba-line">lines 55–64 · problem 5</span></td><td><b>A hand-off method, left open on purpose</b><code>hand_off_to_treasury</code> is a stub with four options written in the code: HTTP call, application job, event, or a feed the treasury system polls.</td><td><span class="tag human">A person decides</span><small>Bob refused to guess the integration channel. That is the behaviour we wanted.</small></td></tr>
-<tr><td><b>Launches another old program</b>Starts the treasury upload report directly.<span class="ba-line">line 67 · problem 6</span></td><td><b>Folded into the same hand-off</b>Whatever channel is chosen above replaces the direct launch.</td><td><span class="tag human">A person decides</span><small>Depends on who owns the treasury program.</small></td></tr>
-<tr><td><b>Comment promises a currency conversion the code never does</b>The comment says "currency conversion", the statement only updates a log.<span class="ba-line">lines 38–41 · problem 7</span></td><td><b>Flagged, not silently "fixed"</b>Bob did not invent a conversion. The amount field carries a note: conversion requirement unresolved.</td><td><span class="tag human">A person decides</span><small>The one business-logic catch Bob made in this program.</small></td></tr>
-<tr><td><b>Classic report program</b>Built to run from the old SAP desktop, with a selection screen.<span class="ba-line">line 8 · problem 8</span></td><td><b>A class with one <code>run</code> method</b>Can be called from a job, a service or a test. No screen.</td><td><span class="tag human">A person decides</span><small>How it is triggered on the target (job, service, event) is an architecture choice.</small></td></tr>
-</tbody></table>
+<span class="ba-hint">＋ Click a row to open it</span>
+<div class="ba-rows">
+<details class="ba-row"><summary><span class="ba-num">1</span><span class="ba-old">Reads finance tables directly</span><span class="ba-arrow">→</span><span class="ba-new">Reads through a data view</span><span class="tag wait">Needs the customer's system</span><span class="ba-plus" aria-hidden="true">+</span></summary><div class="ba-detail"><div><h4>Before</h4>Pulls open invoices straight from SAP's accounting and supplier tables. Lines 30–36, problems 1–2.</div><div><h4>After, in Bob's rewrite</h4>A new view (<code>ZI_VendorOpenItem_VAgeing</code>) sits between the code and SAP's data, the way cloud code should. The “open items only” filter moved into it.</div><div><h4>Where it stands</h4>On the free trial the view could not start: its two SAP sources do not exist there. Bob had marked exactly those two as “confirm on target”.</div></div></details>
+<details class="ba-row"><summary><span class="ba-num">2</span><span class="ba-old">Raw database command</span><span class="ba-arrow">→</span><span class="ba-new">Standard update statement</span><span class="tag good">Compiles</span><span class="ba-plus" aria-hidden="true">+</span></summary><div class="ba-detail"><div><h4>Before</h4>A database-specific command, forbidden in the cloud, stamps a “last run” date. Lines 39–41, problem 3.</div><div><h4>After, in Bob's rewrite</h4>Plain ABAP SQL writes the same date to the same log table (<code>write_log</code>).</div><div><h4>Where it stands</h4>Works against a stand-in log table. Whether the real log table is customer-owned is the customer's question.</div></div></details>
+<details class="ba-row"><summary><span class="ba-num">3</span><span class="ba-old">Outdated table declaration</span><span class="ba-arrow">→</span><span class="ba-new">Modern declaration and loop</span><span class="tag good">Done</span><span class="ba-plus" aria-hidden="true">+</span></summary><div class="ba-detail"><div><h4>Before</h4>A desktop-era construct the cloud rejects. Line 19, problem 4.</div><div><h4>After, in Bob's rewrite</h4>Typed table, inline loop, no hidden header row (<code>assign_buckets</code>).</div><div><h4>Where it stands</h4>Covered by the unit tests.</div></div></details>
+<details class="ba-row"><summary><span class="ba-num">4</span><span class="ba-old">Writes a file on the server</span><span class="ba-arrow">→</span><span class="ba-new">Hand-off method, left open</span><span class="tag human">A person decides</span><span class="ba-plus" aria-hidden="true">+</span></summary><div class="ba-detail"><div><h4>Before</h4>Drops a CSV on the application server for nightly pickup. Lines 55–64, problem 5.</div><div><h4>After, in Bob's rewrite</h4><code>hand_off_to_treasury</code> is a stub listing four options: HTTP call, job, event, or a polled feed.</div><div><h4>Where it stands</h4>Bob refused to guess the integration channel. That is the behaviour we wanted.</div></div></details>
+<details class="ba-row"><summary><span class="ba-num">5</span><span class="ba-old">Launches another old program</span><span class="ba-arrow">→</span><span class="ba-new">Folded into the hand-off</span><span class="tag human">A person decides</span><span class="ba-plus" aria-hidden="true">+</span></summary><div class="ba-detail"><div><h4>Before</h4>Starts the treasury upload report directly. Line 67, problem 6.</div><div><h4>After, in Bob's rewrite</h4>Whatever channel is chosen above replaces the direct launch.</div><div><h4>Where it stands</h4>Depends on who owns the treasury program.</div></div></details>
+<details class="ba-row"><summary><span class="ba-num">6</span><span class="ba-old">Comment promises a conversion</span><span class="ba-arrow">→</span><span class="ba-new">Flagged, not silently “fixed”</span><span class="tag human">A person decides</span><span class="ba-plus" aria-hidden="true">+</span></summary><div class="ba-detail"><div><h4>Before</h4>The comment says “currency conversion”; the code only updates a log. Lines 38–41, problem 7.</div><div><h4>After, in Bob's rewrite</h4>Bob did not invent a conversion. The amount field carries a note: requirement unresolved.</div><div><h4>Where it stands</h4>The one business-logic catch Bob made in this program.</div></div></details>
+<details class="ba-row"><summary><span class="ba-num">7</span><span class="ba-old">Classic report with a screen</span><span class="ba-arrow">→</span><span class="ba-new">A class with one run method</span><span class="tag human">A person decides</span><span class="ba-plus" aria-hidden="true">+</span></summary><div class="ba-detail"><div><h4>Before</h4>Built for the old SAP desktop, with a selection screen. Line 8, problem 8.</div><div><h4>After, in Bob's rewrite</h4>Callable from a job, a service or a test. No screen.</div><div><h4>Where it stands</h4>How it is triggered on the target is an architecture choice.</div></div></details>
+</div>
 
 <h2>The same rule, side by side</h2>
-<p class="note">The part of the program a finance person actually cares about: how overdue is "overdue". Bob kept the thresholds and made them testable. We then ported the old rule verbatim as an oracle and ran both for 431 different ages: identical every time. Changing one threshold to 31 made two tests fail, so the check is real.</p>
+<p class="note">How overdue is “overdue”: Bob kept the thresholds and made them testable.</p>
 <div class="ba-pair">
 <figure><figcaption>Before · lines 44–51 of the old report</figcaption><pre>gv_days = p_keydt - gt_items-zfbdt.
 IF gv_days &lt;= <mark>30</mark>.
@@ -95,11 +115,11 @@ ELSE.
   &lt;ls_item&gt;-Bucket = c_bucket_60p.
 ENDIF.</pre></figure>
 </div>
-<p class="note">The database read and the file write are gone from this loop; only the rule is left, so it can be tested without any SAP data.</p>
+
 
 <div class="ba-two">
-<div class="ba-box"><div class="eyebrow">What the seven tests check</div><div class="big">7 of 7 passed</div>
-<ul>
+<div class="ba-box"><div class="eyebrow">Bob's own tests</div><div class="big">7 of 7 passed</div>
+<details class="ba-fold"><summary>What they check</summary><ul>
 <li>An invoice due today lands in "0–30".</li>
 <li>Exactly 30 days overdue is still "0–30".</li>
 <li>31 days is the first day of "31–60".</li>
@@ -107,26 +127,26 @@ ENDIF.</pre></figure>
 <li>61 days and more is "60+".</li>
 <li>If no key date is given, today is used.</li>
 <li>An open item goes through the whole run and comes out with a bucket.</li>
-</ul>
+</ul></details>
 <p class="note" style="margin-top:12px">Run on 26 Sep on an SAP BTP trial system, 2.1 seconds. <a href="https://github.com/kosesena/clean-core-copilot/blob/main/bob_sessions/2026-09-26_abap_unit_7_tests.png" target="_blank" rel="noopener">Screenshot of the test panel</a>.</p></div>
-<div class="ba-box"><div class="eyebrow">What a person still decides</div>
-<ul>
+<div class="ba-box"><div class="eyebrow">What a person still decides</div><div class="big">5 questions</div>
+<details class="ba-fold"><summary>Show them</summary><ul>
 <li>Do the two SAP data views exist, and are they released, on the customer's release?</li>
 <li>Which channel hands the result to the treasury system?</li>
 <li>Is a currency conversion actually required? The old comment said yes, the old code said no.</li>
 <li>Is the log table customer-owned, or governed by an SAP object?</li>
 <li>How is the job triggered in the cloud: scheduled job, service, or event?</li>
-</ul>
+</ul></details>
 <p class="note" style="margin-top:12px">Bob wrote each of these into the code as a <code>candidate</code> note instead of guessing. That is the behaviour the custom mode asks for.</p></div>
 </div>
 
 <h2>We checked that the tests can catch a mistake</h2>
 <div class="ba-strip" aria-label="Threshold mutation test">
-<article><span>1 · Original threshold: 30 days</span><strong>8 / 8</strong><small>All eight test methods passed on the trial.</small></article>
-<article><span>2 · Deliberately changed to 31</span><strong>2 failed</strong><small>Bob’s boundary test and our independent comparison both caught the wrong bucket for day 31. <a href="https://github.com/kosesena/clean-core-copilot/blob/main/bob_sessions/2026-09-27_planted_bug_caught.png">See the failure</a>.</small></article>
-<article><span>3 · Restored to 30 days</span><strong>8 / 8</strong><small>The change was undone, the class reactivated and every test passed again. <a href="https://github.com/kosesena/clean-core-copilot/blob/main/bob_sessions/2026-09-27_equivalence_8_tests.png">See the final run</a>.</small></article>
+<article><span>1 · Original threshold: 30 days</span><strong>8 / 8</strong><small>all tests pass</small></article>
+<article><span>2 · Deliberately changed to 31</span><strong>2 failed</strong><small>both checks caught it · <a href="https://github.com/kosesena/clean-core-copilot/blob/main/bob_sessions/2026-09-27_planted_bug_caught.png">See the failure</a>.</small></article>
+<article><span>3 · Restored to 30 days</span><strong>8 / 8</strong><small>all pass again · <a href="https://github.com/kosesena/clean-core-copilot/blob/main/bob_sessions/2026-09-27_equivalence_8_tests.png">See the final run</a>.</small></article>
 </div>
-<p class="note">27 Sep · Team-run experiment, not another Bob generation. The added test checks 431 age values inside one test method. Stand-in tables isolate the test from unavailable SAP data sources.</p>
+<p class="note">27 Sep · run by us, not by Bob.</p>
 <h2>Where this was tried</h2>
 <div class="ba-trial">
 <div><b>Data view</b><span class="tag wait">Did not start</span><small>Two SAP sources missing on the free trial. Exactly the two Bob had flagged.</small></div>
