@@ -103,6 +103,7 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 | 15:5x | Claude | Past-winner review (Pedigree, Atlas, Sandbox): README top gets ECC 2027 hook + stats table + 8/8; test PNGs in bob_sessions labelled as test evidence; form and pitch updated; 8-page slide deck | `86a6e53`, `c09c186` |
 | 16:0x | Claude | Sena's review of the live site: Proof page report card (stats, details, open decisions, JSON download), bring-your-own panel fixed (was printing `null` after a repaint) and tested with a real upload, ring legend, explained "Not run on SAP" cells; Findings shows the 13 problems the sealed key lists as missed. Deployed | `d368b28` |
 | 16:2x | Claude | Full site review (all pages, links, mobile, numbers): mobile horizontal scroll fixed (notice line), overview reordered, plain Ask Bob wording, stale "dashed box"/7-of-7 text, rewrite rows aligned; all GitHub links point to tracked files (live once public). Deployed | `1e867ef` |
+| 16:4x | Claude + Codex | Octo post-mortem check (7 items): named user line added, `docs/JUDGE-GUIDE.md` (claim → file → command, plus what we do not do). Codex drew 6 Bob candidates; problem-b and does-a placed in README | `6d45992` |
 
 ## Open at the time of writing
 
