@@ -104,6 +104,7 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 | 16:0x | Claude | Sena's review of the live site: Proof page report card (stats, details, open decisions, JSON download), bring-your-own panel fixed (was printing `null` after a repaint) and tested with a real upload, ring legend, explained "Not run on SAP" cells; Findings shows the 13 problems the sealed key lists as missed. Deployed | `8b6c9aa` |
 | 16:2x | Claude | Full site review (all pages, links, mobile, numbers): mobile horizontal scroll fixed (notice line), overview reordered, plain Ask Bob wording, stale "dashed box"/7-of-7 text, rewrite rows aligned; all GitHub links point to tracked files (live once public). Deployed | `f70356e` |
 | 16:4x | Claude + Codex | Octo post-mortem check (7 items): named user line added, `docs/JUDGE-GUIDE.md` (claim → file → command, plus what we do not do). Codex drew 6 Bob candidates; problem-b and does-a placed in README | `a6befde` |
+| 17:55 | Sena + Claude | **Submitted on lablab** (team "Clean Core Copilot", solo). Video: submission.mp4 (2:43); slides: 10-page PDF; repo public, tag `v1.0-hackathon` | lablab confirmation page |
 
 ## Open at the time of writing
 
