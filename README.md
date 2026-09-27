@@ -14,6 +14,8 @@ for the IBM Bob 2.0 Hackathon (lablab.ai, Sep 2026).
 > programs were rewritten in parallel by sub-agents. Findings stay advisory until
 > checked on the customer's target — see
 > [`docs/verification-notes.md`](docs/verification-notes.md).
+>
+> **Live demo:** https://clean-core-copilot.vercel.app — recorded evidence, no live analyzer.
 
 ## The problem
 

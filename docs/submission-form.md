@@ -49,7 +49,7 @@ IBM Bob, SAP, ABAP, Clean Core, S/4HANA, legacy modernization, code review, eval
 
 - Public repository: github.com/kosesena/clean-core-copilot (flip to public before submitting; run the credential scan first)
 - Task session screenshots: `bob_sessions/` (10 PNGs, solo team)
-- Demo platform / URL: static site in `demo-prototype/` — host it (Vercel or GitHub Pages) and paste the URL, or state "runs locally: python3 -m http.server 4173"
+- Demo platform: Vercel (static) · Application URL: https://clean-core-copilot.vercel.app
 - Cover image: `video/cover.png`
 - Video: `video/clean-core-copilot-demo-v1.mp4` (2:19)
 - Slides: optional; the Overview page and `docs/presentation-outline.md` stand in
