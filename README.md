@@ -230,6 +230,16 @@ pasted object was still an empty skeleton. Full log in
 the customer's target release and the read side ran against a stub, so
 the status stays *Needs target verification*.
 
+## Honest limits
+
+- **Synthetic samples.** The four programs and the 41 planted problems were written by us; customer ABAP cannot be published. Every number on this page describes this test, not Bob in general.
+- **The answer key is the sample author's.** It is sealed by hash, but it is not an independent review. Two of Bob's findings matched the key's own "human decision" notes and were left unscored rather than counted either way.
+- **One program was tested, against stubs.** ZFI's class compiled and its tests passed on a free BTP trial with two labelled stand-in tables. Bob's own view did not activate there. Nothing ran against real finance data or on a customer's release.
+- **Three rewrites are unreviewed.** Task 7 produced 13 files in parallel; nobody has read or run them.
+- **No like-for-like speed claim.** 16 minutes (three programs, parallel) versus 45 minutes (one program, serial) are different jobs. We report both and claim no ratio.
+- **No customer validation.** The problem statement comes from the S/4HANA Clean Core migration practice, not from a customer interview run for this hackathon.
+- **Mascot permission pending.** IBM Bob artwork is shown under the hackathon disclosure; a `SHOW_MASCOT` flag turns it off if IBM objects.
+
 ## Repo layout
 
 ```
