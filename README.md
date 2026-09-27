@@ -24,6 +24,8 @@ Built with IBM Bob for the IBM Bob 2.0 Hackathon (lablab.ai, Sep 2026).
 
 Evidence: [scoring](docs/scoring/) · [SAP trial record](docs/activation/) · [Bob sessions](bob_sessions/) · [verification notes](docs/verification-notes.md). The site shows recorded evidence, not a live analyzer.
 
+<p align="center"><a href="https://clean-core-copilot.vercel.app"><img src="docs/readme/site-findings.png" width="100%" alt="The evidence site: Bob’s finding pinned to the exact lines of the old program"></a></p>
+
 ## The problem
 
 <img align="right" src="demo-prototype/assets/bob-peeking.png" width="130" alt="">
@@ -65,44 +67,6 @@ Clean Core Copilot is a Bob mode, so it runs wherever Bob runs. Ten minutes:
 5. Activate, run ATC and the tests on **your** SAP release. The mode never claims that step happened; only your system can.
 
 The exam numbers in this repository describe our four sample programs, not your code.
-
-## Prepared before the hackathon
-
-<img align="right" src="demo-prototype/assets/bob-verifying.png" width="130" alt="">
-
-The kick-off was 25 September 2026, 18:00 TRT (15:00 UTC). The organisers
-confirmed that pre-prepared synthetic sample code and demo UI templates may be
-used *"as long as they are clearly disclosed in your repository and all the
-core Bob analysis and project logic are built during the hackathon"* (Hamza,
-lablab.ai — `#participants-chat-ibm-bob-2-0-hackathon`, 25 Sep 2026, 19:37 TRT).
-
-Everything below existed before the kick-off. Commit dates are in the git
-history.
-
-| What | Where | Prepared | Notes |
-|------|-------|----------|-------|
-| Four synthetic legacy Z programs | `samples/legacy/` | 24 Sep | Written for this demo, no customer code. Audit input, never edited. |
-| Clean Core rule catalogue | `docs/clean-core-rules.md` | 24 Sep | CC-01 … CC-12, the fixed rules Bob audits against. |
-| Verification rules and findings schema | `docs/verification-rules.md`, `docs/findings.schema.json` | 24 Sep | Output format Bob has to follow. |
-| Draft of the custom mode and first task | `bob-config-draft/` | 24 Sep | Written without Bob 2.0 access. To be moved into Bob's real mode format during the hackathon; any change to the wording is visible in the git history. |
-| Answer key (baseline) | kept outside the repo | 24 Sep | The issues planted in the samples, written by the sample author, not an independent review. Only its SHA-256 is published, in `docs/freeze.sha256`, so it can't be changed after Bob's results are seen. |
-| Freeze and audit-workspace scripts | `scripts/` | 24 Sep | Bob runs on an isolated copy with no plan, notes or answer key. |
-| Demo UI (findings viewer, case viewer) | `demo-prototype/` | 24–25 Sep | Built with Codex. Shows recorded output only; contains no Bob results. |
-| Plan, presentation outline, verification notes | `docs/` | 24 Sep | Working notes. |
-
-The frozen inputs (`docs/freeze.sha256`, 24 Sep 16:37 UTC) cover the samples,
-rules, schema, mode draft and baseline.
-
-**Built during the hackathon:** the Bob custom mode in its final form, every
-Bob audit and modernization run, `reports/`, `modernized/`, `bob_sessions/`,
-the measured results table, and the demo content that shows them.
-
-**Mascot:** the demo shows IBM's Bob artwork (`demo-prototype/assets/ibm-bob.webp`,
-from bob.ibm.com, unchanged, IBM's property). Permission to use it was asked
-of IBM through the organisers on 25 Sep 2026 (Discord, Hamza / lablab.ai,
-reminder 26 Sep); no answer had arrived when the static image was enabled on
-26 Sep. The animated greeting stays disabled. If IBM objects, the image is
-removed with one flag (`SHOW_MASCOT` in `demo-prototype/demo-config.js`).
 
 ## How Bob is used
 
@@ -154,6 +118,8 @@ and approval workflows were involved, so these runs do not establish a
 cost or speed improvement from parallel execution.
 
 ### What did 4.258 Bobcoin actually buy?
+
+<img align="right" src="demo-prototype/assets/bob-coins.png" width="130" alt="">
 
 Think of it as asking an assistant to inspect four old business programs,
 prepare replacement drafts for all four, and revise one after review.
@@ -213,14 +179,13 @@ performed yet.
   `needs_verification`; `verified_on_target` never appears.
 
 **What was not Bob.** The rule catalogue, samples, answer key and demo page
-were prepared before the kick-off (disclosed above). The scoring in
+were prepared before the kick-off (see "Prepared before the hackathon" below). The scoring in
 `docs/scoring/` was done by Claude Code, reading Bob's JSON against the
 answer key; the demo page was built by Codex. Sena directed both, made the
 disclosure and mascot decisions, and approved each Bob write.
 
 ## Results
 
-<img align="right" src="demo-prototype/assets/bob-coins.png" width="130" alt="">
 
 <!-- Measured, not claimed: findings scored by Claude, judgements confirmed by Sena. -->
 
@@ -275,6 +240,44 @@ the status stays *Needs target verification*.
 - **No like-for-like speed claim.** 16 minutes (three programs, parallel) versus 45 minutes (one program, serial) are different jobs. We report both and claim no ratio.
 - **No customer validation.** The problem statement comes from the S/4HANA Clean Core migration practice, not from a customer interview run for this hackathon.
 - **Mascot permission pending.** IBM Bob artwork is shown under the hackathon disclosure; a `SHOW_MASCOT` flag turns it off if IBM objects.
+
+## Prepared before the hackathon
+
+<img align="right" src="demo-prototype/assets/bob-verifying.png" width="130" alt="">
+
+The kick-off was 25 September 2026, 18:00 TRT (15:00 UTC). The organisers
+confirmed that pre-prepared synthetic sample code and demo UI templates may be
+used *"as long as they are clearly disclosed in your repository and all the
+core Bob analysis and project logic are built during the hackathon"* (Hamza,
+lablab.ai — `#participants-chat-ibm-bob-2-0-hackathon`, 25 Sep 2026, 19:37 TRT).
+
+Everything below existed before the kick-off. Commit dates are in the git
+history.
+
+| What | Where | Prepared | Notes |
+|------|-------|----------|-------|
+| Four synthetic legacy Z programs | `samples/legacy/` | 24 Sep | Written for this demo, no customer code. Audit input, never edited. |
+| Clean Core rule catalogue | `docs/clean-core-rules.md` | 24 Sep | CC-01 … CC-12, the fixed rules Bob audits against. |
+| Verification rules and findings schema | `docs/verification-rules.md`, `docs/findings.schema.json` | 24 Sep | Output format Bob has to follow. |
+| Draft of the custom mode and first task | `bob-config-draft/` | 24 Sep | Written without Bob 2.0 access. To be moved into Bob's real mode format during the hackathon; any change to the wording is visible in the git history. |
+| Answer key (baseline) | kept outside the repo | 24 Sep | The issues planted in the samples, written by the sample author, not an independent review. Only its SHA-256 is published, in `docs/freeze.sha256`, so it can't be changed after Bob's results are seen. |
+| Freeze and audit-workspace scripts | `scripts/` | 24 Sep | Bob runs on an isolated copy with no plan, notes or answer key. |
+| Demo UI (findings viewer, case viewer) | `demo-prototype/` | 24–25 Sep | Built with Codex. Shows recorded output only; contains no Bob results. |
+| Plan, presentation outline, verification notes | `docs/` | 24 Sep | Working notes. |
+
+The frozen inputs (`docs/freeze.sha256`, 24 Sep 16:37 UTC) cover the samples,
+rules, schema, mode draft and baseline.
+
+**Built during the hackathon:** the Bob custom mode in its final form, every
+Bob audit and modernization run, `reports/`, `modernized/`, `bob_sessions/`,
+the measured results table, and the demo content that shows them.
+
+**Mascot:** the demo shows IBM's Bob artwork (`demo-prototype/assets/ibm-bob.webp`,
+from bob.ibm.com, unchanged, IBM's property). Permission to use it was asked
+of IBM through the organisers on 25 Sep 2026 (Discord, Hamza / lablab.ai,
+reminder 26 Sep); no answer had arrived when the static image was enabled on
+26 Sep. The animated greeting stays disabled. If IBM objects, the image is
+removed with one flag (`SHOW_MASCOT` in `demo-prototype/demo-config.js`).
 
 ## Repo layout
 
