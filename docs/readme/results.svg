@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" role="img" aria-label="Results per program: rule problems found, logic bugs found, wrong findings, Bob's advice">
+  <style>
+    .h{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;letter-spacing:1.5px;fill:#6b1f2a}
+    .p{font-family:Georgia,'Times New Roman',serif;font-size:19px;fill:#2a1d20}
+    .c{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;fill:#8a7a7e}
+    .n{font-family:Georgia,'Times New Roman',serif;font-size:24px}
+    .g{fill:#1f5a38}.w{fill:#6b1f2a}.a{fill:#b8741a}
+    .s{font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12px;fill:#6f5f63}
+    .v{font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:13px;font-weight:600;fill:#fffaf3}
+  </style>
+  <rect x="1" y="1" width="958" height="328" rx="14" fill="#fffaf3" stroke="#e2d8c8" stroke-width="2"/>
+  <path d="M1 15a14 14 0 0 1 14-14h930a14 14 0 0 1 14 14v37H1z" fill="#efe6db"/>
+  <text class="h" x="28" y="32">PROGRAM</text>
+  <text class="h" x="360" y="32">RULE PROBLEMS</text>
+  <text class="h" x="510" y="32">LOGIC BUGS</text>
+  <text class="h" x="640" y="32">WRONG</text>
+  <text class="h" x="760" y="32">BOB’S ADVICE</text>
+
+  <g transform="translate(0,52)">
+    <text class="p" x="28" y="36">Unpaid supplier invoices</text><text class="c" x="28" y="54">ZFI_VENDOR_AGING · 8 findings</text>
+    <text class="n g" x="360" y="44">6 of 6</text>
+    <text class="n a" x="510" y="44">1 of 5</text>
+    <text class="n w" x="640" y="44">0</text><text class="s" x="662" y="44">1 partly</text>
+    <rect x="760" y="22" width="84" height="28" rx="14" fill="#6b1f2a"/><text class="v" x="802" y="41" text-anchor="middle">Rebuild</text>
+  </g>
+  <line x1="20" y1="121" x2="940" y2="121" stroke="#e2d8c8"/>
+  <g transform="translate(0,121)">
+    <text class="p" x="28" y="36">Open customer orders</text><text class="c" x="28" y="54">ZSD_OPEN_ORDERS · 18 findings, 5 repeats</text>
+    <text class="n g" x="360" y="44">11 of 12</text>
+    <text class="n a" x="510" y="44">0 of 3</text>
+    <text class="n w" x="640" y="44">1</text>
+    <rect x="760" y="22" width="84" height="28" rx="14" fill="#6b1f2a"/><text class="v" x="802" y="41" text-anchor="middle">Rebuild</text><text class="s" x="852" y="41">key: Refactor</text>
+  </g>
+  <line x1="20" y1="190" x2="940" y2="190" stroke="#e2d8c8"/>
+  <g transform="translate(0,190)">
+    <text class="p" x="28" y="36">Bulk material price updates</text><text class="c" x="28" y="54">ZMM_MASS_PRICE_UPDATE · 8 findings</text>
+    <text class="n g" x="360" y="44">6 of 6</text>
+    <text class="n a" x="510" y="44">0 of 3</text>
+    <text class="n w" x="640" y="44">1</text>
+    <rect x="760" y="22" width="84" height="28" rx="14" fill="#6b1f2a"/><text class="v" x="802" y="41" text-anchor="middle">Rebuild</text>
+  </g>
+  <line x1="20" y1="259" x2="940" y2="259" stroke="#e2d8c8"/>
+  <g transform="translate(0,259)">
+    <text class="p" x="28" y="36">Material list</text><text class="c" x="28" y="54">ZCC_LEGACY_MATERIALS · 6 findings, 1 repeat</text>
+    <text class="n g" x="360" y="44">4 of 5</text>
+    <text class="n a" x="510" y="44">0 of 1</text>
+    <text class="n w" x="640" y="44">0</text><text class="s" x="662" y="44">+1 fair extra</text>
+    <rect x="760" y="22" width="84" height="28" rx="14" fill="#6b1f2a"/><text class="v" x="802" y="41" text-anchor="middle">Rebuild</text><text class="s" x="852" y="41">key: Refactor</text>
+  </g>
+</svg>

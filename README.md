@@ -2,8 +2,10 @@
   <img src="docs/readme/ibm-logo.svg" height="64" alt="IBM">
   &nbsp;&nbsp;&nbsp;
   <img src="docs/readme/ibm-bob.png" height="96" alt="IBM Bob">
+  &nbsp;&nbsp;&nbsp;
+  <a href="https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon"><img src="docs/readme/lablab-logo.png" height="56" alt="lablab.ai"></a>
 </p>
-<p align="center"><sub>Built with IBM Bob for the IBM Bob 2.0 Hackathon</sub></p>
+<p align="center"><sub>Built with IBM Bob for the <a href="https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon">IBM Bob 2.0 Hackathon on lablab.ai</a></sub></p>
 
 <h1 align="center">Clean Core Copilot</h1>
 
@@ -187,14 +189,9 @@ disclosure and mascot decisions, and approved each Bob write.
 ## Results
 
 
-<!-- Measured, not claimed: findings scored by Claude, judgements confirmed by Sena. -->
+<p align="center"><img src="docs/readme/results.svg" width="100%" alt="Results per program: rule problems found, logic bugs found, wrong findings, Bob's advice"></p>
 
-| Program | Findings | Correct | Wrong | Missed | Verdict hint |
-|---------|----------|---------|-------|--------|--------------|
-| ZSD_OPEN_ORDERS | 18 (5 duplicates) | 11 core | 1 (F-11) | 1 core + 3 bonus | Rebuild (key says Refactor) — see [`docs/scoring/zsd_open_orders.md`](docs/scoring/zsd_open_orders.md) |
-| ZFI_VENDOR_AGING | 8 | 6 core + 1 bonus | 0 (1 partially correct) | 4 bonus | Rebuild — see [`docs/scoring/zfi_vendor_aging.md`](docs/scoring/zfi_vendor_aging.md) |
-| ZMM_MASS_PRICE_UPDATE | 8 | 6 core | 1 (F-07) | 3 bonus | Rebuild — see [`docs/scoring/zmm_mass_price_update.md`](docs/scoring/zmm_mass_price_update.md) |
-| ZCC_LEGACY_MATERIALS | 6 (1 duplicate) | 4 core + 1 extra | 0 | 1 core (runtime) + 1 bonus | Rebuild (key says Refactor) — see [`docs/scoring/zcc_legacy_materials.md`](docs/scoring/zcc_legacy_materials.md) |
+Scoring notes per program: [supplier invoices](docs/scoring/zfi_vendor_aging.md) · [customer orders](docs/scoring/zsd_open_orders.md) · [price updates](docs/scoring/zmm_mass_price_update.md) · [material list](docs/scoring/zcc_legacy_materials.md).
 
 Totals across the four audits: core recall 27 / 29, bonus 1 / 12, 40 raw
 findings of which 6 are duplicates, precision over decided findings 29 / 32,
