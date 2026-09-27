@@ -42,6 +42,9 @@ h1{font-size:72px;line-height:1.04}h2{font-size:52px;line-height:1.08}
 .use li strong{font-family:Georgia,serif;font-weight:400;font-size:44px;color:var(--wine);min-width:190px}
 .quote{font-family:Georgia,serif;font-size:58px;line-height:1.14}
 .quote span{display:block}
+.shot{border-radius:14px;border:1px solid var(--line);box-shadow:0 18px 40px rgba(42,29,32,.14);display:block}
+.url{display:inline-block;margin-top:18px;background:var(--wine);color:#fffaf3;border-radius:999px;padding:12px 22px;font-size:20px;font-weight:600}
+.pair{display:flex;gap:26px;align-items:flex-start;margin-top:26px}
 </style></head><body>
 
 <section class="s">
@@ -74,6 +77,15 @@ h1{font-size:72px;line-height:1.04}h2{font-size:52px;line-height:1.08}
 </section>
 
 <section class="s">
+ <div class="k">Try it now</div>
+ <div style="display:flex;gap:40px;align-items:center">
+  <div style="flex:0 0 330px"><h2 style="font-size:46px">Every finding, on the exact line.</h2><p class="lead" style="font-size:20px;margin-top:16px">Pick a program, see what Bob found and whether Bob was right. No login.</p><span class="url">clean-core-copilot.vercel.app</span></div>
+  <img class="shot" src="shot-site.png" style="width:720px">
+ </div>
+ <div class="foot"><span>Clean Core Copilot</span><span>04</span></div>
+</section>
+
+<section class="s">
  <div class="k">03 · The exam</div>
  <h2 style="margin-bottom:40px">Answers written down before Bob saw any code.</h2>
  <div class="row">
@@ -81,7 +93,7 @@ h1{font-size:72px;line-height:1.04}h2{font-size:52px;line-height:1.08}
   <div class="card"><strong class="w">41</strong><b>planted problems</b></div>
   <div class="card"><strong class="w">24 Sep</strong><b>answer key sealed by hash</b></div>
  </div>
- <div class="foot"><span>Clean Core Copilot</span><span>04</span></div>
+ <div class="foot"><span>Clean Core Copilot</span><span>05</span></div>
 </section>
 
 <section class="s">
@@ -96,7 +108,7 @@ h1{font-size:72px;line-height:1.04}h2{font-size:52px;line-height:1.08}
   <div class="chip"><i>✓</i>0 of 40 claimed a system check</div>
  </div>
  <p class="lead" style="margin-top:30px;font-size:22px">Strong on the rules. Weak on business logic, so a person still checks that.</p>
- <div class="foot"><span>Synthetic programs · these numbers describe this test only</span><span>05</span></div>
+ <div class="foot"><span>Synthetic programs · these numbers describe this test only</span><span>06</span></div>
 </section>
 
 <section class="s dark">
@@ -110,7 +122,19 @@ h1{font-size:72px;line-height:1.04}h2{font-size:52px;line-height:1.08}
   <div class="t"><strong class="ok">8/8</strong><b>fixed, pass again</b><small>the tests caught it</small></div>
  </div>
  <p class="caption">SAP BTP trial · stand-in tables · Bob’s 7 tests + 1 team-added test (431 cases)</p>
- <div class="foot"><span>Clean Core Copilot</span><span>06</span></div>
+ <div class="foot"><span>Clean Core Copilot</span><span>07</span></div>
+</section>
+
+<section class="s dark">
+ <div class="k">The real screen · SAP BTP trial, 27 Sep 15:31</div>
+ <h2 style="font-size:44px">We set the limit to 31. Two tests failed.</h2>
+ <div class="pair">
+  <div style="flex:0 0 480px"><div style="font:14px ui-monospace,Menlo,monospace;color:#b3a2a5;margin-bottom:10px">Bob’s class, one line changed</div><pre style="background:#0b1f1b;color:#e0e9e3;border-radius:14px;padding:24px 22px;font:22px/1.6 ui-monospace,Menlo,monospace;border:1px solid #3e2f33">CONSTANTS c_threshold_30
+  TYPE i VALUE <span style="background:#5b2b30;color:#ffd9de;padding:0 6px;border-radius:4px">31</span>.</pre><div style="font:14px ui-monospace,Menlo,monospace;color:#b3a2a5;margin-top:10px">was 30</div></div>
+  <img class="shot" src="shot-tests.png" style="width:600px;border-color:#3e2f33">
+ </div>
+ <p class="caption">Left: the planted change in Bob’s class. Right: ABAP Unit results, 2 failed, 6 passed. Reverted afterwards: 8 of 8.</p>
+ <div class="foot"><span>Screenshot: bob_sessions/2026-09-27_planted_bug_caught.png</span><span>08</span></div>
 </section>
 
 <section class="s">
@@ -122,7 +146,7 @@ h1{font-size:72px;line-height:1.04}h2{font-size:52px;line-height:1.08}
   <li><strong>4.3 / 40</strong>Bobcoin for the whole project</li>
  </ul>
  <img class="art" src="../../demo-prototype/assets/bob-coins.png" width="210" alt="" style="bottom:70px">
- <div class="foot"><span>Every task summary is in bob_sessions/</span><span>07</span></div>
+ <div class="foot"><span>Every task summary is in bob_sessions/</span><span>09</span></div>
 </section>
 
 <section class="s">
