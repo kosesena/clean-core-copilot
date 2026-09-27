@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 120" role="img" aria-label="8 of 8 ABAP Unit tests on SAP BTP; 27 of 29 rule problems found; 1 of 12 logic bugs found; 4.258 of 40 Bobcoin">
+  <style>
+    .n{font-family:Georgia,'Times New Roman',serif;font-size:40px;fill:#6b1f2a}
+    .g{fill:#1f5a38}.a{fill:#b8741a}
+    .l{font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;font-size:14px;fill:#6f5f63}
+  </style>
+  <rect x="1" y="1" width="958" height="118" rx="14" fill="#f6f1e7" stroke="#e2d8c8" stroke-width="2"/>
+  <g transform="translate(36,0)">
+    <text class="n g" x="0" y="62">8 of 8</text>
+    <text class="l" x="0" y="90">unit tests on SAP BTP</text>
+  </g>
+  <line x1="252" y1="26" x2="252" y2="94" stroke="#e2d8c8" stroke-width="2"/>
+  <g transform="translate(276,0)">
+    <text class="n" x="0" y="62">27 of 29</text>
+    <text class="l" x="0" y="90">rule problems found</text>
+  </g>
+  <line x1="492" y1="26" x2="492" y2="94" stroke="#e2d8c8" stroke-width="2"/>
+  <g transform="translate(516,0)">
+    <text class="n" x="0" y="62">1 of 12</text>
+    <text class="l" x="0" y="90">logic bugs found</text>
+  </g>
+  <line x1="712" y1="26" x2="712" y2="94" stroke="#e2d8c8" stroke-width="2"/>
+  <g transform="translate(736,0)">
+    <text class="n a" x="0" y="62">4.3 of 40</text>
+    <text class="l" x="0" y="90">Bobcoin spent</text>
+  </g>
+</svg>

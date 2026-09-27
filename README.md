@@ -7,12 +7,11 @@
 <p align="center"><b>An IBM Bob mode that reviews old SAP code for the cloud, and knows what it must not claim.</b></p>
 
 <p align="center">
-  <a href="https://clean-core-copilot.vercel.app"><img alt="Live demo" src="https://img.shields.io/badge/live%20demo-clean--core--copilot.vercel.app-6b1f2a?style=for-the-badge"></a>
-  <img alt="Built with IBM Bob" src="https://img.shields.io/badge/built%20with-IBM%20Bob%202.0-0f62fe?style=for-the-badge">
-  <img alt="Bobcoin" src="https://img.shields.io/badge/Bobcoin-4.258%20of%2040-b8741a?style=for-the-badge">
-  <img alt="Tests" src="https://img.shields.io/badge/ABAP%20Unit-8%20of%208%20passed-1f5a38?style=for-the-badge">
-  <img alt="Bob tools" src="https://img.shields.io/badge/Bob%20tools-Read%20%2B%20Edit%20only%2C%20no%20Execute-3d2229?style=for-the-badge">
-  <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-lightgrey?style=for-the-badge"></a>
+  <a href="https://clean-core-copilot.vercel.app"><img src="docs/readme/links.svg" width="520" alt="Open the live demo: clean-core-copilot.vercel.app"></a>
+</p>
+
+<p align="center">
+  <img src="docs/readme/stats.svg" width="100%" alt="8 of 8 unit tests on SAP BTP · 27 of 29 rule problems found · 1 of 12 logic bugs found · 4.3 of 40 Bobcoin">
 </p>
 
 **SAP ends mainstream maintenance for ECC 6.0 on 31 December 2027. Every
