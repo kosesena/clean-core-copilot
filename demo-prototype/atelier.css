@@ -274,3 +274,7 @@ body.program-dialog-open{overflow:hidden}
 .why-box.compact{margin:0;padding:16px 18px}.why-box.compact p{font-size:14px;margin:0 0 8px}
 @media(max-width:900px){.product-cols{grid-template-columns:1fr}.product-head{flex-direction:column}}
 .intro > .actions{display:none!important}
+
+.detail-meaning{font-size:15px;line-height:1.55;color:#3d2229;margin:6px 0 8px}
+.bobs-words{margin:16px 0}.bobs-words summary{cursor:pointer;color:#6b1f2a;font-weight:600;font-size:13px}
+.code-clip{max-height:220px;overflow:hidden;position:relative}.code-more{margin:8px 0 4px}
