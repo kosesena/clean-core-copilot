@@ -3,9 +3,9 @@
   &nbsp;&nbsp;&nbsp;
   <img src="docs/readme/ibm-bob.png" height="96" alt="IBM Bob">
   &nbsp;&nbsp;&nbsp;
-  <a href="https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon"><img src="docs/readme/lablab-logo.png" height="56" alt="lablab.ai"></a>
+  <img src="docs/readme/lablab-logo.png" height="56" alt="lablab.ai">
 </p>
-<p align="center"><sub>Built with IBM Bob for the <a href="https://lablab.ai/ai-hackathons/ibm-bob-2-hackathon">IBM Bob 2.0 Hackathon on lablab.ai</a></sub></p>
+<p align="center"><sub>Built with IBM Bob for the IBM Bob 2.0 Hackathon on lablab.ai</sub></p>
 
 <h1 align="center">Clean Core Copilot</h1>
 
