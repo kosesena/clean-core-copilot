@@ -1,0 +1,2 @@
+Tool: built-in image_gen. Reference: original assets/ibm-bob.webp.
+Identity-preserving pose edit: retain white rectangular face, black circular eyes, smile, grey ears and blue-purple hardhat. Only head and two white mitten hands peeking over an invisible horizontal ledge. No torso or legs, no folder, transparent alpha background. Flat 2D, slight head tilt. CSS aligns hands over study folder.
