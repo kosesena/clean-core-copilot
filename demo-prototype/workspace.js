@@ -73,7 +73,9 @@ function paintWorkspace(){
  const stage=$('findings-hero-stage');stage.hidden=page!=='findings';
  if(page==='findings'){
  const f=report.findings[0];
- stage.innerHTML=f?`<div class="hero-code-callout"><span>WHY BOB FLAGGED THIS</span><p>${esc(plainFinding(f))}</p></div>${window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true?'<img src="assets/bob-peeking.png" alt="Bob showing a recorded finding" class="code-hero-bob">':''}<div class="hero-code-ribbon"><div class="hero-code-label">${esc(programTitles[report.program]||report.program)} · ${esc(linesText(f))}</div><pre>${esc(f.evidence)}</pre></div>`:'<p>No findings in this report.</p>';
+ const heroSource=recordedForCurrent()?.source;
+ const excerpt=f?(heroSource?heroSource.split('\n').slice(f.line_start-1,Math.min(f.line_start+2,f.line_end)):f.evidence.split('\n').filter(Boolean).slice(0,3)):[];
+ stage.innerHTML=f?`<div class="hero-code-callout"><code>${esc(excerpt[0].trim())}</code><p>${esc(plainFinding(f))}</p></div>${window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true?'<img src="assets/bob-seated-findings.png" alt="Bob sitting beside a recorded code finding" class="code-hero-bob">':''}<div class="hero-code-ribbon"><div class="hero-code-label">Code excerpt · ${esc(linesText(f))} · full source below</div><div class="hero-code-lines">${excerpt.map((line,i)=>`<div class="hero-code-line ${i===0?'flagged':''}"><span aria-hidden="true">${heroSource?f.line_start+i:(i===0?'›':'·')}</span><code>${esc(line)}</code></div>`).join('')}</div></div>`:'<p>No findings in this report.</p>';
  }
  $('program-name').textContent=programTitles[report.program]||report.program;
  const heroMascot=document.querySelector('.intro [data-mascot]');
