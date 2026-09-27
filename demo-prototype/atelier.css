@@ -195,3 +195,7 @@ body{background:var(--paper);color:var(--ink)}
 .audit-page .intro.code-hero .actions .btn{font:600 13px var(--sans);background:#6b1f2a;color:#fffaf3;border:1px solid #6b1f2a;padding:14px 18px;border-radius:5px;transform:none;white-space:normal}
 .audit-page .intro.code-hero .actions .btn:nth-child(2){background:transparent;color:#6b1f2a;transform:none}.audit-page .intro.code-hero .actions .btn::before{display:none}.audit-page .intro.code-hero .actions .btn>svg{display:block;width:18px;height:18px}
 @media(max-width:550px){#findings-hero-stage{padding-top:170px}.code-hero-bob{width:115px;height:135px;top:40px;right:0}.hero-code-callout{right:105px;left:0;width:auto;padding:12px}.hero-code-callout p{font-size:17px}.hero-code-ribbon{padding:15px}.hero-code-ribbon pre{font-size:12px}}
+
+/* Explain sample identifiers without requiring SAP knowledge. */
+.program-naming-guide{font:13px/1.65 var(--sans);color:#6f5f63;max-width:900px;margin:0 0 22px}.program-naming-guide strong{color:var(--ink);display:block;margin-bottom:4px}.program-naming-guide code{color:#6b1f2a}
+.atlas-table .atlas-program-title{font:600 15px/1.4 var(--sans);display:block;overflow-wrap:normal}.atlas-table tbody th .technical-name{font:10px/1.5 var(--mono)}.atlas-table .program-name-note{font:11px/1.55 var(--sans);color:#79676c;border-top:1px solid var(--line);padding-top:9px;margin-top:10px}
