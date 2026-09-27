@@ -115,77 +115,109 @@ And the right column lists what Bob could not verify,
 instead of guessing.
 
 30
-00:01:34,180 --> 00:01:35,476
+00:01:34,180 --> 00:01:35,665
 Against the sealed key:
 
 31
-00:01:35,626 --> 00:01:38,728
+00:01:35,815 --> 00:01:39,344
 twenty-seven of twenty-nine rule problems, on the right lines.
 
 32
-00:01:38,878 --> 00:01:41,258
-But only one of twelve business-logic bugs.
-
-33
-00:01:41,408 --> 00:01:44,149
+00:01:39,494 --> 00:01:42,615
 Ninety-one percent of the judged findings were right.
 
+33
+00:01:42,765 --> 00:01:44,250
+Business logic is different:
+
 34
-00:01:44,299 --> 00:01:47,763
-Bob is a strong first reviewer for rules and a
+00:01:44,400 --> 00:01:45,476
+one of twelve.
 
 35
-00:01:47,913 --> 00:01:52,100
-weak one for logic, and now I can say that with numbers.
+00:01:45,626 --> 00:01:50,382
+Bob does not reason about runtime, and it does not pretend to.
 
 36
-00:01:52,250 --> 00:01:54,085
-Then Bob rewrote one program:
+00:01:50,532 --> 00:01:54,469
+It never invented a rule, never claimed anything was verified,
 
 37
-00:01:54,235 --> 00:01:57,262
-a data view, a class, seven unit tests.
+00:01:54,619 --> 00:01:56,513
+and asked before every write.
 
 38
-00:01:57,412 --> 00:02:01,232
-On a real SAP trial system the view failed on
+00:01:56,663 --> 00:02:01,010
+That is exactly the behaviour you want from a first reviewer.
 
 39
-00:02:01,382 --> 00:02:04,409
-exactly the two objects Bob had marked candidate.
+00:02:01,160 --> 00:02:02,868
+Then Bob rewrote one program:
 
 40
-00:02:04,559 --> 00:02:08,776
-With stand-in tables the class compiled and all seven tests passed,
+00:02:03,018 --> 00:02:05,840
+a data view, a class, seven unit tests.
 
 41
-00:02:08,926 --> 00:02:12,350
-after two syntax fixes that only a compiler finds.
+00:02:05,990 --> 00:02:09,556
+On a real SAP trial system the view failed on
 
 42
-00:02:12,500 --> 00:02:14,350
-This is the honest picture:
+00:02:09,706 --> 00:02:12,529
+exactly the two objects Bob had marked candidate.
 
 43
-00:02:14,500 --> 00:02:17,950
-four programs audited and scored, four rewritten, one tested,
+00:02:12,679 --> 00:02:16,616
+With stand-in tables the class compiled and all seven tests passed.
 
 44
-00:02:18,100 --> 00:02:20,350
-none verified on a customer's system.
+00:02:16,766 --> 00:02:20,332
+Then we compared the old rule with the new code
 
 45
-00:02:20,500 --> 00:02:24,750
-Every dashed cell is a claim we chose not to make.
+00:02:20,482 --> 00:02:22,933
+for four hundred and thirty-one different ages,
 
 46
-00:02:24,900 --> 00:02:25,550
-Total cost:
+00:02:23,083 --> 00:02:25,534
+and planted a bug in a threshold:
 
 47
-00:02:25,700 --> 00:02:27,550
-about four of forty Bobcoin.
+00:02:25,684 --> 00:02:27,020
+the tests caught it.
 
 48
-00:02:27,700 --> 00:02:31,950
-The human stays in the loop, and now I know where.
+00:02:27,170 --> 00:02:28,964
+This is the honest picture:
+
+49
+00:02:29,114 --> 00:02:32,463
+four programs audited and scored, four rewritten, one tested,
+
+50
+00:02:32,613 --> 00:02:34,796
+none verified on a customer's system.
+
+51
+00:02:34,946 --> 00:02:39,073
+Every dashed cell is a claim we chose not to make.
+
+52
+00:02:39,223 --> 00:02:39,851
+Total cost:
+
+53
+00:02:40,001 --> 00:02:41,795
+about four of forty Bobcoin.
+
+54
+00:02:41,945 --> 00:02:43,739
+Bob does the catalogue work;
+
+55
+00:02:43,889 --> 00:02:46,072
+a person keeps the business decisions.
+
+56
+00:02:46,222 --> 00:02:49,960
+Now we can say where the line is, with numbers.
