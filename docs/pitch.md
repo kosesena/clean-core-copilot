@@ -2,6 +2,7 @@
 
 ## 60 seconds (video opening, lablab "problem / solution" fields)
 
+SAP ends mainstream maintenance for ECC 6.0 on 31 December 2027.
 Every company moving to S/4HANA Cloud carries hundreds of custom ABAP
 programs written over fifteen years. Each one has to be checked against
 Clean Core rules before it can move — and today that review is done by hand,

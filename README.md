@@ -1,15 +1,28 @@
 # Clean Core Copilot
 
-**Legacy ABAP → S/4HANA Cloud, with the reasoning shown.** Built with IBM Bob
-for the IBM Bob 2.0 Hackathon (lablab.ai, Sep 2026).
+**SAP ends mainstream maintenance for ECC 6.0 on 31 December 2027. Every
+custom Z program needs a Clean Core review before it can move. Clean Core
+Copilot lets IBM Bob do the first pass, and measures how far to trust it.**
+Built with IBM Bob for the IBM Bob 2.0 Hackathon (lablab.ai, Sep 2026).
+
+**Live demo:** https://clean-core-copilot.vercel.app
+
+| | |
+|---|---|
+| Bob work | 7 Bob tasks in a custom mode, incl. 3 parallel sub-agents — screenshots in [`bob_sessions/`](bob_sessions/) |
+| Cost | **4.258 of 40** Bobcoin |
+| Audit vs. sealed answer key | **27 of 29** rule problems, **1 of 12** logic bugs, **29 of 32** findings correct — [`docs/scoring/`](docs/scoring/) |
+| On a real SAP BTP trial | **8 of 8** ABAP Unit tests (Bob's 7 + a 431-case check against the old code); a planted bug made **2 fail** — [`docs/activation/`](docs/activation/) |
 
 > **Status:** four Bob audit runs recorded (25 Sep 2026), scored against an
 > author's answer key for synthetic samples — see [`docs/scoring/`](docs/scoring/).
 > One rewrite was pushed to a BTP ABAP trial system on 26 Sep: the CDS view
 > did not activate — its two consumed views are missing there, exactly the
 > ones Bob had marked *candidate*. With two labelled stub tables in place of
-> them, the class activated, **all seven ABAP Unit tests passed**, and ATC
-> reported 0 errors — proof of the logic, not of the SAP data link
+> them, the class activated, **all seven of Bob's ABAP Unit tests passed**, and ATC
+> reported 0 errors. On 27 Sep a differential test against the legacy rule
+> (431 ages) passed too, **8 of 8**, and a planted threshold bug (30 → 31 days)
+> made two tests fail — proof of the logic, not of the SAP data link
 > ([`docs/activation/`](docs/activation/)). Three more
 > programs were rewritten in parallel by sub-agents. Findings stay advisory until
 > checked on the customer's target — see
@@ -94,6 +107,9 @@ removed with one flag (`SHOW_MASCOT` in `demo-prototype/demo-config.js`).
 Everything Bob did happened in IBM Bob 2.2.0 (enterprise plan, hackathon
 account) between 25 Sep 20:10 and 26 Sep 16:28 TRT. One screenshot per task
 with the consumption badge is in [`bob_sessions/`](bob_sessions/).
+Three files there are **not Bob sessions but test evidence**: `2026-09-26_abap_unit_7_tests.png`,
+`2026-09-27_equivalence_8_tests.png` and `2026-09-27_planted_bug_caught.png` are
+ABAP Unit results from the BTP trial system in VS Code.
 
 **Custom mode.** Bob's Settings → Modes → *Create new mode* form was used to
 define **Clean Core Architect** (slug `clean-core-architect`, global scope).
