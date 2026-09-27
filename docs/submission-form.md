@@ -5,11 +5,11 @@ under 500 words.
 
 ## Project title
 
-Clean Core Copilot — grading IBM Bob on SAP legacy code
+Clean Core Copilot — an IBM Bob mode that reviews legacy SAP code, with its reliability measured
 
 ## Short description
 
-We tested IBM Bob like an exam on four old SAP programs with 41 planted problems and an answer key sealed by hash before kick-off. Bob found 27 of 29 rule violations on the right lines, 1 of 12 business-logic bugs, and its rewrite passed 7 of 7 tests on a real SAP trial. The only SAP entry; 4.3 of 40 Bobcoin.
+Clean Core Copilot is an IBM Bob custom mode plus a 12-rule catalogue that audits legacy SAP ABAP programs for S/4HANA Cloud readiness and rewrites them. Before trusting it we measured it: on four programs with 41 planted problems and an answer key sealed by hash, Bob found 27 of 29 rule violations and 1 of 12 business-logic bugs; its rewrite passed 7 of 7 tests on a real SAP trial. The only SAP entry. 4.3 of 40 Bobcoin.
 
 ## Long description — problem & solution
 
