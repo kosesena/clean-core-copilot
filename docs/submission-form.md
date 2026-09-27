@@ -52,4 +52,4 @@ IBM Bob, SAP, ABAP, Clean Core, S/4HANA, legacy modernization, code review, eval
 - Demo platform: Vercel (static) · Application URL: https://clean-core-copilot.vercel.app
 - Cover image: `video/cover.png`
 - Video: `video/clean-core-copilot-demo-v3.mp4` (2:54, ElevenLabs narration, captions)
-- Slides: optional; the Overview page and `docs/presentation-outline.md` stand in
+- Slides: `docs/clean-core-copilot-slides.pdf` (8 pages, by Codex)
