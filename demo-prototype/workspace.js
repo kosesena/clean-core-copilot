@@ -38,25 +38,55 @@ function programButtons(){
  const imports=entries.filter(([key,s])=>!key.startsWith('recorded-')&&!s.isDesign);
  return main.map(button).join('')+(imports.length?`<details class="your-imports" ${imports.some(([key])=>key===activeReportKey)?'open':''}><summary>Reports you uploaded (${imports.length})</summary><div class="program-strip">${imports.map(button).join('')}</div></details>`:'');
 }
-function bindPrograms(node){node.querySelectorAll('[data-program]').forEach(b=>b.onclick=()=>{const page=location.hash;switchReport(b.dataset.program);location.hash=page||'#overview';paintWorkspace();});}
+function bindPrograms(node){node.querySelectorAll('[data-program]').forEach(b=>b.onclick=()=>{const page=location.hash;switchReport(b.dataset.program);location.hash=page||'#overview';paintWorkspace();if(node.id==='overview-view')openProgramDialog(b.dataset.program);});}
 function paintOverview(){
  const steps=[['1','We hid the problems','We wrote four old-style SAP programs and hid 41 known problems in them. The answer list was sealed on 24 Sep, before Bob saw any code.'],['2','Bob looked for them','Bob read each program and listed every problem it saw, with the line number and its reason.'],['3','We checked Bob’s list','Claude compared Bob’s list with the sealed answers. Sena confirmed every call on 26 Sep.']];
  const cards=[['Rule problems Bob caught','27 of 29','29 of the hidden problems break a written SAP cloud rule. Bob found 27 of them on the right lines.'],['Logic bugs Bob caught','1 of 12','12 hidden problems are business-logic mistakes that no rule list covers. Bob found 1, so a person still has to check the logic.'],['How often Bob was right','29 of 32','We could judge 32 of Bob’s findings, and 29 were correct (91%). Six repeats and two fair points our list did not count are left out.']];
  const spend=[['Reading the four programs','0.661'],['Rewriting one program as new cloud code','0.807'],['Fixing that rewrite after our review','1.030'],['Rewriting the other three programs at once','1.760']];
  const mascot=window.CLEAN_CORE_DEMO_CONFIG?.SHOW_MASCOT===true?'<img class="coin-art" src="assets/bob-coins.png" alt="" width="200" height="200">':'';
- const p=report.program,a=report.summary.draft_verdict_hint;
  $('overview-view').innerHTML=`<section class="plain-intro" aria-labelledby="plain-intro-title"><h2 id="plain-intro-title">What this is about</h2><p>Large companies run their money, orders and stock on <strong>SAP</strong>. Over the years they wrote thousands of their own add-on programs for it, in SAP&#x27;s language, <strong>ABAP</strong>. SAP&#x27;s new cloud version bans many of the old techniques those programs use, so every program has to be checked and rewritten before a company can move. Today that check is slow, manual work done by a few experts.</p><p><strong>IBM Bob</strong> is an AI coding assistant. We asked one question: can Bob do that check, and how well? To find out, we tested it like an exam.</p><details class="plain-glossary"><summary>Words you will see on this site</summary><dl><div><dt>Clean Core rules</dt><dd>SAP&#x27;s list of what old code may no longer do in the cloud version. We wrote our 12-rule list from it.</dd></div><div><dt>SAP table / data view</dt><dd>Where SAP keeps its data. Cloud code must read it through approved views, not straight from the tables.</dd></div><div><dt>Old-style / classic</dt><dd>Techniques from the desktop era of SAP that the cloud version rejects.</dd></div><div><dt>Answer list, sealed</dt><dd>Our list of the 41 hidden problems, locked with a digital fingerprint on 24 Sep, before Bob saw any code.</dd></div><div><dt>Unit test</dt><dd>A small automatic check that a piece of code gives the right answer.</dd></div><div><dt>Bobcoin</dt><dd>The credit each hackathon team gets to pay for Bob&#x27;s work: 40 per team.</dd></div></dl></details></section><ol class="explain-steps">${steps.map(([n,t,d])=>`<li><span class="step-number">${n}</span><div><h3>${t}</h3><p>${d}</p></div></li>`).join('')}</ol>
  <div class="metric-grid">${cards.map(([t,v,n])=>`<article class="metric"><span>${t}</span><strong>${v}</strong><small>${n}</small></article>`).join('')}
  <article class="metric metric-coins">${mascot}<div class="coin-summary"><span class="eyebrow">Bob credits spent</span><div class="coin-value"><strong>≈4.3 of 40</strong><span>Bobcoin</span></div><p>Each hackathon team gets 40 Bobcoin to pay for Bob’s work. This whole project used about a tenth of it.</p><div class="coin-budget"><div class="coin-track" role="meter" aria-label="Bobcoin used" aria-valuemin="0" aria-valuemax="40" aria-valuenow="4.258"><span style="width:10.645%"></span></div><div class="coin-budget-labels"><span>4.258 used</span><span>35.742 left</span></div></div><ul class="coin-breakdown">${spend.map(([t,v])=>`<li><span>${t}</span><b>${v}</b></li>`).join('')}</ul></div></article></div>
  <details class="study-method"><summary>Where these numbers come from</summary><p>The 41 problems sit in made-up programs we wrote for this test, so the numbers describe this test only, not Bob on every SAP system. Scoring notes are in docs/scoring/. Bobcoin figures come from Bob’s own task summaries.</p></details>
  <h2 class="plain-heading">Pick a program to see what Bob found</h2><div class="program-strip">${programButtons()}</div>
- <div class="section-heading"><h2>${esc(programTitles[p]||p)}</h2><small class="technical-name">Code name: ${esc(p)}</small><span>${esc(programPlain[p]||'')}${a?` · Bob’s advice: ${esc(adviceText[a]||a)}`:''} · ${esc(triedText(p))}</span></div>
+`;
+ bindPrograms($('overview-view'));
+}
+// Native modal keeps the background inert and traps keyboard focus.
+let programDialogKey=null;
+const programDialog=document.createElement('dialog');
+programDialog.className='program-dialog';
+programDialog.setAttribute('aria-labelledby','program-dialog-title');
+document.body.append(programDialog);
+programDialog.addEventListener('close',()=>{
+ document.body.classList.remove('program-dialog-open');
+ const trigger=[...document.querySelectorAll('#overview-view [data-program]')].find(b=>b.dataset.program===programDialogKey);
+ if(location.hash==='#overview'||!location.hash)trigger?.focus({preventScroll:true});
+});
+let dialogBackdropDown=false;
+programDialog.addEventListener('pointerdown',e=>{dialogBackdropDown=e.target===programDialog;});
+programDialog.addEventListener('click',e=>{if(e.target===programDialog&&dialogBackdropDown)programDialog.close();dialogBackdropDown=false;});
+function openProgramDialog(key){
+ programDialogKey=key;
+ const p=report.program,a=report.summary.draft_verdict_hint;
+ const trial=!recordedForCurrent()?'Uploaded report: no trial result independently checked.':p==='ZFI_VENDOR_AGING'?'Trial: 7/7 tests passed with stand-in tables. Real SAP data access remains unproven.':'Trial: not performed for this program.';
+ programDialog.innerHTML=`<div class="program-dialog-panel"><header class="program-dialog-bar"><span>PROGRAM REVIEW</span><button type="button" class="program-dialog-close" aria-label="Close program review">Close <span aria-hidden="true">×</span></button></header> <div class="section-heading"><h2 id="program-dialog-title" tabindex="-1">${esc(programTitles[p]||p)}</h2><small class="technical-name">Code name: ${esc(p)}</small><span>${esc(programPlain[p]||'')}${a?` · Bob’s advice: ${esc(adviceText[a]||a)}`:''} · ${esc(trial)}</span></div>
  <div class="finding-gallery-heading"><span>Bob flagged ${report.findings.length} problems in this program</span><a href="#findings">See each one in the code ↗</a></div>
  <p class="assessment-label gallery-assessment">Each card says whether Bob was right, compared with our sealed answer list: ✓ right · ◐ partly right · ✗ wrong.</p>
- <div class="finding-gallery">${report.findings.map(f=>{const [vt,vc]=verdictFor(f);return `<article class="finding-card"><button class="finding-card-title" data-finding="${esc(f.id)}" aria-label="Open ${esc(problemNo(f))}"><span>${esc(plainFinding(f))}</span><b aria-hidden="true">↗</b></button><div class="finding-card-meta"><span>${esc(problemNo(f))} · ${esc(linesText(f))}</span><span class="verdict ${vc}">${esc(vt)}</span></div><div class="finding-card-top"><span class="rule-plain">${esc(ruleLabel(f.rule))}</span></div><details class="finding-code"><summary>Show the code <span aria-hidden="true">＋</span></summary><pre>${esc(f.evidence)}</pre></details></article>`;}).join('')}</div>
- <details class="study-method"><summary>How we judged Bob’s answers</summary><p>Before the hackathon we wrote down every hidden problem and sealed the list with a fingerprint (a hash) on 24 Sep, so nobody could change it after seeing Bob’s answers. “Right” here means right against that list. It does not mean the code was tested on a live SAP system.</p></details>`;
- bindPrograms($('overview-view'));$('overview-view').querySelectorAll('[data-finding]').forEach(b=>b.onclick=()=>{selected=b.dataset.finding;activeTab='source';location.hash='#findings';paintWorkspace();});
+ <div class="finding-gallery">${report.findings.map(f=>{const [vt,vc]=verdictFor(f);return `<article class="finding-card"><button class="finding-card-title" data-finding="${esc(f.id)}" aria-label="Open ${esc(problemNo(f))}"><span>${esc(plainFinding(f))}</span><b aria-hidden="true">↗</b></button><div class="finding-card-meta"><span>${esc(problemNo(f))} · ${esc(linesText(f))}</span><span class="verdict ${vc}">${esc(vt)}</span></div><div class="finding-card-top"><span class="rule-plain">${esc(ruleLabel(f.rule))}</span></div><details class="finding-code"><summary>Show the code <span aria-hidden="true">＋</span></summary><pre>${esc(f.evidence)}</pre></details></article>`;}).join('')}</div></div>`;
+ programDialog.querySelector('.program-dialog-close').onclick=()=>programDialog.close();
+ programDialog.querySelectorAll('[data-finding]').forEach(b=>b.onclick=()=>{
+  selected=b.dataset.finding;activeTab='source';location.hash='#findings';programDialog.close();paintWorkspace();
+  $('page-title').setAttribute('tabindex','-1');$('page-title').focus();
+ });
+ programDialog.querySelector('a[href="#findings"]').onclick=()=>{location.hash='#findings';programDialog.close();};
+ document.body.classList.add('program-dialog-open');
+ programDialog.showModal();
+ programDialog.scrollTop=0;
+ $('program-dialog-title').focus({preventScroll:true});
 }
+window.addEventListener('hashchange',()=>{if(programDialog.open&&location.hash!=='#overview')programDialog.close();});
+
 function paintWorkspace(){
  const page=['overview','findings','evidence'].includes(location.hash.slice(1))?location.hash.slice(1):'overview';
  document.querySelectorAll('[data-page]').forEach(a=>{if(a.dataset.page===page)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});

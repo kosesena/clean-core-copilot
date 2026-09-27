@@ -202,3 +202,26 @@ body{background:var(--paper);color:var(--ink)}
 
 /* Context first, terminology available on demand. */
 .plain-intro{padding:24px 28px;margin:0 0 24px;background:#fffaf2;border:1px solid var(--line);border-left:3px solid #6b1f2a;border-radius:8px}.plain-intro h2{font:28px/1.2 Georgia,serif;margin:0 0 14px}.plain-intro p{font:14px/1.7 var(--sans);max-width:950px;color:#65565a}.plain-glossary{border-top:1px solid var(--line);padding-top:15px;margin-top:20px}.plain-glossary summary{cursor:pointer;font:600 13px var(--sans);color:#6b1f2a}.plain-glossary dl{margin:16px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:16px 28px}.plain-glossary dt{font:600 13px var(--sans);margin-bottom:5px}.plain-glossary dd{font:13px/1.6 var(--sans);color:#65565a;margin:0}@media(max-width:650px){.plain-intro{padding:20px}.plain-glossary dl{grid-template-columns:1fr}}
+
+/* Overview: a focused, cinematic review of one program. */
+body.program-dialog-open{overflow:hidden}
+.program-dialog{border:0;padding:0;background:transparent;color:var(--ink);width:min(1120px,calc(100vw - 48px));max-width:none;max-height:88dvh;overflow:auto;border-radius:18px;box-shadow:0 28px 100px #0006;overscroll-behavior:contain}
+.program-dialog::backdrop{background:rgba(22,15,19,.78);backdrop-filter:blur(5px)}
+.program-dialog[open]{animation:program-cinema-in 180ms ease-out}
+.program-dialog[open]::backdrop{animation:program-backdrop-in 180ms ease-out}
+.program-dialog-panel{background:var(--paper);padding:0 36px 36px;min-width:0}
+.program-dialog-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;position:sticky;top:0;z-index:2;padding:18px 0;background:var(--paper);border-bottom:1px solid var(--line)}
+.program-dialog-bar>span{font:600 11px var(--mono,monospace);letter-spacing:2px;color:var(--green)}
+.program-dialog-close{display:flex;align-items:center;gap:14px;padding:8px 12px;border:1px solid var(--line);border-radius:30px;background:var(--white);color:var(--ink);cursor:pointer;font:600 14px var(--sans,sans-serif)}
+.program-dialog-close span{font-size:26px;line-height:1}
+.program-dialog .section-heading{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin:28px 0}
+.program-dialog .section-heading h2{font:clamp(28px,4vw,44px)/1.15 Georgia,serif;margin:0}
+.program-dialog .section-heading>span{line-height:1.7;max-width:850px}
+.program-dialog .finding-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
+.program-dialog .finding-gallery-heading{gap:16px;flex-wrap:wrap}
+@keyframes program-cinema-in{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes program-backdrop-in{from{opacity:0}to{opacity:1}}
+@media(max-width:640px){.program-dialog{width:calc(100vw - 20px);max-height:92dvh;border-radius:12px}.program-dialog-panel{padding:0 18px 24px}.program-dialog .finding-gallery{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.program-dialog[open],.program-dialog[open]::backdrop{animation:none}}
+
+.program-dialog .finding-card-title>span{display:block;-webkit-line-clamp:unset;overflow:visible}
