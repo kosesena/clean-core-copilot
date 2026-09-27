@@ -264,7 +264,7 @@ history.
 | Answer key (baseline) | kept outside the repo | 24 Sep | The issues planted in the samples, written by the sample author, not an independent review. Only its SHA-256 is published, in `docs/freeze.sha256`, so it can't be changed after Bob's results are seen. |
 | Freeze and audit-workspace scripts | `scripts/` | 24 Sep | Bob runs on an isolated copy with no plan, notes or answer key. |
 | Demo UI (findings viewer, case viewer) | `demo-prototype/` | 24–25 Sep | Built with Codex. Shows recorded output only; contains no Bob results. |
-| Plan, presentation outline, verification notes | `docs/` | 24 Sep | Working notes. |
+| Plan and verification notes | `docs/PLAN.md`, `docs/verification-notes.md` | 24 Sep | Working notes. |
 
 The frozen inputs (`docs/freeze.sha256`, 24 Sep 16:37 UTC) cover the samples,
 rules, schema, mode draft and baseline.
