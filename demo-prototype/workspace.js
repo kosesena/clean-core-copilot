@@ -196,16 +196,34 @@ async function loadRecordedAudits(){try{
 const reviewerActions=document.querySelector('.actions');
 function downloadJSON(text,name){const url=URL.createObjectURL(new Blob([text],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function reportCardHTML(){
- const rec=recordedForCurrent(),fs=report.findings,d=fs.filter(f=>f.level_hint==='D').length,c=fs.filter(f=>f.level_hint==='C').length;
+ const rec=recordedForCurrent(),fs=report.findings,d=fs.filter(f=>f.level_hint==='D').length,c=fs.filter(f=>f.level_hint==='C').length,o=fs.length-d-c;
  const zfi=report.program==='ZFI_VENDOR_AGING'&&rec;
  const hint=report.summary?.draft_verdict_hint,decide=report.summary?.human_must_decide||[];
- const stats=[[fs.length,'problems flagged'],[d,d===1?'blocker':'blockers'],[c,'need a supported replacement']];
- if(rec)stats.push([String(rec.core).replace(' / ',' of '),'rule problems caught'],[rec.coins.toFixed(3),'Bobcoin for this review']);
- const rows=[['Program',report.program],['Code file',report.source_file],['Findings written by',rec?'IBM Bob, in the “Clean Core Architect” mode':isDesign?'Nobody: a made-up example':'Your uploaded file'],['Rule list',report.provenance.catalogue_version],['Target system',[report.target.product,report.target.release].every(x=>/^unknown$/i.test(x))?'Left unknown on purpose: Bob does not guess the SAP release':[report.target.product,report.target.release].join(' · ')],['Scored',rec?'Against the answer key sealed on 24 Sep; Sena confirmed every call on 26 Sep':'Not by us'],['Run on SAP',zfi?'Yes, SAP BTP trial: class active, 8 of 8 unit tests with two stand-in tables':'No'],['Bob’s original answer','Kept unchanged; our verdicts are stored separately']];
- return `<article class="panel report-card" aria-label="Audit report"><header class="rc-head"><div><div class="eyebrow">Audit report${rec?' · recorded Bob run':''}</div><h2>${esc(programTitles[report.program]||report.program)}</h2><p>${esc(programPlain[report.program]||'Program named in your uploaded report')} · <code>${esc(report.program)}</code></p></div><div class="rc-badges"><label class="rc-pick"><span>Report</span><select id="atlas-program-picker">${[...loadedReports].filter(([k,v])=>k.startsWith('recorded-')||!v.isDesign||k===activeReportKey).map(([k,v])=>`<option value="${esc(k)}" ${k===activeReportKey?'selected':''}>${esc(programTitles[v.report.program]||v.report.program)}${k.startsWith('recorded-')?'':' · your upload'}</option>`).join('')}</select></label>${hint?`<span class="rc-badge wine">Bob’s advice: ${esc(hint)}</span>`:''}<span class="rc-badge">${esc(report.summary?.status||'Needs target verification')}</span></div></header>
- <div class="rc-stats">${stats.map(([v,l])=>`<div><strong>${esc(String(v))}</strong><span>${esc(l)}</span></div>`).join('')}</div>
- <div class="rc-body"><section><h3>Report details</h3><dl>${rows.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join('')}</dl></section><section><h3>What happens next</h3><p class="rc-next">${zfi?'The class runs on the SAP trial and 8 of 8 tests pass. Still open: reading real SAP data, because the trial lacks two SAP data sources. <a href="before-after.html">See the before / after →</a>':rec?'Bob has written a replacement, but nobody has reviewed it or run it on SAP yet. Finding problems in the old code and proving the new code works are separate steps. <a href="https://github.com/kosesena/clean-core-copilot/tree/main/modernized/'+esc(report.program.toLowerCase())+'" target="_blank" rel="noopener">See Bob’s draft ↗</a>':'We have not checked this uploaded report. Mark each finding on the Findings page, then download your review.'}</p><h3>A person must decide <small class="rc-src">· in Bob’s words</small></h3>${decide.length?`<ol class="rc-decide">${decide.slice(0,5).map(x=>`<li>${esc(x)}</li>`).join('')}</ol>${decide.length>5?`<p class="rc-more">and ${decide.length-5} more in the report file</p>`:''}`:'<p class="rc-more">The report lists no open decisions.</p>'}</section></div>
- <footer class="rc-foot"><span>${rec?`Report fingerprint (SHA-256): <code>${esc(rec.report_sha256.slice(0,16))}…</code>`:'Uploaded in this browser only'}</span><span><a href="#findings">Open the ${fs.length} findings →</a>${rec?` · <button class="linkish" type="button" data-download-report>Download this report (JSON)</button>`:''}</span></footer></article>`;
+ const tabs=[...loadedReports].filter(([k,v])=>k.startsWith('recorded-')||!v.isDesign||k===activeReportKey).map(([k,v])=>`<button type="button" class="rc-tab${k===activeReportKey?' on':''}" data-report-key="${esc(k)}">${esc(programTitles[v.report.program]||v.report.program)}${k.startsWith('recorded-')?'':' · upload'}</button>`).join('');
+ const of=v=>String(v).replace(' / ',' of ');
+ const trail=rec?[
+  ['done','Bob audited the code',`${fs.length} problems flagged · ${rec.coins.toFixed(3)} Bobcoin`],
+  ['done','Scored against the sealed key',`${of(rec.core)} rule problems · ${of(rec.bonus)} logic bugs · confirmed by Sena`],
+  ['done','Bob rewrote it',zfi?'Reviewed and revised after our scoring':'Drafted in parallel · not reviewed yet'],
+  [zfi?'done':'todo','Run on a real SAP system',zfi?'SAP BTP trial · 8 of 8 unit tests · two stand-in tables':'Not run · we claim nothing here']
+ ]:[['done','Report uploaded',`${fs.length} problems in the file`],['todo','Scored','Not by us · mark each finding yourself'],['todo','Run on SAP','Not checked']];
+ const shown=decide.slice(0,3),rest=decide.slice(3);
+ return `<article class="panel report-card" aria-label="Audit report">
+ <nav class="rc-tabs" aria-label="Choose a report">${tabs}</nav>
+ <header class="rc-head"><div><div class="eyebrow">Audit report${rec?' · recorded Bob run':' · your upload'}</div><h2>${esc(programTitles[report.program]||report.program)}</h2><p>${esc(programPlain[report.program]||'Program named in your uploaded report')} <code>${esc(report.program)}</code></p></div>
+ ${hint?`<div class="rc-verdict"><span>Bob’s advice</span><strong>${esc(hint)}</strong><small>${esc(report.summary?.status||'Needs target verification')}</small></div>`:''}</header>
+ <div class="rc-stats">
+  <div><strong>${fs.length}</strong><span>problems flagged</span></div>
+  <div><strong><i class="dot d"></i>${d}</strong><span>${d===1?'blocker':'blockers'}</span></div>
+  <div><strong><i class="dot c"></i>${c}</strong><span>need a supported replacement</span></div>
+  <div><strong><i class="dot o"></i>${o}</strong><span>other</span></div>
+ </div>
+ <div class="rc-body">
+  <section><h3>Audit trail</h3><ol class="rc-trail">${trail.map(([st,t,dsc])=>`<li class="${st}"><i aria-hidden="true">${st==='done'?'✓':'–'}</i><div><b>${esc(t)}</b><small>${esc(dsc)}</small></div></li>`).join('')}</ol>
+  ${zfi?'<a class="rc-cta" href="before-after.html">See the before / after →</a>':`<a class="rc-cta" href="#findings">Open the ${fs.length} findings →</a>`}</section>
+  <section><h3>Open questions for a person <small class="rc-src">· ${decide.length} · in Bob’s words</small></h3>${decide.length?`<ol class="rc-decide">${shown.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>${rest.length?`<details class="rc-more-d"><summary>Show ${rest.length} more</summary><ol class="rc-decide" start="4">${rest.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></details>`:''}`:'<p class="rc-more">The report lists no open questions.</p>'}</section>
+ </div>
+ <footer class="rc-foot"><span><code>${esc(report.source_file)}</code> · rules: ${esc(report.provenance.catalogue_version)}${rec?` · SHA-256 <code>${esc(rec.report_sha256.slice(0,12))}…</code>`:''}</span><span><a href="#findings">Findings →</a>${rec?` · <button class="linkish" type="button" data-download-report>Download JSON</button>`:''}</span></footer></article>`;
 }
 function paintAtlas(){
  const heads=['Program','1 · Bob read it','2 · We checked Bob’s answers','3 · Bob rewrote it','4 · Tried on real SAP'];
@@ -224,7 +242,7 @@ function paintAtlas(){
  <p class="caption">Coloured boxes: done and recorded, click to open the evidence. Grey boxes: not done, so we make no claim.</p>
  `+reportCardHTML();
  $('atlas-view').querySelectorAll('[data-atlas-program]').forEach(a=>a.onclick=()=>{switchReport('recorded-'+a.dataset.atlasProgram);location.hash='#findings';paintWorkspace();});
- $('atlas-program-picker').onchange=e=>{switchReport(e.target.value);paintWorkspace();};
+ $('atlas-view').querySelectorAll('[data-report-key]').forEach(b=>b.onclick=()=>{switchReport(b.dataset.reportKey);paintWorkspace();});
  renderEvidence();
  const dl=$('atlas-view').querySelector('[data-download-report]');if(dl)dl.onclick=()=>downloadJSON(rawText,report.program.toLowerCase()+'.json');
  const rv=document.createElement('section');rv.className='panel for-reviewers';rv.innerHTML=`<div class="byo-copy"><div class="eyebrow">For reviewers</div><h2>Bring your own Bob report</h2><p>Run the Clean Core Architect mode on your own program, then open Bob’s JSON here. You get the same view: findings on the code, your own verdicts, and a file to take away. Nothing leaves your browser.</p><ol class="byo-steps"><li><b>1</b><span>Upload a Bob report. No report yet? Take one of ours: <button class="linkish" type="button" data-sample-report>download the supplier-invoice report</button>.</span></li><li><b>2</b><span>Open <i>Findings</i>, read each problem next to the code and mark it right, partly right or wrong.</span></li><li><b>3</b><span>Download your review. Bob’s original answer and your verdicts stay in separate parts of the file.</span></li></ol><p class="byo-format">File format: <a href="https://github.com/kosesena/clean-core-copilot/blob/main/docs/findings.schema.json" target="_blank" rel="noopener">findings.schema.json</a> · up to 2 MB · JSON only</p></div>`;
