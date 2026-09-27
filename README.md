@@ -24,14 +24,18 @@ custom Z program needs a Clean Core review before it can move. Clean Core
 Copilot lets IBM Bob do the first pass, and measures how far to trust it.**
 Built with IBM Bob for the IBM Bob 2.0 Hackathon (lablab.ai, Sep 2026).
 
+**Judges: start with the [judge guide](docs/JUDGE-GUIDE.md)** — every claim, its file, and a command to check it.
+
 Evidence: [scoring](docs/scoring/) · [SAP trial record](docs/activation/) · [Bob sessions](bob_sessions/) · [verification notes](docs/verification-notes.md). The site shows recorded evidence, not a live analyzer.
 
 <p align="center"><a href="https://clean-core-copilot.vercel.app"><img src="docs/readme/site-findings.png" width="100%" alt="The evidence site: Bob’s finding pinned to the exact lines of the old program"></a></p>
 
 ## The problem
 
-<img align="right" src="demo-prototype/assets/bob-peeking.png" width="130" alt="">
+<img align="right" src="demo-prototype/assets/bob-problem.png" width="130" alt="">
 
+Picture the one ABAP developer at a mid-size manufacturer: 600 custom programs, a
+31 December 2027 maintenance deadline, and nobody else who reads both old and new SAP code.
 Companies moving to S/4HANA Cloud carry thousands of custom Z programs written
 over 15+ years. Each one has to be checked against Clean Core rules: which
 tables it reads directly, which screens it replays, which files it writes.
@@ -40,7 +44,7 @@ the old and the new world.
 
 ## What it does
 
-<img align="right" src="demo-prototype/assets/bob-overview.png" width="130" alt="">
+<img align="right" src="demo-prototype/assets/bob-does.png" width="130" alt="">
 
 A Bob custom mode, **Clean Core Architect**, that:
 
