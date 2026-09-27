@@ -1,11 +1,33 @@
-# Clean Core Copilot
+<p align="center">
+  <img src="video/cover.png" alt="Clean Core Copilot — Can IBM Bob review old SAP code? We measured it." width="100%">
+</p>
+
+<h1 align="center">Clean Core Copilot</h1>
+
+<p align="center"><b>An IBM Bob mode that reviews old SAP code for the cloud, and knows what it must not claim.</b></p>
+
+<p align="center">
+  <a href="https://clean-core-copilot.vercel.app"><img alt="Live demo" src="https://img.shields.io/badge/live%20demo-clean--core--copilot.vercel.app-6b1f2a?style=for-the-badge"></a>
+  <img alt="Built with IBM Bob" src="https://img.shields.io/badge/built%20with-IBM%20Bob%202.0-0f62fe?style=for-the-badge">
+  <img alt="Bobcoin" src="https://img.shields.io/badge/Bobcoin-4.258%20of%2040-b8741a?style=for-the-badge">
+  <img alt="Tests" src="https://img.shields.io/badge/ABAP%20Unit-8%20of%208%20passed-1f5a38?style=for-the-badge">
+  <img alt="Bob tools" src="https://img.shields.io/badge/Bob%20tools-Read%20%2B%20Edit%20only%2C%20no%20Execute-3d2229?style=for-the-badge">
+  <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-lightgrey?style=for-the-badge"></a>
+</p>
 
 **SAP ends mainstream maintenance for ECC 6.0 on 31 December 2027. Every
 custom Z program needs a Clean Core review before it can move. Clean Core
 Copilot lets IBM Bob do the first pass, and measures how far to trust it.**
 Built with IBM Bob for the IBM Bob 2.0 Hackathon (lablab.ai, Sep 2026).
 
-**Live demo:** https://clean-core-copilot.vercel.app
+<p align="center">
+  <img src="demo-prototype/assets/bob-overview.png" width="150" alt="IBM Bob holding the four program folders">
+  <img src="demo-prototype/assets/bob-findings.png" width="150" alt="IBM Bob pointing at a finding">
+  <img src="demo-prototype/assets/bob-building.png" width="150" alt="IBM Bob building the rewrite">
+  <img src="demo-prototype/assets/bob-verifying.png" width="150" alt="IBM Bob checking the tests">
+  <img src="demo-prototype/assets/bob-coins.png" width="150" alt="IBM Bob with the Bobcoin spent">
+</p>
+<p align="center"><sub>IBM Bob artwork © IBM, shown under the hackathon's disclosure rule; our own illustrations of Bob are derived from it and flagged as such in <code>demo-prototype/assets/</code>.</sub></p>
 
 | | |
 |---|---|
@@ -32,6 +54,8 @@ Built with IBM Bob for the IBM Bob 2.0 Hackathon (lablab.ai, Sep 2026).
 
 ## The problem
 
+<img align="right" src="demo-prototype/assets/bob-peeking.png" width="130" alt="">
+
 Companies moving to S/4HANA Cloud carry thousands of custom Z programs written
 over 15+ years. Each one has to be checked against Clean Core rules: which
 tables it reads directly, which screens it replays, which files it writes.
@@ -55,6 +79,8 @@ A Bob custom mode, **Clean Core Architect**, that:
    what it can't verify.
 
 ## Try it on your own code
+
+<img align="right" src="demo-prototype/assets/bob-building.png" width="130" alt="">
 
 Clean Core Copilot is a Bob mode, so it runs wherever Bob runs. Ten minutes:
 
@@ -103,6 +129,8 @@ reminder 26 Sep); no answer had arrived when the static image was enabled on
 removed with one flag (`SHOW_MASCOT` in `demo-prototype/demo-config.js`).
 
 ## How Bob is used
+
+<img align="right" src="demo-prototype/assets/bob-seated-findings.png" width="130" alt="">
 
 Everything Bob did happened in IBM Bob 2.2.0 (enterprise plan, hackathon
 account) between 25 Sep 20:10 and 26 Sep 16:28 TRT. One screenshot per task
@@ -216,6 +244,8 @@ disclosure and mascot decisions, and approved each Bob write.
 
 ## Results
 
+<img align="right" src="demo-prototype/assets/bob-coins.png" width="130" alt="">
+
 <!-- Measured, not claimed: findings scored by Claude, judgements confirmed by Sena. -->
 
 | Program | Findings | Correct | Wrong | Missed | Verdict hint |
@@ -260,6 +290,8 @@ the status stays *Needs target verification*.
 
 ## Honest limits
 
+<img align="right" src="demo-prototype/assets/bob-missed.png" width="130" alt="">
+
 - **Synthetic samples.** The four programs and the 41 planted problems were written by us; customer ABAP cannot be published. Every number on this page describes this test, not Bob in general.
 - **The answer key is the sample author's.** It is sealed by hash, but it is not an independent review. Two of Bob's findings matched the key's own "human decision" notes and were left unscored rather than counted either way.
 - **One program was tested, against stubs.** ZFI's class compiled and its tests passed on a free BTP trial with two labelled stand-in tables. Bob's own view did not activate there. Nothing ran against real finance data or on a customer's release.
@@ -281,6 +313,8 @@ bob_sessions/     exported Bob task reports (required for judging)
 The legacy samples are synthetic, written for this demo. No customer code.
 
 ## Demo page
+
+<img align="right" src="demo-prototype/assets/bob-evidence.png" width="130" alt="">
 
 The demo URL renders the recorded `reports/*.json` files: Bob's output plus
 the human review columns. It is an evidence page, not a live analyzer —
