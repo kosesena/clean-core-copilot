@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/readme/ibm-bob.png" width="160" alt="IBM Bob">
+  <img src="docs/readme/ibm-logo.svg" width="150" alt="IBM">
 </p>
 
 <h1 align="center">Clean Core Copilot</h1>
