@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="video/cover-v2.png" alt="Clean Core Copilot — Old SAP code. A new copilot. Built with IBM Bob." width="100%">
+  <img src="docs/readme/ibm-bob.png" width="160" alt="IBM Bob">
 </p>
 
 <h1 align="center">Clean Core Copilot</h1>
