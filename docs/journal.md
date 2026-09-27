@@ -102,6 +102,7 @@ ADT MCP), **Codex** (demo page, pastes code into VS Code / BTP).
 | 15:4x | Claude | Overview after field review: solution-first title, proof strip first (8/8 on BTP, planted bug 2 failed, 16 min parallel with no ratio claim), "what Bob never did" before the scores, scoring step no longer names Claude up front (moved to "Where these numbers come from"). Deployed | `0697507` |
 | 15:5x | Claude | Past-winner review (Pedigree, Atlas, Sandbox): README top gets ECC 2027 hook + stats table + 8/8; test PNGs in bob_sessions labelled as test evidence; form and pitch updated; 8-page slide deck | `86a6e53`, `c09c186` |
 | 16:0x | Claude | Sena's review of the live site: Proof page report card (stats, details, open decisions, JSON download), bring-your-own panel fixed (was printing `null` after a repaint) and tested with a real upload, ring legend, explained "Not run on SAP" cells; Findings shows the 13 problems the sealed key lists as missed. Deployed | `d368b28` |
+| 16:2x | Claude | Full site review (all pages, links, mobile, numbers): mobile horizontal scroll fixed (notice line), overview reordered, plain Ask Bob wording, stale "dashed box"/7-of-7 text, rewrite rows aligned; all GitHub links point to tracked files (live once public). Deployed | `1e867ef` |
 
 ## Open at the time of writing
 
